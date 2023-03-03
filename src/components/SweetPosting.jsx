@@ -29,7 +29,7 @@ const SweetPostingContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 135px;
+  margin-top: 20px;
   width: 44vw;
 `;
 

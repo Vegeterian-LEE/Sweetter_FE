@@ -6,18 +6,22 @@ import { FiSearch } from "react-icons/fi";
 const SearchBar = () => {
   return (
     <>
-      <SearchBarContainer>
-        <SearchForm>
-          <FiSearch size={25} />
-          <SearchSweetterInput placeholder="serch"></SearchSweetterInput>
-        </SearchForm>
-        <FollowListWrapper>Follow List</FollowListWrapper>
-      </SearchBarContainer>
+      <div>
+        <SearchBarContainer>
+          <SearchForm>
+            <FiSearch size={25} />
+            <SearchSweetterInput placeholder="serch"></SearchSweetterInput>
+          </SearchForm>
+          <FollowListWrapper>Follow List</FollowListWrapper>
+        </SearchBarContainer>
+      </div>
     </>
   );
 };
 
 const SearchBarContainer = styled.div`
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,7 +47,7 @@ const SearchForm = styled.form`
 
 const FollowListWrapper = styled.div`
   width: 85%;
-  height: 50%;
+  min-height: 400px;
   margin-top: 20px;
   border-radius: 25px;
   background-color: #eff3f4;
