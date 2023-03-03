@@ -1,5 +1,12 @@
+import React from "react";
+import Router from "./shared/Router";
+
 const App = () => {
-  return <div>Hello Sweeter.</div>;
+  return (
+    <>
+      <Router />
+    </>
+  );
 };
 
 export default App;
