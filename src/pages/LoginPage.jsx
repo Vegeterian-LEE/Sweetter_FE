@@ -13,8 +13,8 @@ const LoginPage = () => {
         <StTitle>지금 일어나고 있는 일</StTitle>
         <StSub>오늘 트위터에 가입하세요</StSub>
         <ButtonWrapper>
-          <Button wh = 'l'>가입하기</Button>
-          <Button wh = 'l'>로그인</Button>
+          <Button wh="l">가입하기</Button>
+          <Button wh="l">로그인</Button>
         </ButtonWrapper>
       </RightHalf>
     </Container>
@@ -23,6 +23,7 @@ const LoginPage = () => {
 
 const Container = styled.div`
   display: flex;
+  overflow-y: hidden;
 `;
 
 const LeftHalf = styled.div`
