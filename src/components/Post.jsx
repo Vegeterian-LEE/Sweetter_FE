@@ -12,7 +12,6 @@ const Post = () => {
           <UserImage>
             <FaUserCircle size={55} />
           </UserImage>
-
           <PostContentsWrapper>
             <UserInfo>
               <h2>User Name</h2>
@@ -36,8 +35,7 @@ const PostContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 44vw;
-  margin-top: 15px;
-
+  padding-top: 15px;
   padding-bottom: 17px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 `;

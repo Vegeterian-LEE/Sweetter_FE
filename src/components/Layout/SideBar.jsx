@@ -15,9 +15,9 @@ const SideBar = () => {
   return (
     <SideBarLayoutContainer>
       <div>
-        {CategoryArr.map((item) => {
+        {CategoryArr.map((item, index) => {
           return (
-            <CategoryWrapper>
+            <CategoryWrapper key={index}>
               <CategoryBox>
                 {item.icon}
                 <Span>{item.title}</Span>
