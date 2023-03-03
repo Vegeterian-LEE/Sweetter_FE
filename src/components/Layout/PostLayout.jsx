@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import Header from "./Header";
+import PostLayoutNavbar from "./PostLayoutNavbar";
 
 const PostLayout = () => {
   return (
     <PostLayoutContainer>
-      <Header></Header>
+      <PostLayoutNavbar></PostLayoutNavbar>
     </PostLayoutContainer>
   );
 };

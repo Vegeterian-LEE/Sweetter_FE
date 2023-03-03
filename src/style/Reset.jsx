@@ -48,6 +48,10 @@ const Reset = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
   }
+  button {
+    background-color: white;
+    border: none;
+  }
 `;
 
 export default Reset;
