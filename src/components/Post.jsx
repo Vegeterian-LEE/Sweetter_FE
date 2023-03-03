@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { FaUserCircle, FaCommentAlt, FaHeart } from "react-icons/fa";
 import { IoMdRepeat } from "react-icons/io";
 
-const Post = () => {
+const Post = ({ mt }) => {
   return (
     <>
       <PostContainer>

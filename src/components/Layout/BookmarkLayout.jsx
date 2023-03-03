@@ -9,7 +9,7 @@ const BookmarkLayout = () => {
     <>
       <PostLayoutContainer>
         <Navbar category="Bookmark"></Navbar>
-        <Post></Post>
+        <Post />
       </PostLayoutContainer>
     </>
   );

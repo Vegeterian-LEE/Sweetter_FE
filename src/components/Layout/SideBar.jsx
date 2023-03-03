@@ -13,36 +13,42 @@ const SideBar = () => {
     { title: "Profile", icon: <CgProfile /> },
   ];
   return (
-    <SideBarLayoutContainer>
+    <>
       <div>
-        {CategoryArr.map((item, index) => {
-          return (
-            <CategoryWrapper key={index}>
+        <SideBarLayoutContainer>
+          <div>
+            {CategoryArr.map((item, index) => {
+              return (
+                <CategoryWrapper key={index}>
+                  <CategoryBox>
+                    {item.icon}
+                    <Span>{item.title}</Span>
+                  </CategoryBox>
+                </CategoryWrapper>
+              );
+            })}
+          </div>
+          <div>
+            <CategoryWrapper>
               <CategoryBox>
-                {item.icon}
-                <Span>{item.title}</Span>
+                <FaUserCircle size={50} />
+                <UserInfo>
+                  <h2>UserName</h2>
+                  <h2>@UserID</h2>
+                </UserInfo>
+                <RxDotsHorizontal />
               </CategoryBox>
             </CategoryWrapper>
-          );
-        })}
+          </div>
+        </SideBarLayoutContainer>
       </div>
-      <div>
-        <CategoryWrapper>
-          <CategoryBox>
-            <FaUserCircle size={50} />
-            <UserInfo>
-              <h2>UserName</h2>
-              <h2>@UserID</h2>
-            </UserInfo>
-            <RxDotsHorizontal />
-          </CategoryBox>
-        </CategoryWrapper>
-      </div>
-    </SideBarLayoutContainer>
+    </>
   );
 };
 
 const SideBarLayoutContainer = styled.div`
+  position: sticky;
+  top: 0;
   width: 28vw;
   height: 100vh;
   display: flex;
