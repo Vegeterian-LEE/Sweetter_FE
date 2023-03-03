@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import { FaTwitter, FaHome, FaBookmark } from "react-icons/fa";
+import { FaTwitter, FaHome, FaBookmark, FaUserCircle } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
+import { RxDotsHorizontal } from "react-icons/rx";
 
 const SideBar = () => {
   const CategoryArr = [
@@ -27,7 +28,14 @@ const SideBar = () => {
       </div>
       <div>
         <CategoryWrapper>
-          <div>User Info</div>
+          <CategoryBox>
+            <FaUserCircle size={50} />
+            <UserInfo>
+              <h2>UserName</h2>
+              <h2>@UserID</h2>
+            </UserInfo>
+            <RxDotsHorizontal />
+          </CategoryBox>
         </CategoryWrapper>
       </div>
     </SideBarLayoutContainer>
@@ -35,11 +43,11 @@ const SideBar = () => {
 };
 
 const SideBarLayoutContainer = styled.div`
-  width: 33vw;
+  width: 28vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 const CategoryWrapper = styled.div`
@@ -53,9 +61,9 @@ const CategoryWrapper = styled.div`
 const CategoryBox = styled.div`
   display: flex;
   align-items: center;
-  width: 150px;
-  padding-left: 10px;
-  padding-bottom: 10px;
+  justify-content: space-around;
+  width: 200px;
+  padding: 0 10px 10px 10px;
   svg {
     font-size: 30px;
     size: 10px;
@@ -72,6 +80,13 @@ const Span = styled.span`
   margin-top: 13px;
   font-size: 20px;
   margin-left: 10px;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px;
 `;
 
 export default SideBar;
