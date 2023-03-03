@@ -1,7 +1,7 @@
 import React from "react";
 
 const SideBar = () => {
-  return <div>SideBar</div>;
+  return <></>;
 };
 
 export default SideBar;
