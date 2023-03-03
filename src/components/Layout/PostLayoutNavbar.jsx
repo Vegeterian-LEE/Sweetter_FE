@@ -22,7 +22,9 @@ const PostLayoutNavbar = () => {
 };
 
 const NavBar = styled.div`
-  width: 33vw;
+  position: fixed;
+  width: 44vw;
+  margin-right: 56vw;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
   background-color: rgba(255, 255, 255, 0.5);
 `;

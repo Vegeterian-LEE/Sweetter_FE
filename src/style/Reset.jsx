@@ -52,6 +52,10 @@ const Reset = createGlobalStyle`
     background-color: white;
     border: none;
   }
+  input, textarea {
+    outline: none;
+    border: none;
+  }
 `;
 
 export default Reset;

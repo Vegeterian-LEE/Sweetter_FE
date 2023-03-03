@@ -35,7 +35,7 @@ const SideBar = () => {
 };
 
 const SideBarLayoutContainer = styled.div`
-  width: 33vw;
+  width: 28vw;
   height: 100vh;
   display: flex;
   flex-direction: column;

@@ -6,7 +6,7 @@ const SearchBar = () => {
 };
 
 const SearchBarContainer = styled.div`
-  width: 33vw;
+  width: 28vw;
 `;
 
 export default SearchBar;
