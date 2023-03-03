@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const ModalWrapper = ({children}) => {
+const ModalWrapper = ({ children }) => {
   return (
     <ModalOverlay>
       <ModalWrap>{children}</ModalWrap>

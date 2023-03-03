@@ -11,6 +11,7 @@ import useOutSideClick from "../components/hooks/useOutsideClick";
 
 import { useState, useRef } from "react";
 import { FaTwitter } from "react-icons/fa";
+import ModalLogout from "../components/elements/modal/ModalLogout";
 
 const LoginPage = () => {
   // 로그인 모달 관리
@@ -33,10 +34,19 @@ const LoginPage = () => {
   const signupModalRef = useRef(null);
   useOutSideClick(signupModalRef, handleSignupModalClose);
 
+  // 로그인 -> 회원가입 모달 이동
   const handleMovetoSignupModal = () => {
     setIsLoginModalOpen(false);
     setIsSignupModalOpen(true);
   };
+
+  //로그아웃 모달(테스트)
+  const [isSignoutModalOpen, setIsSignoutModalOpen] = useState(false);
+  const handleSignoutModalClose = () => {
+    setIsSignoutModalOpen(false);
+  };
+  const signoutModalRef = useRef(null);
+  useOutSideClick(signoutModalRef, handleSignoutModalClose);
 
   return (
     <>
@@ -54,6 +64,9 @@ const LoginPage = () => {
             </Button>
             <Button onClick={() => setIsLoginModalOpen(true)} wh="l">
               로그인
+            </Button>
+            <Button onClick={() => setIsSignoutModalOpen(true)} wh="l">
+              로그아웃
             </Button>
           </ButtonWrapper>
         </RightHalf>
@@ -94,6 +107,7 @@ const LoginPage = () => {
           </ModalBox>
         </ModalWrapper>
       )}
+      {isSignoutModalOpen && <ModalLogout signoutModalRef={signoutModalRef} />}
     </>
   );
 };
@@ -152,20 +166,20 @@ const ButtonWrapper = styled.div`
   margin-top: 32px;
 `;
 
-const StMiniFaTwitter = styled(FaTwitter)`
+export const StMiniFaTwitter = styled(FaTwitter)`
   font-size: 30px;
   margin-bottom: 25px;
   color: #4da0eb;
   border-radius: 50%;
 `;
 
-const StLogin = styled.h1`
+export const StLogin = styled.h1`
   font-size: 25px;
   margin-bottom: 20px;
   font-weight: bold;
 `;
 
-const StInput = styled.input`
+export const StInput = styled.input`
   width: 350px;
   height: 50px;
   margin-bottom: 20px;
@@ -188,7 +202,7 @@ const StInput = styled.input`
   }
 `;
 
-const StToSignUp = styled.h3`
+export const StToSignUp = styled.h3`
   color: #4da0eb;
   font-weight: bold;
   font-size: 13px;
