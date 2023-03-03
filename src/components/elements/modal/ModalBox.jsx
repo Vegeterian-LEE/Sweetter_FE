@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import ModalWrapper from "./ModalWrapper";
 import styled from "styled-components";
+import Button from "../Button";
 
 function ModalBox({ children }) {
   useEffect(() => {
@@ -18,8 +19,6 @@ function ModalBox({ children }) {
       <Modal>
         <ModalText>{children}</ModalText>
         <BtnWrapper>
-          <button>닫기</button>
-          <button>확인</button>
         </BtnWrapper>
       </Modal>
     </ModalWrapper>
@@ -29,9 +28,11 @@ function ModalBox({ children }) {
 const Modal = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  text-align: left;
+  align-items: center;
+  margin: 0 auto;
   width: 31.25rem;
-  height: 19rem;
+  height: 23rem;
   padding: 1.25rem;
   border: 1px solid black;
   border-radius: 1.25rem;
@@ -39,7 +40,7 @@ const Modal = styled.div`
 `;
 
 const ModalText = styled.p`
-  margin-top: 0.9375rem;
+margin-left: 42px;
 `;
 
 const BtnWrapper = styled.div`

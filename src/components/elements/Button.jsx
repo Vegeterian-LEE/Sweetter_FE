@@ -9,7 +9,7 @@ border: none;
 border-radius: 50px;
 font-size: 16px;
 font-weight: bold;
-width: 400px;
+width: ${props => props.width ? props.width : "400px"}; 
 height: 50px;
 cursor: pointer;
 transition: background-color 0.3s ease;
@@ -44,8 +44,9 @@ css`
 `;
 
 const Button = ({ children, ...props }) => {
+  const buttonStyle = {width: props.width};
   return (
-    <TwitterButton wh={props.wh} onClick={props.onClick}>
+    <TwitterButton wh={props.wh} style={buttonStyle} onClick={props.onClick}>
       {children}
     </TwitterButton>
   );
