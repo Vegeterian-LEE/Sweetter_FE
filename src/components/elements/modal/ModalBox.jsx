@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import ModalWrapper from "./ModalWrapper";
 import styled from "styled-components";
-import Button from "../Button";
 
 function ModalBox({ children }) {
   useEffect(() => {
@@ -18,8 +17,7 @@ function ModalBox({ children }) {
     <ModalWrapper>
       <Modal>
         <ModalText>{children}</ModalText>
-        <BtnWrapper>
-        </BtnWrapper>
+        <BtnWrapper></BtnWrapper>
       </Modal>
     </ModalWrapper>
   );
@@ -32,7 +30,7 @@ const Modal = styled.div`
   align-items: center;
   margin: 0 auto;
   width: 31.25rem;
-  height: 23rem;
+  ${(props) => (props.width ? props.width : "23rem")};
   padding: 1.25rem;
   border: 1px solid black;
   border-radius: 1.25rem;
@@ -40,7 +38,7 @@ const Modal = styled.div`
 `;
 
 const ModalText = styled.p`
-margin-left: 42px;
+  margin-left: 42px;
 `;
 
 const BtnWrapper = styled.div`

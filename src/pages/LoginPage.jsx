@@ -1,22 +1,42 @@
 import React from "react";
 import styled from "styled-components";
+
 import TwitterLogo from "../assets/TwitterLogo.jpg";
+
 import Button from "../components/elements/Button";
 import ModalWrapper from "../components/elements/modal/ModalWrapper";
 import ModalBox from "../components/elements/modal/ModalBox";
-import { useState, useRef } from "react";
-import { FaTwitter } from "react-icons/fa";
+
 import useOutSideClick from "../components/hooks/useOutsideClick";
 
-const LoginPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+import { useState, useRef } from "react";
+import { FaTwitter } from "react-icons/fa";
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
+const LoginPage = () => {
+  // 로그인 모달 관리
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  const handleLoginModalClose = () => {
+    setIsLoginModalOpen(false);
   };
 
-  const modalRef = useRef(null);
-  useOutSideClick(modalRef, handleModalClose);
+  const loginModalRef = useRef(null);
+  useOutSideClick(loginModalRef, handleLoginModalClose);
+
+  //회원가입 모달 관리
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+
+  const handleSignupModalClose = () => {
+    setIsSignupModalOpen(false);
+  };
+
+  const signupModalRef = useRef(null);
+  useOutSideClick(signupModalRef, handleSignupModalClose);
+
+  const handleMovetoSignupModal = () => {
+    setIsLoginModalOpen(false);
+    setIsSignupModalOpen(true);
+  };
 
   return (
     <>
@@ -29,25 +49,47 @@ const LoginPage = () => {
           <StTitle>지금 일어나고 있는 일</StTitle>
           <StSub>오늘 트위터에 가입하세요</StSub>
           <ButtonWrapper>
-            <Button wh="l">가입하기</Button>
-            <Button onClick={() => setIsModalOpen(true)} wh="l">
+            <Button onClick={() => setIsSignupModalOpen(true)} wh="l">
+              가입하기
+            </Button>
+            <Button onClick={() => setIsLoginModalOpen(true)} wh="l">
               로그인
             </Button>
           </ButtonWrapper>
         </RightHalf>
       </Container>
-      {isModalOpen && (
+      {isLoginModalOpen && (
         <ModalWrapper>
           <ModalBox>
-            <div ref={modalRef}>
+            <div ref={loginModalRef}>
               <StMiniFaTwitter />
               <StLogin>트위터 로그인</StLogin>
-              <StInput type="text" placeholder="아이디" />
+              <StInput type="text" placeholder="이메일" />
               <StInput type="text" placeholder="비밀번호" />
               <Button wh="l" width="350px">
                 로그인
               </Button>
-              <StToSignUp>비밀번호를 잊으셨나요? 트위터 가입</StToSignUp>
+              <StToSignUp onClick={handleMovetoSignupModal}>
+                비밀번호를 잊으셨나요? 트위터 가입
+              </StToSignUp>
+            </div>
+          </ModalBox>
+        </ModalWrapper>
+      )}
+
+      {isSignupModalOpen && (
+        <ModalWrapper>
+          <ModalBox>
+            <div ref={signupModalRef}>
+              <StMiniFaTwitter />
+              <StLogin>트위터 회원가입</StLogin>
+              <StInput type="text" placeholder="닉네임" />
+              <StInput type="text" placeholder="유저 네임" />
+              <StInput type="text" placeholder="이메일" />
+              <StInput type="text" placeholder="비밀번호" />
+              <Button wh="l" width="350px">
+                가입 완료
+              </Button>
             </div>
           </ModalBox>
         </ModalWrapper>
@@ -153,6 +195,7 @@ const StToSignUp = styled.h3`
   margin-top: 16px;
   text-align: center;
   margin-right: 64px;
+  cursor: pointer;
 `;
 
 export default LoginPage;
