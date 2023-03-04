@@ -13,7 +13,7 @@ const PostLayoutNavbar = () => {
   return (
     <>
       <Navbar category="Home">
-        <NavBarBtnContainer>
+        <CategoryButtonWrapper>
           <CategoryButton
             onClick={() => handleClick("ALL")}
             active={activeButton === "ALL"}
@@ -26,13 +26,13 @@ const PostLayoutNavbar = () => {
           >
             Follow
           </CategoryButton>
-        </NavBarBtnContainer>
+        </CategoryButtonWrapper>
       </Navbar>
     </>
   );
 };
 
-const NavBarBtnContainer = styled.div`
+const CategoryButtonWrapper = styled.div`
   display: flex;
   justify-content: space-around;
 `;
