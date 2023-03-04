@@ -32,7 +32,6 @@ const SideBar = () => {
 
   //로그아웃 메뉴창
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -64,23 +63,23 @@ const SideBar = () => {
               <Button onClick={() => setIsSweetModalOpen(true)}>Sweet</Button>
             </SweetPostingModal>
           </div>
-          <div>
-            <SweetPostingModal>
-              <CategoryBox onClick={handleDropdownToggle}>
-                {isDropdownOpen && (
+          <SweetPostingModal>
+            <CategoryBox onClick={handleDropdownToggle}>
+              {isDropdownOpen && (
+                <div>
                   <StDropDown onClick={() => setIsSignoutModalOpen(true)}>
                     <LogoutText>Log out @userID</LogoutText>
                   </StDropDown>
-                )}
-                <FaUserCircle size={50} />
-                <UserInfo>
-                  <h2>UserName</h2>
-                  <h2>@UserID</h2>
-                </UserInfo>
-                <RxDotsHorizontal />
-              </CategoryBox>
-            </SweetPostingModal>
-          </div>
+                </div>
+              )}
+              <FaUserCircle size={50} />
+              <UserInfo>
+                <h2>UserName</h2>
+                <h2>@UserID</h2>
+              </UserInfo>
+              <RxDotsHorizontal />
+            </CategoryBox>
+          </SweetPostingModal>
         </SideBarLayoutContainer>
         {isSweetModalOpen && (
           <ModalSweetpost sweetPostModalRef={sweetPostModalRef} />
