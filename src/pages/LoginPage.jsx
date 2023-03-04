@@ -78,15 +78,16 @@ const LoginPage = () => {
   };
 
   // 회원가입
-  const newUser = {
-    username,
-    email,
-    userId,
-    password,
-  };
 
-  const joinHandler = (newUser) => {
+  const joinHandler = () => {
     if (isUserId === true && isPassword === true) {
+      const newUser = {
+        username,
+        email,
+        userId,
+        password,
+      };
+
       dispatch(__addUser(newUser))
         .then(() => {
           navigate("/");
@@ -194,7 +195,7 @@ const LoginPage = () => {
                 onChange={onChangePassword}
               />
               <StMessage>{passwordMessage}</StMessage>
-              <Button wh="l" width="350px" onClick={() => joinHandler(newUser)}>
+              <Button wh="l" width="350px" onClick={joinHandler}>
                 가입 완료
               </Button>
             </div>
