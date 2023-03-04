@@ -1,8 +1,9 @@
 import { css } from "styled-components";
+import theme from "./Theme";
 
 export const CenterLayoutBorder = css`
-  border-right: 2px solid rgba(0, 0, 0, 0.1);
-  border-left: 2px solid rgba(0, 0, 0, 0.1);
+  border-right: ${theme.borderline};
+  border-left: ${theme.borderline};
 `;
 
 export const FlexAttribute = (direction, align, justify) => css`

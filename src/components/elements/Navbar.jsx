@@ -2,6 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 import { FlexAttribute } from "../../style/Mixin";
+import theme from "../../style/Theme";
 
 const Navbar = ({ category, children }) => {
   return (
@@ -21,9 +22,9 @@ const NavBar = styled.div`
   top: 0;
   min-height: 50px;
   width: 44vw;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-  background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(2px);
+  border-bottom: ${theme.borderline};
+  background-color: ${theme.color.navbar_background};
+  backdrop-filter: blur(10px);
 `;
 
 const NavTitleContainer = styled.div`

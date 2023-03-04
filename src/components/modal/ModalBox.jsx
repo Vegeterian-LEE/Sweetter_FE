@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { FlexAttribute } from "../../style/Mixin";
 
 import ModalWrapper from "./ModalWrapper";
+import theme from "../../style/Theme";
 
 function ModalBox({ children }) {
   useEffect(() => {
@@ -33,9 +34,8 @@ const Modal = styled.div`
   width: 31.25rem;
   ${(props) => (props.width ? props.width : "23rem")};
   padding: 1.25rem;
-  border: 1px solid black;
   border-radius: 1.25rem;
-  background-color: white;
+  background-color: ${theme.color.modal_background};
 `;
 
 const ModalText = styled.p`

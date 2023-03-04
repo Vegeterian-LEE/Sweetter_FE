@@ -2,6 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 import { FlexAttribute } from "../../style/Mixin";
+import theme from "../../style/Theme";
 
 import { FaUserCircle, FaCommentAlt, FaHeart } from "react-icons/fa";
 import { IoMdRepeat } from "react-icons/io";
@@ -37,7 +38,7 @@ const PostContainer = styled.div`
   width: 44vw;
   padding-top: 15px;
   padding-bottom: 17px;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  border-bottom: ${theme.borderline};
 `;
 
 const PostWrapper = styled.div`
