@@ -38,7 +38,7 @@ const Modal = styled.div`
   background-color: ${theme.color.modal_background};
 `;
 
-const ModalText = styled.p`
+const ModalText = styled.div`
   margin-left: 42px;
 `;
 

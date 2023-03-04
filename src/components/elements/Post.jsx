@@ -21,7 +21,7 @@ const Post = ({ mt }) => {
           </UserImage>
           <PostContentsWrapper>
             <UserInfomation>
-              <UserInfo name>User Name</UserInfo>
+              <UserInfo name="true">User Name</UserInfo>
               <UserInfo>@User ID</UserInfo>
             </UserInfomation>
             <PostContents>hi i'm sweeter</PostContents>
