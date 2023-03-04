@@ -151,7 +151,7 @@ const UserInfo = styled.div`
 const StDropDown = styled.div`
   left: 0;
   position: absolute;
-  top: -30px;
+  top: -45px;
   right: 0;
   background-color: white;
   border: 1px solid #ccc;

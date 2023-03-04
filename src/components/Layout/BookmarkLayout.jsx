@@ -1,5 +1,7 @@
 import React from "react";
+
 import styled from "styled-components";
+import { CenterLayoutBorder } from "../../style/Mixin";
 
 import Navbar from "../elements/Navbar";
 import Post from "../Post";
@@ -16,8 +18,7 @@ const BookmarkLayout = () => {
 };
 
 const PostLayoutContainer = styled.div`
-  border-right: 2px solid rgba(0, 0, 0, 0.1);
-  border-left: 2px solid rgba(0, 0, 0, 0.1);
+  ${CenterLayoutBorder}
 `;
 
 export default BookmarkLayout;

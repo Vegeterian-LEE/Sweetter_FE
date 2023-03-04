@@ -1,6 +1,25 @@
 import React from "react";
-import styled from "styled-components";
-import { css } from "styled-components";
+
+import styled, { css } from "styled-components";
+
+const Button = ({ children, disableHover, ...props }) => {
+  const buttonStyle = { width: props.width };
+  return (
+    <TwitterButton
+      wh={props.wh}
+      style={buttonStyle}
+      onClick={props.onClick}
+      disableHover={disableHover}
+    >
+      {children}
+    </TwitterButton>
+  );
+};
+
+Button.defaultProps = {
+  wh: "m",
+  onClick: () => {},
+};
 
 const TwitterButton = styled.button`
   background-color: ${(props) => props.backgroundColor || "#4da0eb"};
@@ -50,24 +69,5 @@ ${(props) =>
       font-size: 16px;
     `}
 `;
-
-const Button = ({ children, disableHover, ...props }) => {
-  const buttonStyle = { width: props.width };
-  return (
-    <TwitterButton
-      wh={props.wh}
-      style={buttonStyle}
-      onClick={props.onClick}
-      disableHover={disableHover}
-    >
-      {children}
-    </TwitterButton>
-  );
-};
-
-Button.defaultProps = {
-  wh: "m",
-  onClick: () => {},
-};
 
 export default Button;

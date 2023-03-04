@@ -1,5 +1,9 @@
 import React from "react";
+import { useState, useRef } from "react";
+import useOutSideClick from "../components/hooks/useOutsideClick";
+
 import styled from "styled-components";
+import { FlexAttribute } from "../style/Mixin";
 
 import TwitterLogo from "../assets/TwitterLogo.jpg";
 
@@ -7,9 +11,6 @@ import Button from "../components/elements/Button";
 import ModalWrapper from "../components/elements/modal/ModalWrapper";
 import ModalBox from "../components/elements/modal/ModalBox";
 
-import useOutSideClick from "../components/hooks/useOutsideClick";
-
-import { useState, useRef } from "react";
 import { FaTwitter } from "react-icons/fa";
 
 const LoginPage = () => {
@@ -100,7 +101,7 @@ const LoginPage = () => {
 };
 
 const Container = styled.div`
-  display: flex;
+  ${FlexAttribute()}
   overflow-y: hidden;
 `;
 
@@ -117,10 +118,7 @@ const LeftHalf = styled.div`
 `;
 
 const RightHalf = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  ${FlexAttribute("column", "flex-start", "center")}
   padding-left: 50px;
   width: 50%;
   height: 100vh;
@@ -147,8 +145,7 @@ const StSub = styled.div`
 `;
 
 const ButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${FlexAttribute("column")}
   gap: 16px;
   margin-top: 32px;
 `;

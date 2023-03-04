@@ -1,9 +1,13 @@
 import React from "react";
+
 import styled from "styled-components";
-import { StMiniFaTwitter } from "../../../pages/LoginPage";
+import { FlexAttribute } from "../../../style/Mixin";
+
 import ModalWrapper from "./ModalWrapper";
 import ModalBox from "./ModalBox";
 import Button from "../Button";
+
+import { StMiniFaTwitter } from "../../../pages/LoginPage";
 
 const ModalLogout = ({ signoutModalRef }) => {
   return (
@@ -31,17 +35,16 @@ const ModalLogout = ({ signoutModalRef }) => {
 };
 
 const StMiniFaTwitterWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+  ${FlexAttribute("", "", "center")}
   margin-right: 20px;
 `;
 
 const StTitle = styled.div`
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 0.5rem;
   margin-right: 32px;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
 `;
 
 const StMessage = styled.p`
@@ -50,22 +53,21 @@ const StMessage = styled.p`
 `;
 
 const StButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
+  ${FlexAttribute("", "", "space-around")}
   gap: 2rem;
   margin-right: 32px;
   margin-top: 2rem;
 `;
 
 const GrayButton = styled.button`
-  background-color: ${(props) => props.backgroundColor || "lightgray"};
-  color: black;
-  border: none;
-  border-radius: 50px;
-  font-size: 13px;
-  font-weight: bold;
   width: 10rem;
   height: 45px;
+  border: none;
+  border-radius: 50px;
+  color: black;
+  font-size: 13px;
+  font-weight: bold;
+  background-color: ${(props) => props.backgroundColor || "lightgray"};
   cursor: pointer;
 `;
 

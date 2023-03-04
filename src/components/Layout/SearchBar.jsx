@@ -1,5 +1,7 @@
 import React from "react";
+
 import styled from "styled-components";
+import { FlexAttribute } from "../../style/Mixin";
 
 import { FiSearch } from "react-icons/fi";
 
@@ -22,9 +24,7 @@ const SearchBar = () => {
 const SearchBarContainer = styled.div`
   position: sticky;
   top: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  ${FlexAttribute("column", "center", "")}
   width: 28vw;
   padding: 17px;
 `;
@@ -37,8 +37,7 @@ const SearchSweetterInput = styled.input`
 `;
 
 const SearchForm = styled.form`
-  display: flex;
-  align-items: center;
+  ${FlexAttribute("row", "center")}
   border-radius: 25px;
   width: 85%;
   padding-left: 20px;

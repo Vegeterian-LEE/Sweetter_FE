@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+
 import styled from "styled-components";
+import { CenterLayoutBorder, FlexAttribute } from "../../style/Mixin";
 
 import TwitterLogo from "../../assets/TwitterLogo.jpg";
 import Button from "../elements/Button";
 import Navbar from "../elements/Navbar";
+import CategoryButton from "../elements/CategoryButton";
 
 import { FaRegCalendarAlt } from "react-icons/fa";
-import CategoryButton from "../elements/CategoryButton";
 
 const ProfileLayout = () => {
   const [activeButton, setActiveButton] = useState("Sweets");
@@ -66,14 +68,11 @@ const ProfileLayout = () => {
 };
 
 const PostLayoutContainer = styled.div`
-  border-right: 2px solid rgba(0, 0, 0, 0.1);
-  border-left: 2px solid rgba(0, 0, 0, 0.1);
+  ${CenterLayoutBorder}
 `;
 
 const UserWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  ${FlexAttribute("column", "", "space-between")}
   min-height: 200px;
   margin-bottom: 15px;
   padding: 15px 15px 0 15px;
@@ -86,8 +85,7 @@ const UserBackground = styled.div`
 
 const UserImageBox = styled.div`
   position: relative;
-  display: flex;
-  justify-content: space-between;
+  ${FlexAttribute("row", "", "space-between")}
   margin-bottom: 15px;
 `;
 
@@ -107,7 +105,7 @@ const UserInfomation = styled.div``;
 const UserJoinDate = styled.div``;
 
 const UserFollowInfomation = styled.div`
-  display: flex;
+  ${FlexAttribute("row")}
 `;
 
 const Following = styled.h2``;
@@ -115,8 +113,7 @@ const Following = styled.h2``;
 const Followers = styled.h2``;
 
 const CategoryButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
+  ${FlexAttribute("row", "", "space-around")}
 `;
 
 export default ProfileLayout;

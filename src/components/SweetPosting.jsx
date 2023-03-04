@@ -5,6 +5,7 @@ import Button from "./elements/Button";
 
 import { FaUserCircle } from "react-icons/fa";
 import { BsImage } from "react-icons/bs";
+import { FlexAttribute } from "../style/Mixin";
 
 const SweetPosting = () => {
   return (
@@ -26,16 +27,13 @@ const SweetPosting = () => {
 };
 
 const SweetPostingContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  ${FlexAttribute("column", "", "center")}
   margin-top: 20px;
   width: 44vw;
 `;
 
 const InputWrapper = styled.div`
-  display: flex;
-  justify-content: center;
+  ${FlexAttribute("row", "", "center")}
   margin-top: 10px;
 `;
 
@@ -52,9 +50,7 @@ const SweetInput = styled.textarea`
 `;
 
 const SubmitWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  ${FlexAttribute("row", "center", "space-around")}
   margin-top: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2); ;
