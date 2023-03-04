@@ -1,14 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
+
 import styled from "styled-components";
+import theme from "../../style/Theme";
+import { FlexAttribute } from "../../style/Mixin";
 
 import Button from "./Button";
 
 import { FaUserCircle } from "react-icons/fa";
 import { BsImage } from "react-icons/bs";
-import { FlexAttribute } from "../../style/Mixin";
-import theme from "../../style/Theme";
 
 const SweetPosting = () => {
+  const [contents, setContents] = useState("");
+  const [showImages, setShowImages] = useState([]);
+  const [imageFormData, setImageFormData] = useState([]);
+
+  const ImageHandler = (event) => {
+    const formImg = new FormData();
+    imageFormData.forEach((image) => {
+      formImg.append("files", image);
+    });
+    setImageFormData([...imageFormData, ...event.target.files]);
+
+    const imageLists = event.target.files;
+    let imageUrlLists = [...showImages];
+    for (let i = 0; i < imageLists.length; i++) {
+      const currentImageUrl = URL.createObjectURL(imageLists[i]);
+      imageUrlLists.push(currentImageUrl);
+    }
+    if (imageUrlLists.length > 3) {
+      setImageFormData(imageFormData.slice(0, 3));
+      imageUrlLists = imageUrlLists.slice(0, 3);
+    }
+    setShowImages(imageUrlLists);
+  };
+
+  const submitHandler = () => {
+    const formData = new FormData();
+    formData.append(
+      "data",
+      JSON.stringify({
+        contents: contents,
+        image: JSON.stringify(imageFormData),
+      })
+    );
+  };
+
   return (
     <>
       <SweetPostingContainer>
@@ -16,11 +52,33 @@ const SweetPosting = () => {
           <UserImage>
             <FaUserCircle size={55} />
           </UserImage>
-          <SweetInput placeholder="What's happening?"></SweetInput>
+          <Preview>
+            <SweetInput
+              value={contents}
+              onChange={(event) => setContents(event.target.value)}
+              placeholder="What's happening?"
+            ></SweetInput>
+            <PreviewImageWrapper>
+              {showImages.map((image, id) => (
+                <PreviewImage key={id} src={image} alt={`${image}-${id}`} />
+              ))}
+            </PreviewImageWrapper>
+          </Preview>
         </InputWrapper>
         <SubmitWrapper>
-          <BsImage size={20} />
-          <Button wh="s">Sweet</Button>
+          <ImageLabel htmlFor="file-input">
+            <BsImage size={20} />
+          </ImageLabel>
+          <input
+            id="file-input"
+            name="sweetImage"
+            type="file"
+            multiple
+            onChange={ImageHandler}
+          ></input>
+          <Button onClick={submitHandler} wh="s">
+            Sweet
+          </Button>
         </SubmitWrapper>
       </SweetPostingContainer>
     </>
@@ -42,8 +100,12 @@ const UserImage = styled.div`
   margin-right: 15px;
 `;
 
+const Preview = styled.div`
+  ${FlexAttribute("column", "", "center")}
+  width: 75%;
+`;
+
 const SweetInput = styled.textarea`
-  width: 70%;
   height: 100px;
   font-size: 17px;
   resize: none;
@@ -54,7 +116,31 @@ const SubmitWrapper = styled.div`
   ${FlexAttribute("row", "center", "space-around")}
   margin-top: 15px;
   padding-bottom: 15px;
-  border-bottom: ${theme.borderline}; ;
+  border-bottom: ${theme.borderline};
+  input {
+    display: none;
+  }
+`;
+
+const ImageLabel = styled.label`
+  padding: 8px 8px 4px 8px;
+  border-radius: 50%;
+  :hover {
+    background-color: ${theme.color.category_hover};
+  }
+`;
+
+const PreviewImageWrapper = styled.div`
+  ${FlexAttribute("row", "", "center")}
+  flex-wrap: wrap;
+`;
+
+const PreviewImage = styled.img`
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+  border-radius: 30px;
+  object-fit: cover;
 `;
 
 export default SweetPosting;
