@@ -1,14 +1,14 @@
 import React from "react";
 import { useState, useRef } from "react";
+import useOutSideClick from "../../hooks/useOutsideClick";
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 import { CategoryBoxStyle, FlexAttribute } from "../../style/Mixin";
 
 import Button from "../elements/Button";
-import ModalSweetpost from "../elements/modal/ModalSweetpost";
-import ModalLogout from "../elements/modal/ModalLogout";
-import useOutSideClick from "../hooks/useOutsideClick";
+import ModalSweetpost from "../modal/ModalSweetpost";
+import ModalLogout from "../modal/ModalLogout";
 
 import { FaTwitter, FaHome, FaBookmark, FaUserCircle } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";

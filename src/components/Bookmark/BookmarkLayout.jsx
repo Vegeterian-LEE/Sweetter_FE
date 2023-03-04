@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { CenterLayoutBorder } from "../../style/Mixin";
 
 import Navbar from "../elements/Navbar";
-import Post from "../Post";
+import Post from "../elements/Post";
 
 const BookmarkLayout = () => {
   return (

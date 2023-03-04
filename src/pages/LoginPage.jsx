@@ -1,5 +1,5 @@
 import { React, useState, useRef } from "react";
-import useOutSideClick from "../components/hooks/useOutsideClick";
+import useOutSideClick from "../hooks/useOutsideClick";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -9,8 +9,8 @@ import { FlexAttribute } from "../style/Mixin";
 import TwitterLogo from "../assets/TwitterLogo.jpg";
 
 import Button from "../components/elements/Button";
-import ModalWrapper from "../components/elements/modal/ModalWrapper";
-import ModalBox from "../components/elements/modal/ModalBox";
+import ModalWrapper from "../components/modal/ModalWrapper";
+import ModalBox from "../components/modal/ModalBox";
 
 import { FaTwitter } from "react-icons/fa";
 

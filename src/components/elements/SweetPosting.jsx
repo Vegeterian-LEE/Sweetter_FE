@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import Button from "./elements/Button";
+import Button from "./Button";
 
 import { FaUserCircle } from "react-icons/fa";
 import { BsImage } from "react-icons/bs";
-import { FlexAttribute } from "../style/Mixin";
+import { FlexAttribute } from "../../style/Mixin";
 
 const SweetPosting = () => {
   return (

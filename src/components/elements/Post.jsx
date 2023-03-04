@@ -1,7 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
-import { FlexAttribute } from "../style/Mixin";
+import { FlexAttribute } from "../../style/Mixin";
 
 import { FaUserCircle, FaCommentAlt, FaHeart } from "react-icons/fa";
 import { IoMdRepeat } from "react-icons/io";

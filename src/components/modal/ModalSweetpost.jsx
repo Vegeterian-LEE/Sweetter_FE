@@ -2,13 +2,13 @@ import React from "react";
 
 import styled from "styled-components";
 
-import Button from "../Button";
+import Button from "../elements/Button";
 import ModalBox from "./ModalBox";
 import ModalWrapper from "./ModalWrapper";
 
 import { FaUserCircle } from "react-icons/fa";
 import { BsImage } from "react-icons/bs";
-import { FlexAttribute } from "../../../style/Mixin";
+import { FlexAttribute } from "../../style/Mixin";
 
 const ModalSweetpost = ({ sweetPostModalRef }) => {
   return (

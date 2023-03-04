@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import styled from "styled-components";
-import { FlexAttribute } from "../../../style/Mixin";
+import { FlexAttribute } from "../../style/Mixin";
 
 import ModalWrapper from "./ModalWrapper";
 

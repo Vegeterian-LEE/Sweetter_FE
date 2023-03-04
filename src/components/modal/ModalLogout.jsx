@@ -1,13 +1,13 @@
 import React from "react";
 
 import styled from "styled-components";
-import { FlexAttribute } from "../../../style/Mixin";
+import { FlexAttribute } from "../../style/Mixin";
 
 import ModalWrapper from "./ModalWrapper";
 import ModalBox from "./ModalBox";
-import Button from "../Button";
+import Button from "../elements/Button";
 
-import { StMiniFaTwitter } from "../../../pages/LoginPage";
+import { StMiniFaTwitter } from "../../pages/LoginPage";
 
 const ModalLogout = ({ signoutModalRef }) => {
   return (
