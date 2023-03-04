@@ -90,11 +90,16 @@ const LoginPage = () => {
 
       dispatch(__addUser(newUser))
         .then(() => {
-          navigate("/");
+          setIsSignupModalOpen(false);
+          setIsLoginModalOpen(true);
         })
         .catch((error) => {
-          console.error("회원 가입 실패", error);
+          alert("회원 가입 실패", error);
         });
+      setUsername("");
+      setEmail("");
+      setUserId("");
+      setPassword("");
     }
   };
 
@@ -182,6 +187,7 @@ const LoginPage = () => {
                 onChange={onChangeEmail}
               />
               <StInput
+                marginBottom="5px"
                 type="text"
                 placeholder="ID"
                 value={userId}
@@ -189,6 +195,7 @@ const LoginPage = () => {
               />
               <StMessage>{userIdMessage}</StMessage>
               <StInput
+                marginBottom="5px"
                 type="password"
                 placeholder="Password"
                 value={password}
@@ -272,7 +279,7 @@ export const StLogin = styled.h1`
 export const StInput = styled.input`
   width: 350px;
   height: 50px;
-  margin-bottom: 20px;
+  margin-bottom: ${(props) => props.marginBottom || "20px"};
   border-radius: 5px;
   border: 1px solid #ccc;
   padding: 10px;
@@ -295,6 +302,7 @@ export const StInput = styled.input`
 const StMessage = styled.p`
   font-size: 7px;
   color: #0c85d0;
+  margin-bottom: 15px;
 `;
 
 export const StToSignUp = styled.h3`
