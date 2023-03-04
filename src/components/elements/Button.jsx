@@ -1,6 +1,7 @@
 import React from "react";
 
 import styled, { css } from "styled-components";
+import theme from "../../style/Theme";
 
 const Button = ({ children, disableHover, ...props }) => {
   const buttonStyle = { width: props.width };
@@ -22,8 +23,8 @@ Button.defaultProps = {
 };
 
 const TwitterButton = styled.button`
-  background-color: ${(props) => props.backgroundColor || "#4da0eb"};
-  color: #fff;
+  background-color: ${(props) => props.backgroundColor || theme.color.main};
+  color: ${theme.color.button_text};
   border: none;
   border-radius: 50px;
   font-size: 16px;
@@ -34,14 +35,14 @@ const TwitterButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #0c85d0;
+    background-color: ${theme.color.main};
   }
 
   ${(props) =>
     !props.disableHover &&
     css`
       &:hover {
-        background-color: #0c85d0;
+        background-color: ${theme.color.main_color};
       }
     `}
 

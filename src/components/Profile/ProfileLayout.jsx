@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
 import styled from "styled-components";
-import { CenterLayoutBorder, FlexAttribute } from "../../style/Mixin";
+import {
+  CenterLayoutBorder,
+  FlexAttribute,
+  UserInfomaitionText,
+} from "../../style/Mixin";
+import theme from "../../style/Theme";
 
 import TwitterLogo from "../../assets/TwitterLogo.jpg";
 import Button from "../elements/Button";
@@ -30,16 +35,20 @@ const ProfileLayout = () => {
             <Button>Edit</Button>
           </UserImageBox>
           <UserInfomation>
-            <h2>User Name</h2>
-            <h2>User ID</h2>
+            <UserInfo name>User Name</UserInfo>
+            <UserInfo>@User ID</UserInfo>
           </UserInfomation>
           <UserJoinDate>
             <FaRegCalendarAlt />
-            Joined March 2023
+            <Date>Joined March 2023</Date>
           </UserJoinDate>
           <UserFollowInfomation>
-            <Following>3 Following</Following>
-            <Followers>3 Followers</Followers>
+            <Follow>
+              <span>3</span> Following
+            </Follow>
+            <Follow>
+              <span>3</span> Followers
+            </Follow>
           </UserFollowInfomation>
         </UserWrapper>
         <CategoryButtonWrapper>
@@ -100,17 +109,40 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
-const UserInfomation = styled.div``;
+const UserInfomation = styled.div`
+  ${FlexAttribute("column")}
+`;
 
-const UserJoinDate = styled.div``;
+const UserInfo = styled.span`
+  ${UserInfomaitionText}
+  margin-bottom: 5px;
+`;
+
+const UserJoinDate = styled.div`
+  ${FlexAttribute("row", "center")}
+  color: ${theme.color.hazy_text};
+`;
+
+const Date = styled.span`
+  margin-left: 10px;
+  font-size: ${theme.textsize.date};
+`;
 
 const UserFollowInfomation = styled.div`
   ${FlexAttribute("row")}
 `;
 
-const Following = styled.h2``;
-
-const Followers = styled.h2``;
+const Follow = styled.div`
+  color: ${theme.color.hazy_text};
+  span {
+    color: black;
+    font-size: 17px;
+    font-weight: 400;
+  }
+  :last-child {
+    margin-left: 10px;
+  }
+`;
 
 const CategoryButtonWrapper = styled.div`
   ${FlexAttribute("row", "", "space-around")}

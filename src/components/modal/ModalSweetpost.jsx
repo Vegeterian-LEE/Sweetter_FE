@@ -1,6 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
+import theme from "../../style/Theme";
 
 import Button from "../elements/Button";
 import ModalBox from "./ModalBox";
@@ -55,7 +56,7 @@ export const SubmitWrapper = styled.div`
   gap: 18rem;
   margin-top: 15px;
   padding-bottom: 15px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2); ;
+  border-bottom: ${theme.borderline};
 `;
 
 export default ModalSweetpost;

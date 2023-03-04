@@ -10,8 +10,8 @@ const App = () => {
   return (
     <>
       <Reset />
-      <GlobalStyle />
       <ThemeProvider theme={theme}>
+        <GlobalStyle />
         <Router />
       </ThemeProvider>
     </>

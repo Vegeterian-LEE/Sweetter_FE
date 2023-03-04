@@ -2,6 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 import { FlexAttribute } from "../../style/Mixin";
+import theme from "../../style/Theme";
 
 import { FiSearch } from "react-icons/fi";
 
@@ -12,9 +13,9 @@ const SearchBar = () => {
         <SearchBarContainer>
           <SearchForm>
             <FiSearch size={25} />
-            <SearchSweetterInput placeholder="serch"></SearchSweetterInput>
+            <SearchSweetterInput placeholder="serch sweetter 🐥"></SearchSweetterInput>
           </SearchForm>
-          <FollowListWrapper>Follow List</FollowListWrapper>
+          <FollowListWrapper></FollowListWrapper>
         </SearchBarContainer>
       </div>
     </>
@@ -33,7 +34,7 @@ const SearchSweetterInput = styled.input`
   padding-left: 17px;
   border-radius: 20px;
   height: 40px;
-  background-color: #eff3f4;
+  background-color: ${theme.color.search_background};
 `;
 
 const SearchForm = styled.form`
@@ -41,7 +42,7 @@ const SearchForm = styled.form`
   border-radius: 25px;
   width: 85%;
   padding-left: 20px;
-  background-color: #eff3f4;
+  background-color: ${theme.color.search_background};
 `;
 
 const FollowListWrapper = styled.div`
@@ -49,7 +50,7 @@ const FollowListWrapper = styled.div`
   min-height: 400px;
   margin-top: 20px;
   border-radius: 25px;
-  background-color: #eff3f4;
+  background-color: ${theme.color.search_background};
 `;
 
 export default SearchBar;

@@ -4,7 +4,12 @@ import useOutSideClick from "../../hooks/useOutsideClick";
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
-import { CategoryBoxStyle, FlexAttribute } from "../../style/Mixin";
+import {
+  CategoryBoxStyle,
+  CategoryTitleStyle,
+  FlexAttribute,
+} from "../../style/Mixin";
+import theme from "../../style/Theme";
 
 import Button from "../elements/Button";
 import ModalSweetpost from "../modal/ModalSweetpost";
@@ -54,7 +59,7 @@ const SideBar = () => {
                 <CategoryWrapper key={index} to={item.linkTo}>
                   <CategoryBox>
                     {item.icon}
-                    <Span>{item.title}</Span>
+                    <CategoryTitle>{item.title}</CategoryTitle>
                   </CategoryBox>
                 </CategoryWrapper>
               );
@@ -117,15 +122,12 @@ const CategoryBox = styled.div`
   }
   :hover {
     border-radius: 50px;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: ${theme.color.category_hover};
   }
 `;
 
-const Span = styled.span`
-  width: 120px;
-  margin-top: 13px;
-  font-size: 20px;
-  margin-left: 10px;
+const CategoryTitle = styled.span`
+  ${CategoryTitleStyle}
 `;
 
 const UserInfo = styled.div`
@@ -139,9 +141,9 @@ const StDropDown = styled.div`
   left: 0;
   right: 0;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: ${theme.borderline};
   border-radius: 5px;
-  background-color: white;
+  background-color: ${theme.color.logout_dropdown};
   cursor: pointer;
 `;
 
