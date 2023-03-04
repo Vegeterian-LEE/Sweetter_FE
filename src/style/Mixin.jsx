@@ -11,3 +11,9 @@ export const FlexAttribute = (direction, align, justify) => css`
   align-items: ${align};
   justify-content: ${justify};
 `;
+
+export const CategoryBoxStyle = css`
+  ${FlexAttribute("row", "center", "flex-end")}
+  margin: 10px 20px;
+  padding: 5px 10px;
+`;
