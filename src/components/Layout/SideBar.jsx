@@ -1,23 +1,23 @@
 import React from "react";
 import { useState, useRef } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+import Button from "../elements/Button";
+import ModalSweetpost from "../elements/modal/ModalSweetpost";
+import ModalLogout from "../elements/modal/ModalLogout";
+import useOutSideClick from "../hooks/useOutsideClick";
 
 import { FaTwitter, FaHome, FaBookmark, FaUserCircle } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { RxDotsHorizontal } from "react-icons/rx";
-import Button from "../elements/Button";
-
-import ModalSweetpost from "../elements/modal/ModalSweetpost";
-import ModalLogout from "../elements/modal/ModalLogout";
-
-import useOutSideClick from "../hooks/useOutsideClick";
 
 const SideBar = () => {
   const CategoryArr = [
-    { title: "Sweeter", icon: <FaTwitter /> },
-    { title: "Home", icon: <FaHome /> },
-    { title: "Bookmark", icon: <FaBookmark /> },
-    { title: "Profile", icon: <CgProfile /> },
+    { title: "Sweeter", icon: <FaTwitter />, linkTo: "/" },
+    { title: "Home", icon: <FaHome />, linkTo: "/" },
+    { title: "Bookmark", icon: <FaBookmark />, linkTo: "/bookmark" },
+    { title: "Profile", icon: <CgProfile />, linkTo: "/profile" },
   ];
 
   //sweet 모달창
@@ -36,7 +36,6 @@ const SideBar = () => {
   };
 
   //로그아웃 모달
-
   const [isSignoutModalOpen, setIsSignoutModalOpen] = useState(false);
   const handleSignoutModalClose = () => {
     setIsSignoutModalOpen(false);
@@ -49,9 +48,9 @@ const SideBar = () => {
       <>
         <SideBarLayoutContainer>
           <div>
-            {CategoryArr.map((item) => {
+            {CategoryArr.map((item, index) => {
               return (
-                <CategoryWrapper>
+                <CategoryWrapper key={index} to={item.linkTo}>
                   <CategoryBox>
                     {item.icon}
                     <Span>{item.title}</Span>
@@ -59,13 +58,12 @@ const SideBar = () => {
                 </CategoryWrapper>
               );
             })}
-            <CategoryWrapper>
+            <SweetPostingModal>
               <Button onClick={() => setIsSweetModalOpen(true)}>Sweet</Button>
-            </CategoryWrapper>
+            </SweetPostingModal>
           </div>
-
           <div>
-            <CategoryWrapper>
+            <SweetPostingModal>
               <CategoryBox onClick={handleDropdownToggle}>
                 {isDropdownOpen && (
                   <StDropDown onClick={() => setIsSignoutModalOpen(true)}>
@@ -79,7 +77,7 @@ const SideBar = () => {
                 </UserInfo>
                 <RxDotsHorizontal />
               </CategoryBox>
-            </CategoryWrapper>
+            </SweetPostingModal>
           </div>
         </SideBarLayoutContainer>
         {isSweetModalOpen && (
@@ -99,13 +97,23 @@ const SideBarLayoutContainer = styled.div`
   justify-content: space-between;
 `;
 
-const CategoryWrapper = styled.div`
+// style 중복
+const CategoryWrapper = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: flex-end;
   margin: 10px 20px;
   padding: 5px 10px;
 `;
+
+const SweetPostingModal = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 10px 20px;
+  padding: 5px 10px;
+`;
+// -----
 
 const CategoryBox = styled.div`
   position: relative;

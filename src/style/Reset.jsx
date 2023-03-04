@@ -56,6 +56,11 @@ const Reset = createGlobalStyle`
     outline: none;
     border: none;
   }
+  a {
+    color: black;
+    text-decoration: none;
+    outline: none;
+  }
 `;
 
 export default Reset;
