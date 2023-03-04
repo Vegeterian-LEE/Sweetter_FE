@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
 }
 * {
   font-family: 'LINESeedKR-Bd';
-  font-weight: 400;
+  font-weight: 700;
 }
 `;
 

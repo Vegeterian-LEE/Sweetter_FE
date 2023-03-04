@@ -1,7 +1,11 @@
 import React from "react";
 
 import styled from "styled-components";
-import { FlexAttribute } from "../../style/Mixin";
+import {
+  FlexAttribute,
+  PostText,
+  UserInfomaitionText,
+} from "../../style/Mixin";
 import theme from "../../style/Theme";
 
 import { FaUserCircle, FaCommentAlt, FaHeart } from "react-icons/fa";
@@ -16,10 +20,10 @@ const Post = ({ mt }) => {
             <FaUserCircle size={55} />
           </UserImage>
           <PostContentsWrapper>
-            <UserInfo>
-              <h2>User Name</h2>
-              <h2>User ID</h2>
-            </UserInfo>
+            <UserInfomation>
+              <UserInfo name>User Name</UserInfo>
+              <UserInfo>@User ID</UserInfo>
+            </UserInfomation>
             <PostContents>hi i'm sweeter</PostContents>
             <PostButtonWrapper>
               <FaCommentAlt size={19} />
@@ -50,9 +54,13 @@ const PostWrapper = styled.div`
 
 const UserImage = styled.div``;
 
-const UserInfo = styled.div`
+const UserInfomation = styled.div`
   ${FlexAttribute}
-  h2 {
+`;
+
+const UserInfo = styled.span`
+  ${UserInfomaitionText}
+  :last-child {
     margin-left: 10px;
   }
 `;
@@ -62,9 +70,8 @@ const PostContentsWrapper = styled.div`
   margin-left: 10px;
 `;
 
-const PostContents = styled.p`
-  margin-top: 17px;
-  margin-left: 10px;
+const PostContents = styled.span`
+  ${PostText}
 `;
 
 const PostButtonWrapper = styled.div`

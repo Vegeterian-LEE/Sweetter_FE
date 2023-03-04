@@ -19,8 +19,9 @@ const BtnWrapper = styled.div`
 
 const Button = styled.button`
   height: 50px;
-  font-size: 18px;
+  font-size: 17px;
   background-color: transparent;
+  cursor: pointer;
 `;
 
 const StateBar = styled.div`

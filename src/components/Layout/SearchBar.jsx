@@ -13,9 +13,9 @@ const SearchBar = () => {
         <SearchBarContainer>
           <SearchForm>
             <FiSearch size={25} />
-            <SearchSweetterInput placeholder="serch"></SearchSweetterInput>
+            <SearchSweetterInput placeholder="serch sweetter 🐥"></SearchSweetterInput>
           </SearchForm>
-          <FollowListWrapper>Follow List</FollowListWrapper>
+          <FollowListWrapper></FollowListWrapper>
         </SearchBarContainer>
       </div>
     </>

@@ -4,7 +4,11 @@ import useOutSideClick from "../../hooks/useOutsideClick";
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
-import { CategoryBoxStyle, FlexAttribute } from "../../style/Mixin";
+import {
+  CategoryBoxStyle,
+  CategoryTitleStyle,
+  FlexAttribute,
+} from "../../style/Mixin";
 import theme from "../../style/Theme";
 
 import Button from "../elements/Button";
@@ -55,7 +59,7 @@ const SideBar = () => {
                 <CategoryWrapper key={index} to={item.linkTo}>
                   <CategoryBox>
                     {item.icon}
-                    <Span>{item.title}</Span>
+                    <CategoryTitle>{item.title}</CategoryTitle>
                   </CategoryBox>
                 </CategoryWrapper>
               );
@@ -122,11 +126,8 @@ const CategoryBox = styled.div`
   }
 `;
 
-const Span = styled.span`
-  width: 120px;
-  margin-top: 13px;
-  font-size: 20px;
-  margin-left: 10px;
+const CategoryTitle = styled.span`
+  ${CategoryTitleStyle}
 `;
 
 const UserInfo = styled.div`

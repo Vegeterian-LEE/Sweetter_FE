@@ -32,7 +32,8 @@ const NavTitleContainer = styled.div`
 `;
 
 const NavBarTitle = styled.h2`
-  font-size: 26px;
+  font-size: ${theme.textsize.category};
+  font-weight: 700;
   padding-left: 2rem;
   margin: 1rem 0;
 `;

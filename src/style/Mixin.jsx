@@ -18,3 +18,22 @@ export const CategoryBoxStyle = css`
   margin: 10px 20px;
   padding: 5px 10px;
 `;
+
+export const UserInfomaitionText = css`
+  font-size: ${theme.textsize.user_info};
+  font-weight: ${(props) => (props.name ? "bold" : null)};
+  color: ${(props) => (props.name ? null : theme.color.hazy_text)};
+`;
+
+export const PostText = css`
+  display: inline-block;
+  margin: 15px 0;
+  font-size: ${theme.textsize.post};
+`;
+
+export const CategoryTitleStyle = css`
+  width: 120px;
+  margin-top: 13px;
+  margin-left: 10px;
+  font-size: ${theme.textsize.category};
+`;
