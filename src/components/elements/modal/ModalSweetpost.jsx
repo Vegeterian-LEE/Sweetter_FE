@@ -1,10 +1,14 @@
 import React from "react";
-import { FaUserCircle } from "react-icons/fa";
-import { BsImage } from "react-icons/bs";
+
+import styled from "styled-components";
+
 import Button from "../Button";
 import ModalBox from "./ModalBox";
 import ModalWrapper from "./ModalWrapper";
-import styled from "styled-components";
+
+import { FaUserCircle } from "react-icons/fa";
+import { BsImage } from "react-icons/bs";
+import { FlexAttribute } from "../../../style/Mixin";
 
 const ModalSweetpost = ({ sweetPostModalRef }) => {
   return (
@@ -30,8 +34,7 @@ const ModalSweetpost = ({ sweetPostModalRef }) => {
 };
 
 export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${FlexAttribute("column")}
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
@@ -48,9 +51,7 @@ export const SweetInput = styled.textarea`
 `;
 
 export const SubmitWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+  ${FlexAttribute("row", "center", "space-around")}
   gap: 18rem;
   margin-top: 15px;
   padding-bottom: 15px;

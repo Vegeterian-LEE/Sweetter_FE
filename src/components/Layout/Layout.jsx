@@ -1,5 +1,7 @@
 import React from "react";
+
 import styled from "styled-components";
+import { FlexAttribute } from "../../style/Mixin";
 
 const Layout = ({ children }) => {
   return (
@@ -10,8 +12,7 @@ const Layout = ({ children }) => {
 };
 
 const LayoutStyle = styled.div`
-  display: flex;
-  justify-content: center;
+  ${FlexAttribute()}
 `;
 
 export default Layout;

@@ -1,5 +1,7 @@
 import React from "react";
+
 import styled from "styled-components";
+import { FlexAttribute } from "../style/Mixin";
 
 import { FaUserCircle, FaCommentAlt, FaHeart } from "react-icons/fa";
 import { IoMdRepeat } from "react-icons/io";
@@ -31,9 +33,7 @@ const Post = ({ mt }) => {
 };
 
 const PostContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  ${FlexAttribute("column", "", "center")}
   width: 44vw;
   padding-top: 15px;
   padding-bottom: 17px;
@@ -43,13 +43,14 @@ const PostContainer = styled.div`
 const PostWrapper = styled.div`
   display: flex;
   justify-content: center;
+  ${FlexAttribute("row", "", "center")}
   margin-top: 10px;
 `;
 
 const UserImage = styled.div``;
 
 const UserInfo = styled.div`
-  display: flex;
+  ${FlexAttribute}
   h2 {
     margin-left: 10px;
   }
@@ -66,8 +67,7 @@ const PostContents = styled.p`
 `;
 
 const PostButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
+  ${FlexAttribute("row", "", "space-around")}
   margin-top: 20px;
 `;
 

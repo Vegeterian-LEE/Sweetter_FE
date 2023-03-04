@@ -1,6 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
+import { FlexAttribute } from "../../style/Mixin";
 
 const Navbar = ({ category, children }) => {
   return (
@@ -26,8 +27,7 @@ const NavBar = styled.div`
 `;
 
 const NavTitleContainer = styled.div`
-  display: flex;
-  align-items: center;
+  ${FlexAttribute("row", "center")}
 `;
 
 const NavBarTitle = styled.h2`

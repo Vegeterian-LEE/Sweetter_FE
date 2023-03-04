@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
-import ModalWrapper from "./ModalWrapper";
+
 import styled from "styled-components";
+import { FlexAttribute } from "../../../style/Mixin";
+
+import ModalWrapper from "./ModalWrapper";
 
 function ModalBox({ children }) {
   useEffect(() => {
@@ -24,10 +27,8 @@ function ModalBox({ children }) {
 }
 
 const Modal = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${FlexAttribute("column", "center")}
   text-align: left;
-  align-items: center;
   margin: 0 auto;
   width: 31.25rem;
   ${(props) => (props.width ? props.width : "23rem")};
@@ -42,8 +43,7 @@ const ModalText = styled.p`
 `;
 
 const BtnWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
+  ${FlexAttribute("", "", "flex-end")}
 `;
 
 export default ModalBox;

@@ -1,5 +1,7 @@
 import React from "react";
+
 import styled from "styled-components";
+import { FlexAttribute } from "../../style/Mixin";
 
 const CategoryButton = ({ children, onClick, active }) => {
   return (
@@ -11,10 +13,7 @@ const CategoryButton = ({ children, onClick, active }) => {
 };
 
 const BtnWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  ${FlexAttribute("column", "center", "center")}
 `;
 
 const Button = styled.button`
@@ -24,10 +23,10 @@ const Button = styled.button`
 `;
 
 const StateBar = styled.div`
-  background-color: ${(props) => (props.active ? "#1c9bef" : "transparent")};
   width: 100px;
   height: 5px;
   border-radius: 2px;
+  background-color: ${(props) => (props.active ? "#1c9bef" : "transparent")};
 `;
 
 export default CategoryButton;
