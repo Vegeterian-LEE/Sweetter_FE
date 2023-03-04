@@ -11,7 +11,6 @@ import useOutSideClick from "../components/hooks/useOutsideClick";
 
 import { useState, useRef } from "react";
 import { FaTwitter } from "react-icons/fa";
-import ModalLogout from "../components/elements/modal/ModalLogout";
 
 const LoginPage = () => {
   // 로그인 모달 관리
@@ -40,14 +39,6 @@ const LoginPage = () => {
     setIsSignupModalOpen(true);
   };
 
-  //로그아웃 모달(테스트)
-  const [isSignoutModalOpen, setIsSignoutModalOpen] = useState(false);
-  const handleSignoutModalClose = () => {
-    setIsSignoutModalOpen(false);
-  };
-  const signoutModalRef = useRef(null);
-  useOutSideClick(signoutModalRef, handleSignoutModalClose);
-
   return (
     <>
       <Container>
@@ -64,9 +55,6 @@ const LoginPage = () => {
             </Button>
             <Button onClick={() => setIsLoginModalOpen(true)} wh="l">
               로그인
-            </Button>
-            <Button onClick={() => setIsSignoutModalOpen(true)} wh="l">
-              로그아웃
             </Button>
           </ButtonWrapper>
         </RightHalf>
@@ -107,7 +95,6 @@ const LoginPage = () => {
           </ModalBox>
         </ModalWrapper>
       )}
-      {isSignoutModalOpen && <ModalLogout signoutModalRef={signoutModalRef} />}
     </>
   );
 };
