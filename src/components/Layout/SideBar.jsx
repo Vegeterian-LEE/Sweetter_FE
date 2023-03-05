@@ -12,8 +12,8 @@ import {
 import theme from "../../style/Theme";
 
 import Button from "../elements/Button";
-import ModalSweetpost from "../modal/ModalSweetpost";
-import ModalLogout from "../modal/ModalLogout";
+import ModalSweetpost from "../modal/modals/ModalSweetpost";
+import ModalLogout from "../modal/modals/ModalLogout";
 
 import { FaTwitter, FaHome, FaBookmark, FaUserCircle } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";

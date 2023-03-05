@@ -18,10 +18,6 @@ export const __loginUser = createAsyncThunk(
       console.log(response);
       const userToken = response.data.token;
 
-      // const now = new Date();
-      // const after10m = new Date(now);
-      // after10m.setMinutes(now.getMinutes() + 1);
-
       usersInstance.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${userToken}`;
