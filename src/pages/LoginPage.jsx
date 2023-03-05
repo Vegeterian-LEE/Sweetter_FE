@@ -11,7 +11,7 @@ import TwitterLogo from "../assets/TwitterLogo.jpg";
 import Button from "../components/elements/Button";
 import ModalWrapper from "../components/modal/ModalWrapper";
 import ModalBox from "../components/modal/ModalBox";
-import { __addUser } from "../redux/modules/usersSlice";
+import { __addUser, __loginUser } from "../redux/modules/usersSlice";
 
 import { FaTwitter } from "react-icons/fa";
 
@@ -103,11 +103,41 @@ const LoginPage = () => {
     }
   };
 
+  //로그인
+
+  const loginHandler = () => {
+    if (email !== "" && password !== "") {
+      const loginUser = {
+        email,
+        password,
+      };
+      dispatch(__loginUser(loginUser))
+        .then(() => {
+          navigate("/");
+        })
+        .catch((error) => {
+          alert("로그인 오류!", error);
+        });
+    } else {
+      alert("이메일과 비밀번호를 입력해 주세요!");
+    }
+  };
+
+  // 모달 닫히면 내용도 리셋
+
+  const resetForm = () => {
+    setUsername("");
+    setEmail("");
+    setUserId("");
+    setPassword("");
+  };
+
   // 로그인 모달 관리
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const handleLoginModalClose = () => {
     setIsLoginModalOpen(false);
+    resetForm();
   };
 
   const loginModalRef = useRef(null);
@@ -118,6 +148,7 @@ const LoginPage = () => {
 
   const handleSignupModalClose = () => {
     setIsSignupModalOpen(false);
+    resetForm();
   };
 
   const signupModalRef = useRef(null);
@@ -155,9 +186,19 @@ const LoginPage = () => {
             <div ref={loginModalRef}>
               <StMiniFaTwitter />
               <StLogin>트위터 로그인</StLogin>
-              <StInput type="text" placeholder="이메일" />
-              <StInput type="text" placeholder="비밀번호" />
-              <Button wh="l" width="350px">
+              <StInput
+                type="text"
+                placeholder="이메일"
+                value={email}
+                onChange={onChangeEmail}
+              />
+              <StInput
+                type="password"
+                placeholder="비밀번호"
+                value={password}
+                onChange={onChangePassword}
+              />
+              <Button wh="l" width="350px" onClick={loginHandler}>
                 로그인
               </Button>
               <StToSignUp onClick={handleMovetoSignupModal}>
