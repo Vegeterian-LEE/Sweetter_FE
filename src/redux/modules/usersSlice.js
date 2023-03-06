@@ -32,6 +32,12 @@ export const __loginUser = createAsyncThunk(
   }
 );
 
+//개별 유저 정보 갖고오기
+export const getUserInfo = () => {
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  return userInfo;
+};
+
 const initialState = {
   users: [],
   message: "",
