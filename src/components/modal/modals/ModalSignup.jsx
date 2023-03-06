@@ -7,7 +7,9 @@ import {
   StLogin,
   StInput,
   StMessage,
+  ModalBoxRef,
 } from "../../../pages/LoginPage";
+
 import Button from "../../elements/Button";
 
 const ModalSignup = ({
@@ -27,7 +29,7 @@ const ModalSignup = ({
   return (
     <ModalWrapper>
       <ModalBox>
-        <div ref={signupModalRef}>
+        <ModalBoxRef ref={signupModalRef}>
           <StMiniFaTwitter />
           <StLogin>트위터 회원가입</StLogin>
           <StInput
@@ -61,7 +63,7 @@ const ModalSignup = ({
           <Button wh="l" width="350px" onClick={joinHandler}>
             가입 완료
           </Button>
-        </div>
+        </ModalBoxRef>
       </ModalBox>
     </ModalWrapper>
   );
