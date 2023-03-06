@@ -3,12 +3,16 @@ import React from "react";
 import styled from "styled-components";
 import {
   FlexAttribute,
+  IconStyle,
   PostText,
+  UserImageStyle,
   UserInfomaitionText,
 } from "../../style/Mixin";
 import theme from "../../style/Theme";
 
-import { FaUserCircle, FaCommentAlt, FaHeart } from "react-icons/fa";
+import TwitterLogo from "../../assets/TwitterLogo.jpg";
+
+import { FaCommentAlt, FaHeart } from "react-icons/fa";
 import { IoMdRepeat } from "react-icons/io";
 
 const Post = ({ item }) => {
@@ -18,7 +22,7 @@ const Post = ({ item }) => {
       <PostContainer>
         <PostWrapper>
           <UserImage>
-            <FaUserCircle size={55} />
+            <img src={TwitterLogo} alt="userimage" />
           </UserImage>
           <PostContentsWrapper>
             <UserInfomation>
@@ -27,9 +31,15 @@ const Post = ({ item }) => {
             </UserInfomation>
             <PostContents>{item.content}</PostContents>
             <PostButtonWrapper>
-              <FaCommentAlt size={19} />
-              <FaHeart size={20} />
-              <IoMdRepeat size={23} />
+              <IconBox>
+                <FaCommentAlt />
+              </IconBox>
+              <IconBox>
+                <FaHeart />
+              </IconBox>
+              <IconBox>
+                <IoMdRepeat />
+              </IconBox>
             </PostButtonWrapper>
           </PostContentsWrapper>
         </PostWrapper>
@@ -53,7 +63,11 @@ const PostWrapper = styled.div`
   margin-top: 10px;
 `;
 
-const UserImage = styled.div``;
+const UserImage = styled.div`
+  img {
+    ${UserImageStyle}
+  }
+`;
 
 const UserInfomation = styled.div`
   ${FlexAttribute}
@@ -78,6 +92,15 @@ const PostContents = styled.span`
 const PostButtonWrapper = styled.div`
   ${FlexAttribute("row", "", "space-around")}
   margin-top: 20px;
+  svg {
+    font-size: 20px;
+  }
+`;
+
+const IconBox = styled.div`
+  ${IconStyle}
+  width: 25px;
+  height: 25px;
 `;
 
 export default Post;

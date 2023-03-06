@@ -47,7 +47,7 @@ export const __deletePost = createAsyncThunk(
   async (postid, thunkAPI) => {
     try {
       const response = await sweetInstance.get(`/post${postid}`);
-      console.log("deletePostThunk", response.data);
+      // console.log("deletePostThunk", response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -80,7 +80,6 @@ export const sweetSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(__getPostHome.fulfilled, (state, action) => {
-        console.log("lgo11");
         state.isLoading = false;
         state.isError = false;
         state.allPostResponse = action.payload.allPostResponse;

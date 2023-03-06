@@ -8,6 +8,7 @@ import {
   CategoryBoxStyle,
   CategoryTitleStyle,
   FlexAttribute,
+  UserImageStyle,
   UserInfomaitionText,
 } from "../../style/Mixin";
 import theme from "../../style/Theme";
@@ -17,7 +18,9 @@ import ModalSweetpost from "../modal/modals/ModalSweetpost";
 import ModalLogout from "../modal/modals/ModalLogout";
 import { getUserInfo } from "../../redux/modules/usersSlice";
 
-import { FaTwitter, FaHome, FaBookmark, FaUserCircle } from "react-icons/fa";
+import TwitterLogo from "../../assets/TwitterLogo.jpg";
+
+import { FaTwitter, FaHome, FaBookmark } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { RxDotsHorizontal } from "react-icons/rx";
 
@@ -81,12 +84,14 @@ const SideBar = () => {
                   </StDropDown>
                 </div>
               )}
-              <FaUserCircle size={50} />
+              <UserImage>
+                <img src={TwitterLogo} alt="userImage" />
+              </UserImage>
               <UserInfomation>
                 <UserInfo name="true">{userInfo.username}</UserInfo>
                 <UserInfo>@{userInfo.userId}</UserInfo>
               </UserInfomation>
-              <RxDotsHorizontal />
+              <RxDotsHorizontal size={30} />
             </CategoryBox>
           </SweetPostingModal>
         </SideBarLayoutContainer>
@@ -121,7 +126,7 @@ const CategoryBox = styled.div`
   width: 200px;
   padding: 0 10px 10px 10px;
   cursor: pointer;
-  svg {
+  svg:not(:last-child) {
     font-size: 30px;
     size: 10px;
     padding-top: 10px;
@@ -138,7 +143,13 @@ const CategoryTitle = styled.span`
 
 const UserInfomation = styled.div`
   ${FlexAttribute("column", "", "center")}
-  margin-top: 10px;
+`;
+
+const UserImage = styled.div`
+  img {
+    ${UserImageStyle}
+    margin-top: 10px;
+  }
 `;
 
 const UserInfo = styled.span`
