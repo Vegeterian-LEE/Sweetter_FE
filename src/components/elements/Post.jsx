@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { __deletePost } from "../../redux/modules/sweetSlice";
 
 import styled, { css } from "styled-components";
 import {
@@ -13,13 +15,13 @@ import theme from "../../style/Theme";
 
 import TwitterLogo from "../../assets/TwitterLogo.jpg";
 
-import { FaCommentAlt, FaHeart, FaTrash } from "react-icons/fa";
+import { FaCommentAlt, FaHeart, FaTrash, FaBookmark } from "react-icons/fa";
 import { IoMdRepeat } from "react-icons/io";
-import { useDispatch } from "react-redux";
-import { __deletePost } from "../../redux/modules/sweetSlice";
 
 const Post = ({ item }) => {
   const { userId } = JSON.parse(localStorage.getItem("userInfo"));
+  console.log(userId);
+  console.log("item", item);
   const dispatch = useDispatch();
   const deletePost = (postId) => {
     dispatch(__deletePost(postId));
@@ -32,7 +34,7 @@ const Post = ({ item }) => {
             <img src={TwitterLogo} alt="userimage" />
           </UserImage>
           <PostContentsWrapper>
-            {userId === item.id && (
+            {userId === item.userId && (
               <IconBox onClick={deletePost(item.id)} delete="true">
                 <FaTrash />
               </IconBox>
@@ -50,13 +52,16 @@ const Post = ({ item }) => {
             </Link>
             <PostButtonWrapper>
               <IconBox>
-                <FaCommentAlt />
-              </IconBox>
-              <IconBox>
                 <FaHeart />
               </IconBox>
               <IconBox>
+                <FaCommentAlt />
+              </IconBox>
+              <IconBox>
                 <IoMdRepeat />
+              </IconBox>
+              <IconBox>
+                <FaBookmark />
               </IconBox>
             </PostButtonWrapper>
           </PostContentsWrapper>

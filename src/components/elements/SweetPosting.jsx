@@ -45,16 +45,10 @@ const SweetPosting = () => {
     imageFormData.forEach((image) => {
       formData.append("image", image);
     });
-    // formData.append(
-    //   "data",
-    //   JSON.stringify({
-    //     image: JSON.stringify(imageFormData),
-    //   })
-    // );
-    dispatch(__uploadImage(imageFormData));
-    // for (let value of formData.values()) {
-    //   console.log(value);
-    // }
+    formData.append("data", {
+      image: JSON.stringify(imageFormData),
+    });
+    dispatch(__uploadImage(formData));
   };
 
   return (
