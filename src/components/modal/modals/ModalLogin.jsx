@@ -2,14 +2,16 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import ModalWrapper from "../ModalFrames/ModalWrapper";
-import ModalBox from "../ModalFrames/ModalBox";
 import {
   StMiniFaTwitter,
   StLogin,
   StInput,
   StToSignUp,
+  ModalBoxRef,
 } from "../../../pages/LoginPage";
+
+import ModalBox from "../ModalFrames/ModalBox";
+import ModalWrapper from "../ModalFrames/ModalWrapper";
 import Button from "../../elements/Button";
 
 import { __loginUser } from "../../../redux/modules/usersSlice";
@@ -46,7 +48,7 @@ const ModalLogin = ({
   return (
     <ModalWrapper>
       <ModalBox>
-        <div ref={loginModalRef}>
+        <ModalBoxRef ref={loginModalRef}>
           <StMiniFaTwitter />
           <StLogin>트위터 로그인</StLogin>
           <StInput
@@ -67,7 +69,7 @@ const ModalLogin = ({
           <StToSignUp onClick={handleMovetoSignupModal}>
             비밀번호를 잊으셨나요? 트위터 가입
           </StToSignUp>
-        </div>
+        </ModalBoxRef>
       </ModalBox>
     </ModalWrapper>
   );

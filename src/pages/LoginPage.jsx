@@ -9,10 +9,11 @@ import TwitterLogo from "../assets/TwitterLogo.jpg";
 
 import Button from "../components/elements/Button";
 import ModalLogin from "../components/modal/modals/ModalLogin";
+import ModalSignup from "../components/modal/modals/ModalSignup";
+
 import { __addUser } from "../redux/modules/usersSlice";
 
 import { FaTwitter } from "react-icons/fa";
-import ModalSignup from "../components/modal/modals/ModalSignup";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -290,6 +291,10 @@ export const StToSignUp = styled.h3`
   text-align: center;
   margin-right: 64px;
   cursor: pointer;
+`;
+
+export const ModalBoxRef = styled.div`
+  ${FlexAttribute("column", "center", "center")}
 `;
 
 export default LoginPage;

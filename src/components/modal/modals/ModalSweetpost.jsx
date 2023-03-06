@@ -2,32 +2,21 @@ import React from "react";
 
 import styled from "styled-components";
 import theme from "../../../style/Theme";
+import { ModalBoxRef } from "../../../pages/LoginPage";
+import { FlexAttribute } from "../../../style/Mixin";
 
-import Button from "../../elements/Button";
 import ModalBox from "../ModalFrames/ModalBox";
 import ModalWrapper from "../ModalFrames/ModalWrapper";
-
-import { FaUserCircle } from "react-icons/fa";
-import { BsImage } from "react-icons/bs";
-import { FlexAttribute } from "../../../style/Mixin";
+import SweetPosting from "../../elements/SweetPosting";
 
 const ModalSweetpost = ({ sweetPostModalRef }) => {
   return (
     <>
       <ModalWrapper>
         <ModalBox>
-          <div ref={sweetPostModalRef}>
-            <InputWrapper>
-              <UserImage>
-                <FaUserCircle size={55} />
-              </UserImage>
-              <SweetInput placeholder="What's happening?"></SweetInput>
-            </InputWrapper>
-            <SubmitWrapper>
-              <BsImage size={20} />
-              <Button wh="s">Sweet</Button>
-            </SubmitWrapper>
-          </div>
+          <ModalBoxRef ref={sweetPostModalRef}>
+            <SweetPosting></SweetPosting>
+          </ModalBoxRef>
         </ModalBox>
       </ModalWrapper>
     </>

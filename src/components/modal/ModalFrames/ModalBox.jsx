@@ -31,7 +31,6 @@ const Modal = styled.div`
   ${FlexAttribute("column", "center")}
   text-align: left;
   margin: 0 auto;
-  width: 31.25rem;
   ${(props) => (props.width ? props.width : "23rem")};
   padding: 1.25rem;
   border-radius: 1.25rem;
@@ -39,7 +38,7 @@ const Modal = styled.div`
 `;
 
 const ModalText = styled.div`
-  margin-left: 42px;
+  min-width: 42vw;
 `;
 
 const BtnWrapper = styled.div`
