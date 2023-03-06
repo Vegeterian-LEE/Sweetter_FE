@@ -1,18 +1,23 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
 import theme from "../../style/Theme";
-import { FlexAttribute } from "../../style/Mixin";
+import { FlexAttribute, IconStyle, UserImageStyle } from "../../style/Mixin";
 
 import Button from "./Button";
 
-import { FaUserCircle } from "react-icons/fa";
+import TwitterLogo from "../../assets/TwitterLogo.jpg";
+
+import { __uploadImage } from "../../redux/modules/sweetSlice";
+
 import { BsImage } from "react-icons/bs";
 
 const SweetPosting = () => {
   const [contents, setContents] = useState("");
   const [showImages, setShowImages] = useState([]);
   const [imageFormData, setImageFormData] = useState([]);
+  const dispatch = useDispatch();
 
   const ImageHandler = (event) => {
     const formImg = new FormData();
@@ -36,13 +41,14 @@ const SweetPosting = () => {
 
   const submitHandler = () => {
     const formData = new FormData();
-    formData.append(
-      "data",
-      JSON.stringify({
-        contents: contents,
-        image: JSON.stringify(imageFormData),
-      })
-    );
+
+    imageFormData.forEach((image) => {
+      formData.append("image", image);
+    });
+    formData.append("data", {
+      image: JSON.stringify(imageFormData),
+    });
+    dispatch(__uploadImage(formData));
   };
 
   return (
@@ -50,7 +56,7 @@ const SweetPosting = () => {
       <SweetPostingContainer>
         <InputWrapper>
           <UserImage>
-            <FaUserCircle size={55} />
+            <img src={TwitterLogo} alt="userImage" />
           </UserImage>
           <Preview>
             <SweetInput
@@ -75,7 +81,7 @@ const SweetPosting = () => {
             type="file"
             multiple
             onChange={ImageHandler}
-          ></input>
+          />
           <Button onClick={submitHandler} wh="s">
             Sweet
           </Button>
@@ -98,6 +104,9 @@ const InputWrapper = styled.div`
 
 const UserImage = styled.div`
   margin-right: 15px;
+  img {
+    ${UserImageStyle}
+  }
 `;
 
 const Preview = styled.div`
@@ -124,10 +133,7 @@ const SubmitWrapper = styled.div`
 
 const ImageLabel = styled.label`
   padding: 8px 8px 4px 8px;
-  border-radius: 50%;
-  :hover {
-    background-color: ${theme.color.category_hover};
-  }
+  ${IconStyle}
 `;
 
 const PreviewImageWrapper = styled.div`

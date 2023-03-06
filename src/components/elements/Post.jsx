@@ -1,34 +1,68 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { __deletePost } from "../../redux/modules/sweetSlice";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
   FlexAttribute,
+  IconStyle,
   PostText,
+  UserImageStyle,
   UserInfomaitionText,
 } from "../../style/Mixin";
 import theme from "../../style/Theme";
 
-import { FaUserCircle, FaCommentAlt, FaHeart } from "react-icons/fa";
+import TwitterLogo from "../../assets/TwitterLogo.jpg";
+
+import { FaCommentAlt, FaHeart, FaTrash, FaBookmark } from "react-icons/fa";
 import { IoMdRepeat } from "react-icons/io";
 
-const Post = () => {
+const Post = ({ item }) => {
+  const { userId } = JSON.parse(localStorage.getItem("userInfo"));
+  console.log(userId);
+  console.log("item", item);
+  const dispatch = useDispatch();
+  const deletePost = (postId) => {
+    dispatch(__deletePost(postId));
+  };
   return (
     <>
       <PostContainer>
         <PostWrapper>
           <UserImage>
-            <FaUserCircle size={55} />
+            <img src={TwitterLogo} alt="userimage" />
           </UserImage>
           <PostContentsWrapper>
-            <UserInfomation>
-              <UserInfo name="true">User Name</UserInfo>
-              <UserInfo>@User ID</UserInfo>
-            </UserInfomation>
-            <PostContents>hi i'm sweeter</PostContents>
+            {userId === item.userId && (
+              <IconBox onClick={deletePost(item.id)} delete="true">
+                <FaTrash />
+              </IconBox>
+            )}
+            <Link to={`/detail/${item.id}`}>
+              <div>
+                <UserInfoWrapper>
+                  <UserInfomation>
+                    <UserInfo name="true">{item.username}</UserInfo>
+                    <UserInfo>@{item.userId}</UserInfo>
+                  </UserInfomation>
+                </UserInfoWrapper>
+                <PostContents>{item.content}</PostContents>
+              </div>
+            </Link>
             <PostButtonWrapper>
-              <FaCommentAlt size={19} />
-              <FaHeart size={20} />
-              <IoMdRepeat size={23} />
+              <IconBox>
+                <FaHeart />
+              </IconBox>
+              <IconBox>
+                <FaCommentAlt />
+              </IconBox>
+              <IconBox>
+                <IoMdRepeat />
+              </IconBox>
+              <IconBox>
+                <FaBookmark />
+              </IconBox>
             </PostButtonWrapper>
           </PostContentsWrapper>
         </PostWrapper>
@@ -52,7 +86,15 @@ const PostWrapper = styled.div`
   margin-top: 10px;
 `;
 
-const UserImage = styled.div``;
+const UserImage = styled.div`
+  img {
+    ${UserImageStyle}
+  }
+`;
+
+const UserInfoWrapper = styled.div`
+  ${FlexAttribute("row", "", "space-between")}
+`;
 
 const UserInfomation = styled.div`
   ${FlexAttribute}
@@ -66,6 +108,7 @@ const UserInfo = styled.span`
 `;
 
 const PostContentsWrapper = styled.div`
+  position: relative;
   width: 80%;
   margin-left: 10px;
 `;
@@ -77,6 +120,24 @@ const PostContents = styled.span`
 const PostButtonWrapper = styled.div`
   ${FlexAttribute("row", "", "space-around")}
   margin-top: 20px;
+  svg {
+    font-size: 20px;
+  }
+`;
+
+const IconBox = styled.div`
+  ${IconStyle}
+  ${(props) =>
+    props.delete &&
+    css`
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      padding: 10px;
+      z-index: 1;
+      color: #f4212d;
+      cursor: pointer;
+    `}
 `;
 
 export default Post;

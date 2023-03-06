@@ -37,3 +37,19 @@ export const CategoryTitleStyle = css`
   margin-left: 10px;
   font-size: ${theme.textsize.category};
 `;
+
+export const UserImageStyle = css`
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+`;
+
+export const IconStyle = css`
+  ${FlexAttribute("row", "center", "center")}
+  padding: 8px;
+  border-radius: 50%;
+  :hover {
+    background-color: ${theme.color.category_hover};
+  }
+`;

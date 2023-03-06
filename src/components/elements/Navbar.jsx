@@ -19,6 +19,7 @@ const Navbar = ({ category, children }) => {
 
 const NavBar = styled.div`
   position: sticky;
+  z-index: 5;
   top: 0;
   min-height: 50px;
   width: 44vw;
