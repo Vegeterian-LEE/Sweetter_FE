@@ -13,7 +13,7 @@ const ModalSweetpost = ({ sweetPostModalRef }) => {
   return (
     <>
       <ModalWrapper>
-        <ModalBox>
+        <ModalBox width={"42vw"}>
           <ModalBoxRef ref={sweetPostModalRef}>
             <SweetPosting></SweetPosting>
           </ModalBoxRef>

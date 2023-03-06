@@ -6,7 +6,7 @@ import { FlexAttribute } from "../../../style/Mixin";
 import ModalWrapper from "./ModalWrapper";
 import theme from "../../../style/Theme";
 
-function ModalBox({ children }) {
+function ModalBox({ children, width }) {
   useEffect(() => {
     const $body = document.querySelector("body");
     const overflow = $body.style.overflow;
@@ -20,7 +20,7 @@ function ModalBox({ children }) {
   return (
     <ModalWrapper>
       <Modal>
-        <ModalText>{children}</ModalText>
+        <ModalText width={width}>{children}</ModalText>
         <BtnWrapper></BtnWrapper>
       </Modal>
     </ModalWrapper>
@@ -38,7 +38,7 @@ const Modal = styled.div`
 `;
 
 const ModalText = styled.div`
-  min-width: 42vw;
+  min-width: ${(props) => (props.width ? props.width : "400px")};
 `;
 
 const BtnWrapper = styled.div`
