@@ -1,6 +1,5 @@
 import { React, useState, useRef } from "react";
 import useOutSideClick from "../hooks/useOutsideClick";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
@@ -9,11 +8,11 @@ import { FlexAttribute } from "../style/Mixin";
 import TwitterLogo from "../assets/TwitterLogo.jpg";
 
 import Button from "../components/elements/Button";
-import ModalWrapper from "../components/modal/ModalWrapper";
-import ModalBox from "../components/modal/ModalBox";
-import { __addUser, __loginUser } from "../redux/modules/usersSlice";
+import ModalLogin from "../components/modal/modals/ModalLogin";
+import { __addUser } from "../redux/modules/usersSlice";
 
 import { FaTwitter } from "react-icons/fa";
+import ModalSignup from "../components/modal/modals/ModalSignup";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -29,7 +28,6 @@ const LoginPage = () => {
   const [isUserId, setIsUserId] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   //userId input change
@@ -103,26 +101,6 @@ const LoginPage = () => {
     }
   };
 
-  //로그인
-
-  const loginHandler = () => {
-    if (email !== "" && password !== "") {
-      const loginUser = {
-        email,
-        password,
-      };
-      dispatch(__loginUser(loginUser))
-        .then(() => {
-          navigate("/");
-        })
-        .catch((error) => {
-          alert("로그인 오류!", error);
-        });
-    } else {
-      alert("이메일과 비밀번호를 입력해 주세요!");
-    }
-  };
-
   // 모달 닫히면 내용도 리셋
 
   const resetForm = () => {
@@ -180,75 +158,33 @@ const LoginPage = () => {
           </ButtonWrapper>
         </RightHalf>
       </Container>
+
       {isLoginModalOpen && (
-        <ModalWrapper>
-          <ModalBox>
-            <div ref={loginModalRef}>
-              <StMiniFaTwitter />
-              <StLogin>트위터 로그인</StLogin>
-              <StInput
-                type="text"
-                placeholder="이메일"
-                value={email}
-                onChange={onChangeEmail}
-              />
-              <StInput
-                type="password"
-                placeholder="비밀번호"
-                value={password}
-                onChange={onChangePassword}
-              />
-              <Button wh="l" width="350px" onClick={loginHandler}>
-                로그인
-              </Button>
-              <StToSignUp onClick={handleMovetoSignupModal}>
-                비밀번호를 잊으셨나요? 트위터 가입
-              </StToSignUp>
-            </div>
-          </ModalBox>
-        </ModalWrapper>
+        <ModalLogin
+          loginModalRef={loginModalRef}
+          email={email}
+          onChangeEmail={onChangeEmail}
+          password={password}
+          onChangePassword={onChangePassword}
+          handleMovetoSignupModal={handleMovetoSignupModal}
+        />
       )}
 
       {isSignupModalOpen && (
-        <ModalWrapper>
-          <ModalBox>
-            <div ref={signupModalRef}>
-              <StMiniFaTwitter />
-              <StLogin>트위터 회원가입</StLogin>
-              <StInput
-                type="text"
-                placeholder="유저 이름"
-                value={username}
-                onChange={onChangeUsername}
-              />
-              <StInput
-                type="text"
-                placeholder="이메일"
-                value={email}
-                onChange={onChangeEmail}
-              />
-              <StInput
-                marginBottom="5px"
-                type="text"
-                placeholder="ID"
-                value={userId}
-                onChange={onChangeUserId}
-              />
-              <StMessage>{userIdMessage}</StMessage>
-              <StInput
-                marginBottom="5px"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={onChangePassword}
-              />
-              <StMessage>{passwordMessage}</StMessage>
-              <Button wh="l" width="350px" onClick={joinHandler}>
-                가입 완료
-              </Button>
-            </div>
-          </ModalBox>
-        </ModalWrapper>
+        <ModalSignup
+          signupModalRef={signupModalRef}
+          username={username}
+          onChangeUsername={onChangeUsername}
+          email={email}
+          onChangeEmail={onChangeEmail}
+          userId={userId}
+          onChangeUserId={onChangeUserId}
+          userIdMessage={userIdMessage}
+          password={password}
+          onChangePassword={onChangePassword}
+          passwordMessage={passwordMessage}
+          joinHandler={joinHandler}
+        />
       )}
     </>
   );
@@ -340,7 +276,7 @@ export const StInput = styled.input`
   }
 `;
 
-const StMessage = styled.p`
+export const StMessage = styled.p`
   font-size: 7px;
   color: #0c85d0;
   margin-bottom: 15px;
