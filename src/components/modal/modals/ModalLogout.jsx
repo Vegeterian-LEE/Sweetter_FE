@@ -1,4 +1,6 @@
 import React from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import { FlexAttribute } from "../../../style/Mixin";
@@ -9,6 +11,14 @@ import ModalBox from "../ModalFrames/ModalBox";
 import Button from "../../elements/Button";
 
 const ModalLogout = ({ signoutModalRef }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("userInfo");
+    Cookies.remove("accessJWTToken");
+    navigate("/login");
+  };
+
   return (
     <ModalWrapper>
       <ModalBox>
@@ -21,13 +31,13 @@ const ModalLogout = ({ signoutModalRef }) => {
             언제든지 다시 로그인 할 수 있습니다. 계정을 전환하려는 경우 이미
             존재하는 계정을 추가하면 전환할 수 있습니다.
           </StMessage>
+          <StButtonWrapper>
+            <GrayButton>취소</GrayButton>
+            <Button wh="s" width="10rem" onClick={handleLogout}>
+              로그아웃
+            </Button>
+          </StButtonWrapper>
         </ModalBoxRef>
-        <StButtonWrapper>
-          <GrayButton>취소</GrayButton>
-          <Button wh="s" width="10rem">
-            로그아웃
-          </Button>
-        </StButtonWrapper>
       </ModalBox>
     </ModalWrapper>
   );

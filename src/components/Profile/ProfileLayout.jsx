@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { React, useState, useRef } from "react";
 
 import styled from "styled-components";
 import {
@@ -12,8 +12,11 @@ import TwitterLogo from "../../assets/TwitterLogo.jpg";
 import Button from "../elements/Button";
 import Navbar from "../elements/Navbar";
 import CategoryButton from "../elements/CategoryButton";
+import ModalEdit from "../modal/modals/ModalEdit";
 
 import { FaRegCalendarAlt } from "react-icons/fa";
+
+import useOutSideClick from "../../hooks/useOutsideClick";
 
 const ProfileLayout = () => {
   const [activeButton, setActiveButton] = useState("Sweets");
@@ -21,6 +24,14 @@ const ProfileLayout = () => {
   const handleClick = (category) => {
     setActiveButton(category);
   };
+
+  //프로필 수정 모달창
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const handleModalClose = () => {
+    setIsEditModalOpen(false);
+  };
+  const editModalRef = useRef(null);
+  useOutSideClick(editModalRef, handleModalClose);
 
   return (
     <>
@@ -32,7 +43,7 @@ const ProfileLayout = () => {
             <div>
               <Image src={TwitterLogo} />
             </div>
-            <Button>Edit</Button>
+            <Button onClick={() => setIsEditModalOpen(true)}>Edit</Button>
           </UserImageBox>
           <UserInfomation>
             <UserInfo name>User Name</UserInfo>
@@ -72,6 +83,7 @@ const ProfileLayout = () => {
           </CategoryButton>
         </CategoryButtonWrapper>
       </PostLayoutContainer>
+      {isEditModalOpen && <ModalEdit editModalRef={editModalRef} />}
     </>
   );
 };

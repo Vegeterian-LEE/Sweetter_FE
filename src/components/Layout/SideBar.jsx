@@ -14,6 +14,7 @@ import theme from "../../style/Theme";
 import Button from "../elements/Button";
 import ModalSweetpost from "../modal/modals/ModalSweetpost";
 import ModalLogout from "../modal/modals/ModalLogout";
+import { getUserInfo } from "../../redux/modules/usersSlice";
 
 import { FaTwitter, FaHome, FaBookmark, FaUserCircle } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
@@ -49,6 +50,8 @@ const SideBar = () => {
   const signoutModalRef = useRef(null);
   useOutSideClick(signoutModalRef, handleSignoutModalClose);
 
+  const userInfo = getUserInfo();
+
   return (
     <>
       <>
@@ -73,14 +76,14 @@ const SideBar = () => {
               {isDropdownOpen && (
                 <div>
                   <StDropDown onClick={() => setIsSignoutModalOpen(true)}>
-                    <LogoutText>Log out @userID</LogoutText>
+                    <LogoutText>Log out @{userInfo.userId}</LogoutText>
                   </StDropDown>
                 </div>
               )}
               <FaUserCircle size={50} />
               <UserInfo>
-                <h2>UserName</h2>
-                <h2>@UserID</h2>
+                <div>{userInfo.username}</div>
+                <div>@{userInfo.userId}</div>
               </UserInfo>
               <RxDotsHorizontal />
             </CategoryBox>
