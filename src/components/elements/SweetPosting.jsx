@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
 import theme from "../../style/Theme";
 import { FlexAttribute } from "../../style/Mixin";
 
 import Button from "./Button";
+
+import { __uploadImage } from "../../redux/modules/sweetSlice";
 
 import { FaUserCircle } from "react-icons/fa";
 import { BsImage } from "react-icons/bs";
@@ -13,6 +16,7 @@ const SweetPosting = () => {
   const [contents, setContents] = useState("");
   const [showImages, setShowImages] = useState([]);
   const [imageFormData, setImageFormData] = useState([]);
+  const dispatch = useDispatch();
 
   const ImageHandler = (event) => {
     const formImg = new FormData();
@@ -36,13 +40,20 @@ const SweetPosting = () => {
 
   const submitHandler = () => {
     const formData = new FormData();
-    formData.append(
-      "data",
-      JSON.stringify({
-        contents: contents,
-        image: JSON.stringify(imageFormData),
-      })
-    );
+
+    imageFormData.forEach((image) => {
+      formData.append("image", image);
+    });
+    // formData.append(
+    //   "data",
+    //   JSON.stringify({
+    //     image: JSON.stringify(imageFormData),
+    //   })
+    // );
+    dispatch(__uploadImage(imageFormData));
+    for (let value of formData.values()) {
+      console.log(value);
+    }
   };
 
   return (

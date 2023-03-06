@@ -11,7 +11,8 @@ import theme from "../../style/Theme";
 import { FaUserCircle, FaCommentAlt, FaHeart } from "react-icons/fa";
 import { IoMdRepeat } from "react-icons/io";
 
-const Post = () => {
+const Post = ({ item }) => {
+  console.log("post", item);
   return (
     <>
       <PostContainer>
@@ -21,10 +22,10 @@ const Post = () => {
           </UserImage>
           <PostContentsWrapper>
             <UserInfomation>
-              <UserInfo name="true">User Name</UserInfo>
-              <UserInfo>@User ID</UserInfo>
+              <UserInfo name="true">{item.username}</UserInfo>
+              <UserInfo>@{item.userId}</UserInfo>
             </UserInfomation>
-            <PostContents>hi i'm sweeter</PostContents>
+            <PostContents>{item.content}</PostContents>
             <PostButtonWrapper>
               <FaCommentAlt size={19} />
               <FaHeart size={20} />

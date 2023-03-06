@@ -8,6 +8,7 @@ import {
   CategoryBoxStyle,
   CategoryTitleStyle,
   FlexAttribute,
+  UserInfomaitionText,
 } from "../../style/Mixin";
 import theme from "../../style/Theme";
 
@@ -54,7 +55,7 @@ const SideBar = () => {
 
   return (
     <>
-      <>
+      <div>
         <SideBarLayoutContainer>
           <div>
             {CategoryArr.map((item, index) => {
@@ -81,10 +82,10 @@ const SideBar = () => {
                 </div>
               )}
               <FaUserCircle size={50} />
-              <UserInfo>
-                <div>{userInfo.username}</div>
-                <div>@{userInfo.userId}</div>
-              </UserInfo>
+              <UserInfomation>
+                <UserInfo name="true">{userInfo.username}</UserInfo>
+                <UserInfo>@{userInfo.userId}</UserInfo>
+              </UserInfomation>
               <RxDotsHorizontal />
             </CategoryBox>
           </SweetPostingModal>
@@ -92,13 +93,15 @@ const SideBar = () => {
         {isSweetModalOpen && (
           <ModalSweetpost sweetPostModalRef={sweetPostModalRef} />
         )}
-      </>
+      </div>
       {isSignoutModalOpen && <ModalLogout signoutModalRef={signoutModalRef} />}
     </>
   );
 };
 
 const SideBarLayoutContainer = styled.div`
+  position: sticky;
+  top: 0;
   ${FlexAttribute("column", "", "space-between")}
   width: 28vw;
   height: 100vh;
@@ -133,9 +136,16 @@ const CategoryTitle = styled.span`
   ${CategoryTitleStyle}
 `;
 
-const UserInfo = styled.div`
+const UserInfomation = styled.div`
   ${FlexAttribute("column", "", "center")}
   margin-top: 10px;
+`;
+
+const UserInfo = styled.span`
+  ${UserInfomaitionText}
+  :first-child {
+    margin-bottom: 5px;
+  }
 `;
 
 const StDropDown = styled.div`
