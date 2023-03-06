@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { usersInstance } from "../../utils/axios";
-import { useCookies } from "react-cookie";
+import Cookies from "js-cookie";
 
 //회원가입
 export const __addUser = createAsyncThunk("login/signup", async (newUser) => {
@@ -15,17 +15,17 @@ export const __loginUser = createAsyncThunk(
   async (loginUser) => {
     try {
       const response = await usersInstance.post("/api/user/login", loginUser);
-      console.log(response);
-      const userToken = response.data.token;
+      const Token = response.headers.authorization;
 
-      usersInstance.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${userToken}`;
+      const userInfo = response.data.data;
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
 
-      const [setCookie] = useCookies(["accessJWTToken"]);
-      setCookie("accessJWTToken", userToken, { path: "/" });
+      // const expiryDate = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000);
+      Cookies.set("accessJWTToken", Token);
 
-      return { token: userToken };
+      usersInstance.defaults.headers.common["Authorization"] = Token;
+
+      return { token: Token };
     } catch (error) {
       throw new Error(error.response.data.message);
     }
