@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
   FlexAttribute,
   IconStyle,
@@ -12,11 +13,17 @@ import theme from "../../style/Theme";
 
 import TwitterLogo from "../../assets/TwitterLogo.jpg";
 
-import { FaCommentAlt, FaHeart } from "react-icons/fa";
+import { FaCommentAlt, FaHeart, FaTrash } from "react-icons/fa";
 import { IoMdRepeat } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { __deletePost } from "../../redux/modules/sweetSlice";
 
 const Post = ({ item }) => {
-  console.log("post", item);
+  const { userId } = JSON.parse(localStorage.getItem("userInfo"));
+  const dispatch = useDispatch();
+  const deletePost = (postId) => {
+    dispatch(__deletePost(postId));
+  };
   return (
     <>
       <PostContainer>
@@ -25,11 +32,22 @@ const Post = ({ item }) => {
             <img src={TwitterLogo} alt="userimage" />
           </UserImage>
           <PostContentsWrapper>
-            <UserInfomation>
-              <UserInfo name="true">{item.username}</UserInfo>
-              <UserInfo>@{item.userId}</UserInfo>
-            </UserInfomation>
-            <PostContents>{item.content}</PostContents>
+            {userId === item.id && (
+              <IconBox onClick={deletePost(item.id)} delete="true">
+                <FaTrash />
+              </IconBox>
+            )}
+            <Link to={`/detail/${item.id}`}>
+              <div>
+                <UserInfoWrapper>
+                  <UserInfomation>
+                    <UserInfo name="true">{item.username}</UserInfo>
+                    <UserInfo>@{item.userId}</UserInfo>
+                  </UserInfomation>
+                </UserInfoWrapper>
+                <PostContents>{item.content}</PostContents>
+              </div>
+            </Link>
             <PostButtonWrapper>
               <IconBox>
                 <FaCommentAlt />
@@ -69,6 +87,10 @@ const UserImage = styled.div`
   }
 `;
 
+const UserInfoWrapper = styled.div`
+  ${FlexAttribute("row", "", "space-between")}
+`;
+
 const UserInfomation = styled.div`
   ${FlexAttribute}
 `;
@@ -81,6 +103,7 @@ const UserInfo = styled.span`
 `;
 
 const PostContentsWrapper = styled.div`
+  position: relative;
   width: 80%;
   margin-left: 10px;
 `;
@@ -99,8 +122,17 @@ const PostButtonWrapper = styled.div`
 
 const IconBox = styled.div`
   ${IconStyle}
-  width: 25px;
-  height: 25px;
+  ${(props) =>
+    props.delete &&
+    css`
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      padding: 10px;
+      z-index: 1;
+      color: #f4212d;
+      cursor: pointer;
+    `}
 `;
 
 export default Post;

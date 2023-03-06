@@ -9,6 +9,7 @@ import SweetPosting from "../elements/SweetPosting";
 import Post from "../elements/Post";
 
 import { __getPostHome } from "../../redux/modules/sweetSlice";
+import IsLoading from "../elements/IsLoading";
 
 const PostLayout = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const PostLayout = () => {
     <PostLayoutContainer>
       <PostLayoutNavbar></PostLayoutNavbar>
       <SweetPosting></SweetPosting>
+      {postLists.isLoading && <IsLoading />}
       {postLists.allPostResponse.map((item) => {
         return <Post key={item.id} item={item}></Post>;
       })}

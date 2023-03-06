@@ -46,6 +46,8 @@ export const UserImageStyle = css`
 `;
 
 export const IconStyle = css`
+  ${FlexAttribute("row", "center", "center")}
+  padding: 8px;
   border-radius: 50%;
   :hover {
     background-color: ${theme.color.category_hover};

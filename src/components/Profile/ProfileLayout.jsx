@@ -46,7 +46,7 @@ const ProfileLayout = () => {
             <Button onClick={() => setIsEditModalOpen(true)}>Edit</Button>
           </UserImageBox>
           <UserInfomation>
-            <UserInfo name={true}>User Name</UserInfo>
+            <UserInfo name="true">User Name</UserInfo>
             <UserInfo>@User ID</UserInfo>
           </UserInfomation>
           <UserJoinDate>

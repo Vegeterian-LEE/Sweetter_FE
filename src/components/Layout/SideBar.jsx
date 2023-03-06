@@ -106,6 +106,7 @@ const SideBar = () => {
 
 const SideBarLayoutContainer = styled.div`
   position: sticky;
+  z-index: 5;
   top: 0;
   ${FlexAttribute("column", "", "space-between")}
   width: 28vw;

@@ -24,6 +24,7 @@ const SearchBar = () => {
 
 const SearchBarContainer = styled.div`
   position: sticky;
+  z-index: 5;
   top: 0;
   ${FlexAttribute("column", "center", "")}
   width: 28vw;

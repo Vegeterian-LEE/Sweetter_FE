@@ -8,7 +8,6 @@ const initialState = {
   followPostResponse: [],
   isLoading: false,
   isError: false,
-  isCheck: false,
 };
 
 // image upload
@@ -47,7 +46,6 @@ export const __deletePost = createAsyncThunk(
   async (postid, thunkAPI) => {
     try {
       const response = await sweetInstance.get(`/post${postid}`);
-      // console.log("deletePostThunk", response.data);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -97,6 +95,9 @@ export const sweetSlice = createSlice({
         state.isError = false;
         console.log("deletePostState ->", state);
         console.log("deletePostAction ->", action);
+      })
+      .addCase(__deletePost.rejected, (state) => {
+        state.isError = true;
       });
   },
 });
