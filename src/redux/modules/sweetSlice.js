@@ -22,7 +22,23 @@ export const __uploadImage = createAsyncThunk(
         },
       });
       console.log("image upload response ->", response);
+      return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// Posting Sweet
+
+export const __uploadSweet = createAsyncThunk(
+  "uploadPost",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await sweetInstance.post("/post", payload);
+      console.log("post response ->", response);
+    } catch (error) {
+      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -78,10 +94,9 @@ export const sweetSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(__uploadImage.fulfilled, (state, action) => {
-        state.isLoading = true;
+        state.isLoading = false;
         state.isError = false;
         state.imageURl = action.payload;
-        console.log("state image -> ", state.imageURl);
       })
       .addCase(__uploadImage.rejected, (state) => {
         state.isLoading = false;
@@ -98,6 +113,7 @@ export const sweetSlice = createSlice({
         state.allPostResponse = action.payload.allPostResponse;
       })
       .addCase(__getPostHome.rejected, (state) => {
+        state.isLoading = false;
         state.isError = true;
       });
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
 import theme from "../../style/Theme";
@@ -9,7 +9,7 @@ import Button from "./Button";
 
 import TwitterLogo from "../../assets/TwitterLogo.jpg";
 
-import { __uploadImage } from "../../redux/modules/sweetSlice";
+import { __uploadImage, __uploadSweet } from "../../redux/modules/sweetSlice";
 
 import { BsImage } from "react-icons/bs";
 
@@ -18,6 +18,8 @@ const SweetPosting = () => {
   const [showImages, setShowImages] = useState([]);
   const [imageFormData, setImageFormData] = useState([]);
   const dispatch = useDispatch();
+
+  const imageURLs = useSelector((state) => state.sweets.imageURL);
 
   const ImageHandler = (event) => {
     const formImg = new FormData();
@@ -39,6 +41,7 @@ const SweetPosting = () => {
     setShowImages(imageUrlLists);
   };
 
+  let uploadSweetData = {};
   const submitHandler = () => {
     const formData = new FormData();
 
@@ -49,6 +52,7 @@ const SweetPosting = () => {
       image: JSON.stringify(imageFormData),
     });
     dispatch(__uploadImage(formData));
+    dispatch(__uploadSweet(uploadSweetData));
   };
 
   return (
