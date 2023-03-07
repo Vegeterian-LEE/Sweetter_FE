@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
 import theme from "../../style/Theme";
@@ -19,15 +19,13 @@ const SweetPosting = () => {
   const [imageFormData, setImageFormData] = useState([]);
   const dispatch = useDispatch();
 
-  const imageURLs = useSelector((state) => state.sweets.imageURL);
-
   const ImageHandler = (event) => {
     const formImg = new FormData();
     imageFormData.forEach((image) => {
       formImg.append("files", image);
     });
     setImageFormData([...imageFormData, ...event.target.files]);
-
+    // 이미지 미리 보기
     const imageLists = event.target.files;
     let imageUrlLists = [...showImages];
     for (let i = 0; i < imageLists.length; i++) {
@@ -41,8 +39,7 @@ const SweetPosting = () => {
     setShowImages(imageUrlLists);
   };
 
-  let uploadSweetData = {};
-  const submitHandler = () => {
+  const setImageFormdata = () => {
     const formData = new FormData();
 
     imageFormData.forEach((image) => {
@@ -51,8 +48,22 @@ const SweetPosting = () => {
     formData.append("data", {
       image: JSON.stringify(imageFormData),
     });
-    dispatch(__uploadImage(formData));
-    dispatch(__uploadSweet(uploadSweetData));
+
+    return formData;
+  };
+
+  const submitHandler = async () => {
+    const formData = setImageFormdata();
+
+    if (imageFormData.length === 0) {
+      const data = { content: contents, image: null };
+      dispatch(__uploadSweet(data));
+    } else {
+      dispatch(__uploadImage(formData)).then((response) => {
+        const data = { content: contents, image: response.payload };
+        dispatch(__uploadSweet(data));
+      });
+    }
   };
 
   return (
