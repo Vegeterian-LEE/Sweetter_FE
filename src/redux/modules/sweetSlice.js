@@ -10,6 +10,7 @@ const initialState = {
   userLists: [],
   isLoading: false,
   isError: false,
+  commentList: [],
 };
 
 // image upload
@@ -50,7 +51,6 @@ export const __getPostHome = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await sweetInstance.get("/home");
-      console.log(response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -65,6 +65,7 @@ export const __getPostDetail = createAsyncThunk(
   async (postId, thunkAPI) => {
     try {
       const response = await sweetInstance.get(`/post/${postId}`);
+      console.log(response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -165,6 +166,7 @@ export const sweetSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.DetailPost = action.payload;
+        state.commentList = action.payload.commentList;
       })
       .addCase(__getPostDetail.rejected, (state) => {
         state.isLoading = false;
