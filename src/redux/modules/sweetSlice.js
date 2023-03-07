@@ -6,6 +6,7 @@ const initialState = {
   imageURl: [],
   allPostResponse: [],
   followPostResponse: [],
+  DetailPost: {},
   isLoading: false,
   isError: false,
 };
@@ -33,6 +34,20 @@ export const __getPostHome = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await sweetInstance.get("/home");
+      return thunkAPI.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// Get Sweet Post Detail
+
+export const __getPostDetail = createAsyncThunk(
+  "getPostDetail",
+  async (postId, thunkAPI) => {
+    try {
+      const response = await sweetInstance.get(`/post/${postId}`);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -83,6 +98,20 @@ export const sweetSlice = createSlice({
         state.allPostResponse = action.payload.allPostResponse;
       })
       .addCase(__getPostHome.rejected, (state) => {
+        state.isError = true;
+      });
+
+    builder
+      .addCase(__getPostDetail.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__getPostDetail.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.DetailPost = action.payload;
+      })
+      .addCase(__getPostDetail.rejected, (state) => {
+        state.isLoading = false;
         state.isError = true;
       });
 

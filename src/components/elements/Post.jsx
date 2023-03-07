@@ -20,8 +20,6 @@ import { IoMdRepeat } from "react-icons/io";
 
 const Post = ({ item }) => {
   const { userId } = JSON.parse(localStorage.getItem("userInfo"));
-  console.log(userId);
-  console.log("item", item);
   const dispatch = useDispatch();
   const deletePost = (postId) => {
     dispatch(__deletePost(postId));
