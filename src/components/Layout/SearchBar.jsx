@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { FlexAttribute } from "../../style/Mixin";
 import theme from "../../style/Theme";
 
-import User from "../elements/User";
+import User from "../User";
 
 import { FiSearch } from "react-icons/fi";
 
@@ -37,26 +37,24 @@ const SearchBar = () => {
   }, [searchWord]);
 
   return (
-    <>
-      <div>
-        <SearchBarContainer>
-          <SearchForm>
-            <FiSearch size={25} />
-            <SearchSweetterInput
-              name="searchWord"
-              value={searchWord}
-              onChange={(e) => setSearchWord(e.target.value)}
-              placeholder="serch sweetter 🐥"
-            ></SearchSweetterInput>
-          </SearchForm>
-          <FollowListWrapper>
-            {userLists.map((item) => {
-              return <User key={item.userId} item={item}></User>;
-            })}
-          </FollowListWrapper>
-        </SearchBarContainer>
-      </div>
-    </>
+    <div>
+      <SearchBarContainer>
+        <SearchForm>
+          <FiSearch size={25} />
+          <SearchSweetterInput
+            name="searchWord"
+            value={searchWord}
+            onChange={(e) => setSearchWord(e.target.value)}
+            placeholder="serch sweetter 🐥"
+          ></SearchSweetterInput>
+        </SearchForm>
+        <FollowListWrapper>
+          {userLists.map((item) => {
+            return <User key={item.userId} item={item}></User>;
+          })}
+        </FollowListWrapper>
+      </SearchBarContainer>
+    </div>
   );
 };
 

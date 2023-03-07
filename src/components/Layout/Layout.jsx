@@ -3,11 +3,16 @@ import React from "react";
 import styled from "styled-components";
 import { FlexAttribute } from "../../style/Mixin";
 
+import SideBar from "./SideBar";
+import SearchBar from "./SearchBar";
+
 const Layout = ({ children }) => {
   return (
-    <>
-      <LayoutStyle>{children}</LayoutStyle>
-    </>
+    <LayoutStyle>
+      <SideBar />
+      {children}
+      <SearchBar />
+    </LayoutStyle>
   );
 };
 

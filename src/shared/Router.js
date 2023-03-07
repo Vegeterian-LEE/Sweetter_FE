@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MainPage from "../pages/MainPage";
-import LoginPage from "../pages/LoginPage";
-import DetailPage from "../pages/DetailPage";
-import BookmarkPage from "../pages/BookmarkPage";
-import ProfilePage from "../pages/ProfilePage";
+import MainPage from "../pages/Main/MainPage";
+import LoginPage from "../pages/Login/LoginPage";
+import DetailPage from "../pages/Detail/DetailPage";
+import BookmarkPage from "../pages/Bookmark/BookmarkPage";
+import ProfilePage from "../pages/Profile/ProfilePage";
 
 const Router = () => {
   return (
