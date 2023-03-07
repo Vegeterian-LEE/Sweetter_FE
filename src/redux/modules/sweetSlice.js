@@ -50,6 +50,7 @@ export const __getPostHome = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await sweetInstance.get("/home");
+      console.log(response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

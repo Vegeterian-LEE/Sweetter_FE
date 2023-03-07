@@ -11,8 +11,6 @@ import TwitterLogo from "../../assets/TwitterLogo.jpg";
 
 import { __uploadImage, __uploadSweet } from "../../redux/modules/sweetSlice";
 
-import { BsImage } from "react-icons/bs";
-
 const CommentPosting = () => {
   const [contents, setContents] = useState("");
 
@@ -34,7 +32,6 @@ const CommentPosting = () => {
           </Preview>
         </InputWrapper>
         <SubmitWrapper>
-          <ImageLabel htmlFor="file-input"></ImageLabel>
           <Button wh="s">Sweet</Button>
         </SubmitWrapper>
       </SweetPostingContainer>

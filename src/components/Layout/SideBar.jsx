@@ -51,6 +51,7 @@ const SideBar = () => {
   useOutSideClick(signoutModalRef, handleSignoutModalClose);
 
   const userInfo = getUserInfo();
+  console.log(userInfo);
 
   return (
     <>

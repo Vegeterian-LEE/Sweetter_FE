@@ -14,4 +14,11 @@ const sweetInstance = axios.create({
   },
 });
 
-export { usersInstance, sweetInstance };
+const commentInstance = axios.create({
+  baseURL: `${process.env.REACT_APP_SERVER_URL}/api/comment`,
+  headers: {
+    Authorization: token,
+  },
+});
+
+export { usersInstance, sweetInstance, commentInstance };
