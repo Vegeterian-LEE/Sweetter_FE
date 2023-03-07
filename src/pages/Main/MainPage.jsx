@@ -5,11 +5,9 @@ import PostLayout from "./_base/PostLayout";
 
 const MainPage = () => {
   return (
-    <>
-      <Layout>
-        <PostLayout></PostLayout>
-      </Layout>
-    </>
+    <Layout>
+      <PostLayout></PostLayout>
+    </Layout>
   );
 };
 

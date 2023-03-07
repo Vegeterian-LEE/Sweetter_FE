@@ -8,12 +8,10 @@ import Navbar from "../../../components/Navbar";
 
 const BookmarkLayout = () => {
   return (
-    <>
-      <PostLayoutContainer>
-        <Navbar category="Bookmark"></Navbar>
-        {/* <Post /> */}
-      </PostLayoutContainer>
-    </>
+    <PostLayoutContainer>
+      <Navbar category="Bookmark"></Navbar>
+      {/* <Post /> */}
+    </PostLayoutContainer>
   );
 };
 

@@ -14,24 +14,22 @@ const PostLayoutNavbar = () => {
   };
 
   return (
-    <>
-      <Navbar category="Home">
-        <CategoryButtonWrapper>
-          <CategoryButton
-            onClick={() => handleClick("ALL")}
-            active={activeButton === "ALL"}
-          >
-            ALL
-          </CategoryButton>
-          <CategoryButton
-            onClick={() => handleClick("Follow")}
-            active={activeButton === "Follow"}
-          >
-            Follow
-          </CategoryButton>
-        </CategoryButtonWrapper>
-      </Navbar>
-    </>
+    <Navbar category="Home">
+      <CategoryButtonWrapper>
+        <CategoryButton
+          onClick={() => handleClick("ALL")}
+          active={activeButton === "ALL"}
+        >
+          ALL
+        </CategoryButton>
+        <CategoryButton
+          onClick={() => handleClick("Follow")}
+          active={activeButton === "Follow"}
+        >
+          Follow
+        </CategoryButton>
+      </CategoryButtonWrapper>
+    </Navbar>
   );
 };
 

@@ -6,14 +6,12 @@ import { FlexAttribute } from "../style/Mixin";
 
 const Navbar = ({ category, children }) => {
   return (
-    <>
-      <NavBar>
-        <NavTitleContainer>
-          <NavBarTitle>{category}</NavBarTitle>
-        </NavTitleContainer>
-        {children}
-      </NavBar>
-    </>
+    <NavBar>
+      <NavTitleContainer>
+        <NavBarTitle>{category}</NavBarTitle>
+      </NavTitleContainer>
+      {children}
+    </NavBar>
   );
 };
 

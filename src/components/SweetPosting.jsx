@@ -67,42 +67,40 @@ const SweetPosting = () => {
   };
 
   return (
-    <>
-      <SweetPostingContainer>
-        <InputWrapper>
-          <UserImage>
-            <img src={TwitterLogo} alt="userImage" />
-          </UserImage>
-          <Preview>
-            <SweetInput
-              value={contents}
-              onChange={(event) => setContents(event.target.value)}
-              placeholder="What's happening?"
-            ></SweetInput>
-            <PreviewImageWrapper>
-              {showImages.map((image, id) => (
-                <PreviewImage key={id} src={image} alt={`${image}-${id}`} />
-              ))}
-            </PreviewImageWrapper>
-          </Preview>
-        </InputWrapper>
-        <SubmitWrapper>
-          <ImageLabel htmlFor="file-input">
-            <BsImage size={20} />
-          </ImageLabel>
-          <input
-            id="file-input"
-            name="sweetImage"
-            type="file"
-            multiple
-            onChange={ImageHandler}
-          />
-          <Button onClick={submitHandler} wh="s">
-            Sweet
-          </Button>
-        </SubmitWrapper>
-      </SweetPostingContainer>
-    </>
+    <SweetPostingContainer>
+      <InputWrapper>
+        <UserImage>
+          <img src={TwitterLogo} alt="userImage" />
+        </UserImage>
+        <Preview>
+          <SweetInput
+            value={contents}
+            onChange={(event) => setContents(event.target.value)}
+            placeholder="What's happening?"
+          ></SweetInput>
+          <PreviewImageWrapper>
+            {showImages.map((image, id) => (
+              <PreviewImage key={id} src={image} alt={`${image}-${id}`} />
+            ))}
+          </PreviewImageWrapper>
+        </Preview>
+      </InputWrapper>
+      <SubmitWrapper>
+        <ImageLabel htmlFor="file-input">
+          <BsImage size={20} />
+        </ImageLabel>
+        <input
+          id="file-input"
+          name="sweetImage"
+          type="file"
+          multiple
+          onChange={ImageHandler}
+        />
+        <Button onClick={submitHandler} wh="s">
+          Sweet
+        </Button>
+      </SubmitWrapper>
+    </SweetPostingContainer>
   );
 };
 

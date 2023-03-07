@@ -5,11 +5,9 @@ import DetailLayout from "./_base/DetailLayout";
 
 const DetailPage = () => {
   return (
-    <>
-      <Layout>
-        <DetailLayout></DetailLayout>
-      </Layout>
-    </>
+    <Layout>
+      <DetailLayout></DetailLayout>
+    </Layout>
   );
 };
 

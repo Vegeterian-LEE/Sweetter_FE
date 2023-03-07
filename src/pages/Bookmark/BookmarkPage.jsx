@@ -6,11 +6,9 @@ import BookmarkLayout from "./_base/BookmarkLayout";
 
 const BookmarkPage = () => {
   return (
-    <>
-      <Layout>
-        <BookmarkLayout></BookmarkLayout>
-      </Layout>
-    </>
+    <Layout>
+      <BookmarkLayout></BookmarkLayout>
+    </Layout>
   );
 };
 

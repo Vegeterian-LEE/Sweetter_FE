@@ -20,13 +20,11 @@ const DetailLayout = () => {
   }, [dispatch, id]);
 
   return (
-    <>
-      <PostLayoutContainer>
-        <Navbar category="Detail"></Navbar>
-        {data.isLoading && <IsLoading></IsLoading>}
-        <Post item={data.DetailPost}></Post>
-      </PostLayoutContainer>
-    </>
+    <PostLayoutContainer>
+      <Navbar category="Detail"></Navbar>
+      {data.isLoading && <IsLoading></IsLoading>}
+      <Post item={data.DetailPost}></Post>
+    </PostLayoutContainer>
   );
 };
 

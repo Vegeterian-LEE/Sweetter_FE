@@ -13,18 +13,16 @@ import TwitterLogo from "../assets/TwitterLogo.jpg";
 
 const User = ({ item }) => {
   return (
-    <>
-      <UserListContainer>
-        <UserImage
-          src={item.profileImage == null ? TwitterLogo : item.profileImage}
-        ></UserImage>
-        <UserInfomaition>
-          <UserInfo name="true">{item.username}</UserInfo>
-          <UserInfo>@{item.userId}</UserInfo>
-        </UserInfomaition>
-        <Button wh="s">Follow</Button>
-      </UserListContainer>
-    </>
+    <UserListContainer>
+      <UserImage
+        src={item.profileImage == null ? TwitterLogo : item.profileImage}
+      ></UserImage>
+      <UserInfomaition>
+        <UserInfo name="true">{item.username}</UserInfo>
+        <UserInfo>@{item.userId}</UserInfo>
+      </UserInfomaition>
+      <Button wh="s">Follow</Button>
+    </UserListContainer>
   );
 };
 

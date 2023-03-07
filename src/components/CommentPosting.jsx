@@ -17,25 +17,23 @@ const CommentPosting = () => {
   const dispatch = useDispatch();
 
   return (
-    <>
-      <SweetPostingContainer>
-        <InputWrapper>
-          <UserImage>
-            <img src={TwitterLogo} alt="userImage" />
-          </UserImage>
-          <Preview>
-            <SweetInput
-              value={contents}
-              onChange={(event) => setContents(event.target.value)}
-              placeholder="What's happening?"
-            ></SweetInput>
-          </Preview>
-        </InputWrapper>
-        <SubmitWrapper>
-          <Button wh="s">Sweet</Button>
-        </SubmitWrapper>
-      </SweetPostingContainer>
-    </>
+    <SweetPostingContainer>
+      <InputWrapper>
+        <UserImage>
+          <img src={TwitterLogo} alt="userImage" />
+        </UserImage>
+        <Preview>
+          <SweetInput
+            value={contents}
+            onChange={(event) => setContents(event.target.value)}
+            placeholder="What's happening?"
+          ></SweetInput>
+        </Preview>
+      </InputWrapper>
+      <SubmitWrapper>
+        <Button wh="s">Sweet</Button>
+      </SubmitWrapper>
+    </SweetPostingContainer>
   );
 };
 
