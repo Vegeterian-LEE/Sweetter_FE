@@ -18,7 +18,7 @@ const PostLayout = () => {
 
   useEffect(() => {
     dispatch(__getPostHome());
-  }, [dispatch]);
+  }, []);
 
   return (
     <PostLayoutContainer>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import useInput from "../../hooks/useInput";
 
 import styled from "styled-components";
 import theme from "../../style/Theme";
