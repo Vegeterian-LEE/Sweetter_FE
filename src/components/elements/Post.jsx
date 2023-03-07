@@ -1,7 +1,9 @@
 import React from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { __deletePost } from "../../redux/modules/sweetSlice";
+import useOutSideClick from "../../hooks/useOutsideClick";
 
 import styled, { css } from "styled-components";
 import {
@@ -18,12 +20,24 @@ import TwitterLogo from "../../assets/TwitterLogo.jpg";
 import { FaCommentAlt, FaHeart, FaTrash, FaBookmark } from "react-icons/fa";
 import { IoMdRepeat } from "react-icons/io";
 
+import ModalComment from "../modal/modals/ModalComment";
+
 const Post = ({ item }) => {
   const { userId } = JSON.parse(localStorage.getItem("userInfo"));
   const dispatch = useDispatch();
   const deletePost = (postId) => {
     dispatch(__deletePost(postId));
   };
+
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
+
+  const handleCommentModalClose = () => {
+    setIsCommentModalOpen(false);
+  };
+
+  const commentModalRef = useRef(null);
+  useOutSideClick(commentModalRef, handleCommentModalClose);
+
   return (
     <>
       <PostContainer>
@@ -53,7 +67,7 @@ const Post = ({ item }) => {
                 <FaHeart />
               </IconBox>
               <IconBox>
-                <FaCommentAlt />
+                <FaCommentAlt onClick={() => setIsCommentModalOpen(true)} />
               </IconBox>
               <IconBox>
                 <IoMdRepeat />
@@ -65,6 +79,7 @@ const Post = ({ item }) => {
           </PostContentsWrapper>
         </PostWrapper>
       </PostContainer>
+      {isCommentModalOpen && <ModalComment commentModalRef={commentModalRef} />}
     </>
   );
 };

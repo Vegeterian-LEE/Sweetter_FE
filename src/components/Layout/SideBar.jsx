@@ -8,8 +8,6 @@ import {
   CategoryBoxStyle,
   CategoryTitleStyle,
   FlexAttribute,
-  UserImageStyle,
-  UserInfomaitionText,
 } from "../../style/Mixin";
 import theme from "../../style/Theme";
 
@@ -18,9 +16,7 @@ import ModalSweetpost from "../modal/modals/ModalSweetpost";
 import ModalLogout from "../modal/modals/ModalLogout";
 import { getUserInfo } from "../../redux/modules/usersSlice";
 
-import TwitterLogo from "../../assets/TwitterLogo.jpg";
-
-import { FaTwitter, FaHome, FaBookmark } from "react-icons/fa";
+import { FaTwitter, FaHome, FaBookmark, FaUserCircle } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { RxDotsHorizontal } from "react-icons/rx";
 
@@ -58,7 +54,7 @@ const SideBar = () => {
 
   return (
     <>
-      <div>
+      <>
         <SideBarLayoutContainer>
           <div>
             {CategoryArr.map((item, index) => {
@@ -84,30 +80,25 @@ const SideBar = () => {
                   </StDropDown>
                 </div>
               )}
-              <UserImage>
-                <img src={TwitterLogo} alt="userImage" />
-              </UserImage>
-              <UserInfomation>
-                <UserInfo name="true">{userInfo.username}</UserInfo>
-                <UserInfo>@{userInfo.userId}</UserInfo>
-              </UserInfomation>
-              <RxDotsHorizontal size={30} />
+              <FaUserCircle size={50} />
+              <UserInfo>
+                <div>{userInfo.username}</div>
+                <div>@{userInfo.userId}</div>
+              </UserInfo>
+              <RxDotsHorizontal />
             </CategoryBox>
           </SweetPostingModal>
         </SideBarLayoutContainer>
         {isSweetModalOpen && (
           <ModalSweetpost sweetPostModalRef={sweetPostModalRef} />
         )}
-      </div>
+      </>
       {isSignoutModalOpen && <ModalLogout signoutModalRef={signoutModalRef} />}
     </>
   );
 };
 
 const SideBarLayoutContainer = styled.div`
-  position: sticky;
-  z-index: 5;
-  top: 0;
   ${FlexAttribute("column", "", "space-between")}
   width: 28vw;
   height: 100vh;
@@ -127,7 +118,7 @@ const CategoryBox = styled.div`
   width: 200px;
   padding: 0 10px 10px 10px;
   cursor: pointer;
-  svg:not(:last-child) {
+  svg {
     font-size: 30px;
     size: 10px;
     padding-top: 10px;
@@ -142,22 +133,9 @@ const CategoryTitle = styled.span`
   ${CategoryTitleStyle}
 `;
 
-const UserInfomation = styled.div`
+const UserInfo = styled.div`
   ${FlexAttribute("column", "", "center")}
-`;
-
-const UserImage = styled.div`
-  img {
-    ${UserImageStyle}
-    margin-top: 10px;
-  }
-`;
-
-const UserInfo = styled.span`
-  ${UserInfomaitionText}
-  :first-child {
-    margin-bottom: 5px;
-  }
+  margin-top: 10px;
 `;
 
 const StDropDown = styled.div`
