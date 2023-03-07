@@ -11,9 +11,9 @@ import {
 } from "../../style/Mixin";
 import theme from "../../style/Theme";
 
-import Button from "../elements/Button";
-import ModalSweetpost from "../modal/modals/ModalSweetpost";
-import ModalLogout from "../modal/modals/ModalLogout";
+import Button from "../../elements/Button";
+import ModalSweetpost from "../modals/ModalSweetpost";
+import ModalLogout from "../modals/ModalLogout";
 import { getUserInfo } from "../../redux/modules/usersSlice";
 
 import { FaTwitter, FaHome, FaBookmark, FaUserCircle } from "react-icons/fa";
@@ -55,45 +55,43 @@ const SideBar = () => {
 
   return (
     <>
-      <>
-        <SideBarLayoutContainer>
-          <div>
-            {CategoryArr.map((item, index) => {
-              return (
-                <CategoryWrapper key={index} to={item.linkTo}>
-                  <CategoryBox>
-                    {item.icon}
-                    <CategoryTitle>{item.title}</CategoryTitle>
-                  </CategoryBox>
-                </CategoryWrapper>
-              );
-            })}
-            <SweetPostingModal>
-              <Button onClick={() => setIsSweetModalOpen(true)}>Sweet</Button>
-            </SweetPostingModal>
-          </div>
+      <SideBarLayoutContainer>
+        <div>
+          {CategoryArr.map((item, index) => {
+            return (
+              <CategoryWrapper key={index} to={item.linkTo}>
+                <CategoryBox>
+                  {item.icon}
+                  <CategoryTitle>{item.title}</CategoryTitle>
+                </CategoryBox>
+              </CategoryWrapper>
+            );
+          })}
           <SweetPostingModal>
-            <CategoryBox onClick={handleDropdownToggle}>
-              {isDropdownOpen && (
-                <div>
-                  <StDropDown onClick={() => setIsSignoutModalOpen(true)}>
-                    <LogoutText>Log out @{userInfo.userId}</LogoutText>
-                  </StDropDown>
-                </div>
-              )}
-              <FaUserCircle size={50} />
-              <UserInfo>
-                <div>{userInfo.username}</div>
-                <div>@{userInfo.userId}</div>
-              </UserInfo>
-              <RxDotsHorizontal />
-            </CategoryBox>
+            <Button onClick={() => setIsSweetModalOpen(true)}>Sweet</Button>
           </SweetPostingModal>
-        </SideBarLayoutContainer>
-        {isSweetModalOpen && (
-          <ModalSweetpost sweetPostModalRef={sweetPostModalRef} />
-        )}
-      </>
+        </div>
+        <SweetPostingModal>
+          <CategoryBox onClick={handleDropdownToggle}>
+            {isDropdownOpen && (
+              <div>
+                <StDropDown onClick={() => setIsSignoutModalOpen(true)}>
+                  <LogoutText>Log out @{userInfo.userId}</LogoutText>
+                </StDropDown>
+              </div>
+            )}
+            <FaUserCircle size={50} />
+            <UserInfo>
+              <div>{userInfo.username}</div>
+              <div>@{userInfo.userId}</div>
+            </UserInfo>
+            <RxDotsHorizontal />
+          </CategoryBox>
+        </SweetPostingModal>
+      </SideBarLayoutContainer>
+      {isSweetModalOpen && (
+        <ModalSweetpost sweetPostModalRef={sweetPostModalRef} />
+      )}
       {isSignoutModalOpen && <ModalLogout signoutModalRef={signoutModalRef} />}
     </>
   );
