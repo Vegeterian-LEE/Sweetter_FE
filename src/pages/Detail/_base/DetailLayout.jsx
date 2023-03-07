@@ -6,8 +6,8 @@ import { __getPostDetail } from "../../../redux/modules/sweetSlice";
 import styled from "styled-components";
 import { CenterLayoutBorder } from "../../../style/Mixin";
 
-import Post from "../../../elements/Post";
-import Navbar from "../../../elements/Navbar";
+import Post from "../../../components/Post";
+import Navbar from "../../../components/Navbar";
 import IsLoading from "../../../elements/IsLoading";
 
 const DetailLayout = () => {

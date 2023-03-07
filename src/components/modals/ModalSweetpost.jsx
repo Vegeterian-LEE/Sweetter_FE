@@ -7,7 +7,7 @@ import { FlexAttribute } from "../../style/Mixin";
 
 import ModalBox from "../../elements/ModalBox";
 import ModalWrapper from "../../elements/ModalWrapper";
-import SweetPosting from "../../elements/SweetPosting";
+import SweetPosting from "../SweetPosting";
 
 const ModalSweetpost = ({ sweetPostModalRef }) => {
   return (

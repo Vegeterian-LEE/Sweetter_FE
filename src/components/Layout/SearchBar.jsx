@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { FlexAttribute } from "../../style/Mixin";
 import theme from "../../style/Theme";
 
-import User from "../../elements/User";
+import User from "../User";
 
 import { FiSearch } from "react-icons/fi";
 

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import theme from "../style/Theme";
 import { FlexAttribute, IconStyle, UserImageStyle } from "../style/Mixin";
 
-import Button from "./Button";
+import Button from "../elements/Button";
 
 import TwitterLogo from "../assets/TwitterLogo.jpg";
 

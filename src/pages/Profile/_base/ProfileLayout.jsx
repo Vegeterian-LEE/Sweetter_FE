@@ -10,7 +10,7 @@ import theme from "../../../style/Theme";
 
 import TwitterLogo from "../../../assets/TwitterLogo.jpg";
 import Button from "../../../elements/Button";
-import Navbar from "../../../elements/Navbar";
+import Navbar from "../../../components/Navbar";
 import CategoryButton from "../../../components/CategoryButton";
 import ModalEdit from "../../../components/modals/ModalEdit";
 

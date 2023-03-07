@@ -20,7 +20,7 @@ import TwitterLogo from "../assets/TwitterLogo.jpg";
 import { FaCommentAlt, FaHeart, FaTrash, FaBookmark } from "react-icons/fa";
 import { IoMdRepeat } from "react-icons/io";
 
-import ModalComment from "../components/modals/ModalComment";
+import ModalComment from "./modals/ModalComment";
 
 const Post = ({ item }) => {
   const { userId } = JSON.parse(localStorage.getItem("userInfo"));

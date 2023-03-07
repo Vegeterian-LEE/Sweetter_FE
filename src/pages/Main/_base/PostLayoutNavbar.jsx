@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FlexAttribute } from "../../../style/Mixin";
 
-import Navbar from "../../../elements/Navbar";
+import Navbar from "../../../components/Navbar";
 import CategoryButton from "../../../components/CategoryButton";
 
 const PostLayoutNavbar = () => {

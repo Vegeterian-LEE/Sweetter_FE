@@ -5,8 +5,8 @@ import styled from "styled-components";
 import { CenterLayoutBorder } from "../../../style/Mixin";
 
 import PostLayoutNavbar from "./PostLayoutNavbar";
-import SweetPosting from "../../../elements/SweetPosting";
-import Post from "../../../elements/Post";
+import SweetPosting from "../../../components/SweetPosting";
+import Post from "../../../components/Post";
 
 import { __getPostHome } from "../../../redux/modules/sweetSlice";
 import IsLoading from "../../../elements/IsLoading";
