@@ -19,6 +19,9 @@ const DetailLayout = () => {
     dispatch(__getPostDetail(Number(id)));
   }, [dispatch, id]);
 
+  const comments = useSelector((state) => state);
+  console.log(comments);
+
   return (
     <>
       <PostLayoutContainer>

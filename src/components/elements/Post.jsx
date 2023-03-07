@@ -37,7 +37,7 @@ const Post = ({ item }) => {
 
   const commentModalRef = useRef(null);
   useOutSideClick(commentModalRef, handleCommentModalClose);
-
+  console.log(item);
   return (
     <>
       <PostContainer>
