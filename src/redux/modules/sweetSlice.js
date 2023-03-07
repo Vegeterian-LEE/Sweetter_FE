@@ -21,7 +21,6 @@ export const __uploadImage = createAsyncThunk(
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("image upload response ->", response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -36,7 +35,7 @@ export const __uploadSweet = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await sweetInstance.post("/post", payload);
-      console.log("post response ->", response);
+      return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       console.log(error);
       return thunkAPI.rejectWithValue(error);
@@ -104,6 +103,19 @@ export const sweetSlice = createSlice({
       });
 
     builder
+      .addCase(__uploadSweet.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__uploadSweet.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(__uploadSweet.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      });
+
+    builder
       .addCase(__getPostHome.pending, (state) => {
         state.isLoading = true;
       })
@@ -142,6 +154,7 @@ export const sweetSlice = createSlice({
         console.log("deletePostAction ->", action);
       })
       .addCase(__deletePost.rejected, (state) => {
+        state.isLoading = false;
         state.isError = true;
       });
   },
