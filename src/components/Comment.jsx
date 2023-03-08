@@ -43,7 +43,7 @@ const Comment = ({ item }) => {
   useOutSideClick(commentModalRef, handleCommentModalClose);
 
   const likeCommentHandler = () => {
-    dispatch(__likeComment(id));
+    dispatch(__likeComment(item.id));
   };
 
   const commentList = useSelector((state) => state.sweets.commentList);
