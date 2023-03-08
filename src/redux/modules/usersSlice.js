@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { usersInstance } from "../../utils/axios";
+import { sweetInstance, usersInstance } from "../../utils/axios";
 import Cookies from "js-cookie";
 
 //회원가입
@@ -32,16 +32,30 @@ export const __loginUser = createAsyncThunk(
   }
 );
 
+// 유저 정보 가져오기
+export const __getUserInfo = createAsyncThunk(
+  "getUserInfo",
+  async (_, thunkAPI) => {
+    try {
+      const response = await sweetInstance.get("/user/info");
+      return thunkAPI.fulfillWithValue(response.data.data);
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+);
+
 //개별 유저 정보 갖고오기
-export const getUserInfo = () => {
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  return userInfo;
-};
+// export const getUserInfo = () => {
+//   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+//   return userInfo;
+// };
 
 const initialState = {
   users: [],
   message: "",
   token: "",
+  userInfo: {},
   isCheck: false,
 };
 
@@ -60,6 +74,14 @@ export const usersSlice = createSlice({
       })
       .addCase(__loginUser.rejected, (state, action) => {
         state.message = action.error.message;
+      });
+
+    builder
+      .addCase(__getUserInfo.fulfilled, (state, action) => {
+        state.userInfo = action.payload;
+      })
+      .addCase(__getUserInfo.rejected, (state) => {
+        state.isCheck = false;
       });
   },
 });
