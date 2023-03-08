@@ -151,6 +151,9 @@ const IconBox = styled.div`
       color: #f4212d;
       cursor: pointer;
     `}
+    :hover {
+    cursor: pointer;
+  }
 `;
 
 export default Post;

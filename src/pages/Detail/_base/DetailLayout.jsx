@@ -21,7 +21,6 @@ const DetailLayout = () => {
   }, [dispatch, id]);
 
   const commentList = useSelector((state) => state.sweets.commentList);
-  console.log(commentList);
 
   return (
     <PostLayoutContainer>
