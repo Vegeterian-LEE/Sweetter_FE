@@ -11,6 +11,7 @@ const initialState = {
   isLoading: false,
   isError: false,
   commentList: [],
+  bookMarkList: [],
 };
 
 // image upload
@@ -79,7 +80,7 @@ export const __deletePost = createAsyncThunk(
   "deletePost",
   async (postid, thunkAPI) => {
     try {
-      const response = await sweetInstance.get(`/post${postid}`);
+      const response = await sweetInstance.delete(`/post${postid}`);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -98,6 +99,36 @@ export const __likePost = createAsyncThunk("likePost", async (id, thunkAPI) => {
     return thunkAPI.rejectWithValue(error);
   }
 });
+
+// Bookmark Sweet Post
+
+export const __addBookMark = createAsyncThunk(
+  "addBookMark",
+  async (id, thunkAPI) => {
+    try {
+      const response = await sweetInstance.post(`/mark/toggle/${id}`);
+      console.log(response);
+      return thunkAPI.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// Get Bookmark
+
+export const __getBookMark = createAsyncThunk(
+  "getBookMark",
+  async (_, thunkAPI) => {
+    try {
+      const response = await sweetInstance.get("/bookmarks");
+      console.log(response);
+      return thunkAPI.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 // UserList
 export const __getUserList = createAsyncThunk(
@@ -195,6 +226,33 @@ export const sweetSlice = createSlice({
         state.isError = false;
       })
       .addCase(__likePost.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      });
+
+    builder
+      .addCase(__addBookMark.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__addBookMark.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(__addBookMark.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      });
+
+    builder
+      .addCase(__getBookMark.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__getBookMark.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.bookMarkList = action.payload;
+      })
+      .addCase(__getBookMark.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
       });
