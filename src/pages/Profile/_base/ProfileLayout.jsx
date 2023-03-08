@@ -17,7 +17,12 @@ import CategoryButton from "../../../components/CategoryButton";
 import ModalEdit from "../../../components/modals/ModalEdit";
 import Post from "../../../components/Post";
 
-import { __getSweet } from "../../../redux/modules/profileSlice";
+import {
+  __getSweet,
+  __getReSweetsComments,
+  __getMedia,
+  __getLike,
+} from "../../../redux/modules/profileSlice";
 import { useParams } from "react-router-dom";
 
 const ProfileLayout = () => {
@@ -44,6 +49,11 @@ const ProfileLayout = () => {
   useEffect(() => {
     dispatch(__getSweet(Number(id)));
   }, []);
+
+  const getCategoryList = (category, axios) => {
+    handleClick(category);
+    dispatch(axios);
+  };
 
   return (
     <>
@@ -72,44 +82,46 @@ const ProfileLayout = () => {
         </UserWrapper>
         <CategoryButtonWrapper>
           <CategoryButton
-            onClick={() => handleClick("Sweets")}
+            onClick={() => getCategoryList("Sweets", __getSweet(Number(id)))}
             active={activeButton === "Sweets"}
           >
             Sweets
           </CategoryButton>
           <CategoryButton
-            onClick={() => handleClick("Comments")}
+            onClick={() =>
+              getCategoryList("Comments", __getReSweetsComments(Number(id)))
+            }
             active={activeButton === "Comments"}
           >
-            Sweets&Comments
+            ReSweets&Comments
           </CategoryButton>
           <CategoryButton
-            onClick={() => handleClick("Media")}
+            onClick={() => getCategoryList("Media", __getMedia(Number(id)))}
             active={activeButton === "Media"}
           >
             Media
           </CategoryButton>
           <CategoryButton
-            onClick={() => handleClick("Likes")}
+            onClick={() => getCategoryList("Likes", __getLike(Number(id)))}
             active={activeButton === "Likes"}
           >
             Likes
           </CategoryButton>
         </CategoryButtonWrapper>
         {activeButton === "Sweets" &&
-          postList.sweetLists.map((item) => {
+          postList.sweetLists?.map((item) => {
             return <Post key={`post-item-${item.id}`} item={item}></Post>;
           })}
         {activeButton === "Comments" &&
-          postList.sweetLists.map((item) => {
+          postList.sweetLists?.map((item) => {
             return <Post key={`post-item-${item.id}`} item={item}></Post>;
           })}
         {activeButton === "Media" &&
-          postList.sweetandCommentLists.map((item) => {
+          postList.sweetandCommentLists?.map((item) => {
             return <Post key={`post-item-${item.id}`} item={item}></Post>;
           })}
         {activeButton === "Likes" &&
-          postList.likeLists.map((item) => {
+          postList.likeLists?.map((item) => {
             return <Post key={`post-item-${item.id}`} item={item}></Post>;
           })}
       </PostLayoutContainer>

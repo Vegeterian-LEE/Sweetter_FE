@@ -4,7 +4,7 @@ import { sweetInstance } from "../../utils/axios";
 // State
 const initialState = {
   sweetLists: [],
-  sweetandCommentLists: [],
+  reSweetandCommentLists: [],
   mediaLists: [],
   likeLists: [],
   isLoading: false,
@@ -13,7 +13,7 @@ const initialState = {
 
 // Get SweetLists
 export const __getSweet = createAsyncThunk(
-  "upload",
+  "getSweetLists",
   async (payload, thunkAPI) => {
     try {
       const response = await sweetInstance.get(`/tweetlist/${payload}`);
@@ -25,15 +25,13 @@ export const __getSweet = createAsyncThunk(
 );
 
 // Get SweetLists and Comment Lists
-export const __getSweetsComments = createAsyncThunk(
-  "upload",
+export const __getReSweetsComments = createAsyncThunk(
+  "getReSweetLists",
   async (payload, thunkAPI) => {
     try {
-      const response = await sweetInstance.post("/upload", payload, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await sweetInstance.get(
+        `/tweetlistAndCommenttweet/${payload}`
+      );
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -43,14 +41,10 @@ export const __getSweetsComments = createAsyncThunk(
 
 // Get Media Lists
 export const __getMedia = createAsyncThunk(
-  "upload",
+  "getMediaLists",
   async (payload, thunkAPI) => {
     try {
-      const response = await sweetInstance.post("/upload", payload, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await sweetInstance.get(`/medialist/${payload}`);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -60,14 +54,10 @@ export const __getMedia = createAsyncThunk(
 
 //Get Like Lists
 export const __getLike = createAsyncThunk(
-  "upload",
+  "getLikeLists",
   async (payload, thunkAPI) => {
     try {
-      const response = await sweetInstance.post("/upload", payload, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await sweetInstance.get(`/likelist/${payload}`);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -90,6 +80,48 @@ export const profileSlice = createSlice({
         state.sweetLists = action.payload;
       })
       .addCase(__getSweet.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      });
+
+    builder
+      .addCase(__getReSweetsComments.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__getReSweetsComments.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.reSweetandCommentLists = action.payload;
+      })
+      .addCase(__getReSweetsComments.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      });
+
+    builder
+      .addCase(__getMedia.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__getMedia.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.mediaLists = action.payload;
+      })
+      .addCase(__getMedia.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      });
+
+    builder
+      .addCase(__getLike.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__getLike.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.likeLists = action.payload;
+      })
+      .addCase(__getLike.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
       });
