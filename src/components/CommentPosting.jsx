@@ -13,19 +13,28 @@ import { useParams } from "react-router-dom";
 import { __addComment } from "../redux/modules/commentsSlice";
 import { __getPostDetail } from "../redux/modules/sweetSlice";
 
-const CommentPosting = () => {
+const CommentPosting = ({ postId }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
   const [content, setContent] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(true);
 
+  let postIds = 0;
+  if (id == null) {
+    postIds = postId;
+    console.log(postIds);
+  } else {
+    postIds = Number(id);
+    console.log(postIds);
+  }
+
   const onSubmitButtonHandler = (newComment) => {
     if (newComment.content === "") {
       alert("댓글을 입력해 주세요!");
     } else {
-      dispatch(__addComment({ id, newComment })).then(() => {
-        dispatch(__getPostDetail(Number(id)));
+      dispatch(__addComment({ postIds, newComment })).then(() => {
+        dispatch(__getPostDetail(id));
       });
     }
   };

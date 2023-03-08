@@ -15,6 +15,7 @@ const PostLayout = () => {
   const dispatch = useDispatch();
 
   const postLists = useSelector((state) => state.sweets);
+  console.log(postLists.allPostResponse);
 
   useEffect(() => {
     dispatch(__getPostHome());

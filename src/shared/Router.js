@@ -4,6 +4,7 @@ import LoginPage from "../pages/Login/LoginPage";
 import DetailPage from "../pages/Detail/DetailPage";
 import BookmarkPage from "../pages/Bookmark/BookmarkPage";
 import ProfilePage from "../pages/Profile/ProfilePage";
+import ModalComment from "../components/modals/ModalComment";
 
 const Router = () => {
   return (

@@ -87,6 +87,18 @@ export const __deletePost = createAsyncThunk(
   }
 );
 
+// Like Sweet Post
+
+export const __likePost = createAsyncThunk("likePost", async (id, thunkAPI) => {
+  try {
+    const response = await sweetInstance.post(`/post/like/${id}`);
+    console.log(response);
+    return thunkAPI.fulfillWithValue(response.data.data);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});
+
 // UserList
 export const __getUserList = createAsyncThunk(
   "getUserLists",
@@ -170,6 +182,19 @@ export const sweetSlice = createSlice({
         state.commentList = action.payload.commentList;
       })
       .addCase(__getPostDetail.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      });
+
+    builder
+      .addCase(__likePost.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__likePost.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(__likePost.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
       });

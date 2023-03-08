@@ -9,13 +9,13 @@ import ModalBox from "../../elements/ModalBox";
 import ModalWrapper from "../../elements/ModalWrapper";
 import CommentPosting from "../CommentPosting";
 
-const ModalComment = ({ commentModalRef }) => {
+const ModalComment = ({ commentModalRef, postId }) => {
   return (
     <>
       <ModalWrapper>
         <ModalBox width={"42vw"}>
           <ModalBoxRef ref={commentModalRef}>
-            <CommentPosting></CommentPosting>
+            <CommentPosting postId={postId}></CommentPosting>
           </ModalBoxRef>
         </ModalBox>
       </ModalWrapper>

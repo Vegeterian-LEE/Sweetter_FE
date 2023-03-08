@@ -2,7 +2,13 @@ import React from "react";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { __deletePost } from "../redux/modules/sweetSlice";
+
+import {
+  __deletePost,
+  __getPostHome,
+  __likePost,
+} from "../redux/modules/sweetSlice";
+
 import useOutSideClick from "../hooks/useOutsideClick";
 
 import styled, { css } from "styled-components";
@@ -38,6 +44,13 @@ const Post = ({ item }) => {
   const commentModalRef = useRef(null);
   useOutSideClick(commentModalRef, handleCommentModalClose);
 
+  //게시물 좋아요
+  const likePostHandler = () => {
+    dispatch(__likePost(item.id)).then(() => {
+      dispatch(__getPostHome());
+    });
+  };
+
   return (
     <>
       <PostContainer>
@@ -64,10 +77,15 @@ const Post = ({ item }) => {
             </Link>
             <PostButtonWrapper>
               <IconBox>
-                <FaHeart />
+                <FaHeart
+                  onClick={likePostHandler}
+                  color={item.likeCheck ? "red" : "lightgray"}
+                />
+                <StlikeText>{item.likeCount}</StlikeText>
               </IconBox>
               <IconBox>
                 <FaCommentAlt onClick={() => setIsCommentModalOpen(true)} />
+                <StlikeText>{item.commentCount}</StlikeText>
               </IconBox>
               <IconBox>
                 <IoMdRepeat />
@@ -79,7 +97,9 @@ const Post = ({ item }) => {
           </PostContentsWrapper>
         </PostWrapper>
       </PostContainer>
-      {isCommentModalOpen && <ModalComment commentModalRef={commentModalRef} />}
+      {isCommentModalOpen && (
+        <ModalComment commentModalRef={commentModalRef} postId={item.id} />
+      )}
     </>
   );
 };
@@ -154,6 +174,10 @@ const IconBox = styled.div`
     :hover {
     cursor: pointer;
   }
+`;
+
+const StlikeText = styled.div`
+  margin-left: 10px;
 `;
 
 export default Post;

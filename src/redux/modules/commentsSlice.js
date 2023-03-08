@@ -9,9 +9,12 @@ const initialState = {
 
 export const __addComment = createAsyncThunk(
   "addComment",
-  async ({ id, newComment }, thunkAPI) => {
+  async ({ postIds, newComment }, thunkAPI) => {
     try {
-      const response = await sweetInstance.post(`/comment/${id}`, newComment);
+      const response = await sweetInstance.post(
+        `/comment/${postIds}`,
+        newComment
+      );
       console.log(response.data);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
