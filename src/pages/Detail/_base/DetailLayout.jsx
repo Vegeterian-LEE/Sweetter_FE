@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { CenterLayoutBorder } from "../../../style/Mixin";
 
 import Post from "../../../components/Post";
+import Comment from "../../../components/Comment";
 import Navbar from "../../../components/Navbar";
 import IsLoading from "../../../elements/IsLoading";
 
@@ -19,11 +20,17 @@ const DetailLayout = () => {
     dispatch(__getPostDetail(Number(id)));
   }, [dispatch, id]);
 
+  const commentList = useSelector((state) => state.sweets.commentList);
+  console.log(commentList);
+
   return (
     <PostLayoutContainer>
       <Navbar category="Detail"></Navbar>
       {data.isLoading && <IsLoading></IsLoading>}
       <Post item={data.DetailPost}></Post>
+      {commentList.map((item) => {
+        return <Comment key={item.id} item={item}></Comment>;
+      })}
     </PostLayoutContainer>
   );
 };

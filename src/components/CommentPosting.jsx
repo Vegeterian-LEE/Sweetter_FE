@@ -11,6 +11,7 @@ import TwitterLogo from "../assets/TwitterLogo.jpg";
 
 import { useParams } from "react-router-dom";
 import { __addComment } from "../redux/modules/commentsSlice";
+import { __getPostDetail } from "../redux/modules/sweetSlice";
 
 const CommentPosting = () => {
   const { id } = useParams();
@@ -22,7 +23,9 @@ const CommentPosting = () => {
     if (newComment.content === "") {
       alert("댓글을 입력해 주세요!");
     } else {
-      dispatch(__addComment({ id, newComment }));
+      dispatch(__addComment({ id, newComment })).then(() => {
+        dispatch(__getPostDetail(Number(id)));
+      });
     }
   };
 
