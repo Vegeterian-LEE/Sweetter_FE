@@ -21,6 +21,18 @@ export const __addComment = createAsyncThunk(
   }
 );
 
+export const __deleteComment = createAsyncThunk(
+  "deleteComment",
+  async (id, thunkAPI) => {
+    try {
+      const response = await sweetInstance.delete(`/comment/${id}`);
+      return thunkAPI.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const commentsSlice = createSlice({
   name: "users",
   initialState,
@@ -35,6 +47,21 @@ export const commentsSlice = createSlice({
         state.isError = false;
       })
       .addCase(__addComment.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      });
+
+    builder
+      .addCase(__deleteComment.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__deleteComment.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        console.log("deletePostState ->", state);
+        console.log("deletePostAction ->", action);
+      })
+      .addCase(__deleteComment.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
       });

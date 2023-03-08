@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { __deletePost } from "../redux/modules/sweetSlice";
 import useOutSideClick from "../hooks/useOutsideClick";
+import { useParams } from "react-router-dom";
 
 import styled, { css } from "styled-components";
 import {
@@ -18,12 +18,19 @@ import TwitterLogo from "../assets/TwitterLogo.jpg";
 import { FaHeart, FaTrash } from "react-icons/fa";
 
 import ModalComment from "./modals/ModalComment";
+import { __deleteComment } from "../redux/modules/commentsSlice";
+import { __getPostDetail } from "../redux/modules/sweetSlice";
 
 const Comment = ({ item }) => {
-  const { userId } = JSON.parse(localStorage.getItem("userInfo"));
+  const { userId, username } = JSON.parse(localStorage.getItem("userInfo"));
+  const { id } = useParams();
+
   const dispatch = useDispatch();
-  const deletePost = (postId) => {
-    dispatch(__deletePost(postId));
+
+  const deleteComment = (commentId) => {
+    dispatch(__deleteComment(commentId)).then(() => {
+      dispatch(__getPostDetail(Number(id)));
+    });
   };
 
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
@@ -35,6 +42,8 @@ const Comment = ({ item }) => {
   const commentModalRef = useRef(null);
   useOutSideClick(commentModalRef, handleCommentModalClose);
 
+  const onLikeHandler = () => {};
+
   return (
     <>
       <PostContainer>
@@ -43,8 +52,8 @@ const Comment = ({ item }) => {
             <img src={TwitterLogo} alt="userimage" />
           </UserImage>
           <PostContentsWrapper>
-            {userId === item.userId && (
-              <IconBox onClick={deletePost(item.id)} delete="true">
+            {username === item.username && (
+              <IconBox onClick={() => deleteComment(item.id)}>
                 <FaTrash />
               </IconBox>
             )}
@@ -53,7 +62,7 @@ const Comment = ({ item }) => {
               <UserInfoWrapper>
                 <UserInfomation>
                   <UserInfo name="true">{item.username}</UserInfo>
-                  <UserInfo>@{item.userId}</UserInfo>
+                  <UserInfo>@{userId}</UserInfo>
                 </UserInfomation>
               </UserInfoWrapper>
               <PostContents>{item.content}</PostContents>
@@ -61,7 +70,7 @@ const Comment = ({ item }) => {
 
             <PostButtonWrapper>
               <IconBox>
-                <FaHeart />
+                <FaHeart cursor="pointer" size="24" onClick={onLikeHandler} />
               </IconBox>
             </PostButtonWrapper>
           </PostContentsWrapper>
