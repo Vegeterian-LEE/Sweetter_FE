@@ -11,7 +11,7 @@ export const __addComment = createAsyncThunk(
   "addComment",
   async ({ id, newComment }, thunkAPI) => {
     try {
-      const response = await sweetInstance.post(`comment/${id}`, newComment);
+      const response = await sweetInstance.post(`/comment/${id}`, newComment);
       console.log(response.data);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
@@ -26,6 +26,19 @@ export const __deleteComment = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const response = await sweetInstance.delete(`/comment/${id}`);
+      return thunkAPI.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __likeComment = createAsyncThunk(
+  "likeComment",
+  async (id, thunkAPI) => {
+    try {
+      const response = await sweetInstance.post(`/comment/like/${id}`);
+      console.log(response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -62,6 +75,19 @@ export const commentsSlice = createSlice({
         console.log("deletePostAction ->", action);
       })
       .addCase(__deleteComment.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      });
+
+    builder
+      .addCase(__likeComment.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__likeComment.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(__likeComment.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
       });

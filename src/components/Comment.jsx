@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useOutSideClick from "../hooks/useOutsideClick";
 import { useParams } from "react-router-dom";
 
@@ -18,7 +18,7 @@ import TwitterLogo from "../assets/TwitterLogo.jpg";
 import { FaHeart, FaTrash } from "react-icons/fa";
 
 import ModalComment from "./modals/ModalComment";
-import { __deleteComment } from "../redux/modules/commentsSlice";
+import { __deleteComment, __likeComment } from "../redux/modules/commentsSlice";
 import { __getPostDetail } from "../redux/modules/sweetSlice";
 
 const Comment = ({ item }) => {
@@ -42,7 +42,12 @@ const Comment = ({ item }) => {
   const commentModalRef = useRef(null);
   useOutSideClick(commentModalRef, handleCommentModalClose);
 
-  const onLikeHandler = () => {};
+  const likeCommentHandler = () => {
+    dispatch(__likeComment(id));
+  };
+
+  const commentList = useSelector((state) => state.sweets.commentList);
+  console.log(commentList);
 
   return (
     <>
@@ -70,7 +75,11 @@ const Comment = ({ item }) => {
 
             <PostButtonWrapper>
               <IconBox>
-                <FaHeart cursor="pointer" size="24" onClick={onLikeHandler} />
+                <FaHeart
+                  cursor="pointer"
+                  size="24"
+                  onClick={likeCommentHandler}
+                />
               </IconBox>
             </PostButtonWrapper>
           </PostContentsWrapper>
