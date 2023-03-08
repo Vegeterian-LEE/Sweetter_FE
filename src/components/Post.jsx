@@ -7,6 +7,8 @@ import {
   __deletePost,
   __getPostHome,
   __likePost,
+  __addBookMark,
+  __getBookMark,
 } from "../redux/modules/sweetSlice";
 
 import useOutSideClick from "../hooks/useOutsideClick";
@@ -30,6 +32,7 @@ import ModalComment from "./modals/ModalComment";
 
 const Post = ({ item }) => {
   const userId = useSelector((state) => state.users.userInfo);
+
   const dispatch = useDispatch();
   const deletePost = (postId) => {
     dispatch(__deletePost(postId));
@@ -51,6 +54,14 @@ const Post = ({ item }) => {
     });
   };
 
+  //게시물 북마크
+  const bookMarkHandler = () => {
+    dispatch(__addBookMark(item.id)).then(() => {
+      dispatch(__getPostHome());
+    });
+  };
+
+  // item 은 개별유저이다.
   return (
     <>
       <PostContainer>
@@ -91,7 +102,10 @@ const Post = ({ item }) => {
                 <IoMdRepeat />
               </IconBox>
               <IconBox>
-                <FaBookmark />
+                <FaBookmark
+                  onClick={bookMarkHandler}
+                  color={item.bookmarkCheck ? "black" : "lightgray"}
+                />
               </IconBox>
             </PostButtonWrapper>
           </PostContentsWrapper>
