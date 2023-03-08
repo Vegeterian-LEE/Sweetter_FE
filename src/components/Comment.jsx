@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import useOutSideClick from "../hooks/useOutsideClick";
 import { useParams } from "react-router-dom";
 
@@ -43,12 +43,12 @@ const Comment = ({ item }) => {
   useOutSideClick(commentModalRef, handleCommentModalClose);
 
   const likeCommentHandler = () => {
-    dispatch(__likeComment(item.id));
+    dispatch(__likeComment(item.id)).then(() => {
+      dispatch(__getPostDetail(Number(id)));
+    });
   };
 
-  const commentList = useSelector((state) => state.sweets.commentList);
-  console.log(commentList);
-
+  // item = 개별 댓글 하나하나를 의미함
   return (
     <>
       <PostContainer>
@@ -77,9 +77,11 @@ const Comment = ({ item }) => {
               <IconBox>
                 <FaHeart
                   cursor="pointer"
+                  color={item.likeCheck ? "red" : "lightgray"}
                   size="24"
                   onClick={likeCommentHandler}
                 />
+                <StlikeText>{item.likeCount}</StlikeText>
               </IconBox>
             </PostButtonWrapper>
           </PostContentsWrapper>
@@ -157,6 +159,10 @@ const IconBox = styled.div`
       color: #f4212d;
       cursor: pointer;
     `}
+`;
+
+const StlikeText = styled.div`
+  margin-left: 10px;
 `;
 
 export default Comment;

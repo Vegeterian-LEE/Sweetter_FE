@@ -18,6 +18,7 @@ const CommentPosting = () => {
   const dispatch = useDispatch();
 
   const [content, setContent] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const onSubmitButtonHandler = (newComment) => {
     if (newComment.content === "") {
@@ -31,35 +32,38 @@ const CommentPosting = () => {
 
   return (
     <>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
+      {isModalOpen && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
 
-          const newComment = {
-            content: content,
-          };
+            const newComment = {
+              content: content,
+            };
 
-          onSubmitButtonHandler(newComment);
-        }}
-      >
-        <SweetPostingContainer>
-          <InputWrapper>
-            <UserImage>
-              <img src={TwitterLogo} alt="userImage" />
-            </UserImage>
-            <Preview>
-              <SweetInput
-                value={content}
-                onChange={(event) => setContent(event.target.value)}
-                placeholder="Sweet Your Reply"
-              ></SweetInput>
-            </Preview>
-          </InputWrapper>
-          <SubmitWrapper>
-            <Button wh="s">Sweet</Button>
-          </SubmitWrapper>
-        </SweetPostingContainer>
-      </form>
+            onSubmitButtonHandler(newComment);
+            setIsModalOpen(false);
+          }}
+        >
+          <SweetPostingContainer>
+            <InputWrapper>
+              <UserImage>
+                <img src={TwitterLogo} alt="userImage" />
+              </UserImage>
+              <Preview>
+                <SweetInput
+                  value={content}
+                  onChange={(event) => setContent(event.target.value)}
+                  placeholder="Sweet Your Reply"
+                ></SweetInput>
+              </Preview>
+            </InputWrapper>
+            <SubmitWrapper>
+              <Button wh="s">Sweet</Button>
+            </SubmitWrapper>
+          </SweetPostingContainer>
+        </form>
+      )}
     </>
   );
 };
