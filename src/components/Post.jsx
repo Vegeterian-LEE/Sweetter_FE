@@ -9,6 +9,7 @@ import {
   __likePost,
   __addBookMark,
   __getBookMark,
+  __retweetPost,
 } from "../redux/modules/sweetSlice";
 
 import useOutSideClick from "../hooks/useOutsideClick";
@@ -61,6 +62,14 @@ const Post = ({ item }) => {
     });
   };
 
+  //게시물 리트윗
+
+  const retweetHandler = () => {
+    dispatch(__retweetPost(item.id)).then(() => {
+      dispatch(__getPostHome());
+    });
+  };
+
   // item 은 개별유저이다.
   return (
     <>
@@ -99,12 +108,15 @@ const Post = ({ item }) => {
                 <StlikeText>{item.commentCount}</StlikeText>
               </IconBox>
               <IconBox>
-                <IoMdRepeat />
+                <IoMdRepeat
+                  onClick={retweetHandler}
+                  color={item.retweetCheck ? theme.color.main : "lightgray"}
+                />
               </IconBox>
               <IconBox>
                 <FaBookmark
                   onClick={bookMarkHandler}
-                  color={item.bookmarkCheck ? "black" : "lightgray"}
+                  color={item.bookmarkCheck ? theme.color.main : "lightgray"}
                 />
               </IconBox>
             </PostButtonWrapper>

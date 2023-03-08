@@ -100,6 +100,21 @@ export const __likePost = createAsyncThunk("likePost", async (id, thunkAPI) => {
   }
 });
 
+// Retweet Sweet Post
+
+export const __retweetPost = createAsyncThunk(
+  "retweetPost",
+  async (id, thunkAPI) => {
+    try {
+      const response = await sweetInstance.post(`/retweet/${id}`);
+      console.log(response);
+      return thunkAPI.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 // Bookmark Sweet Post
 
 export const __addBookMark = createAsyncThunk(
@@ -226,6 +241,19 @@ export const sweetSlice = createSlice({
         state.isError = false;
       })
       .addCase(__likePost.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      });
+
+    builder
+      .addCase(__retweetPost.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(__retweetPost.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(__retweetPost.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
       });
