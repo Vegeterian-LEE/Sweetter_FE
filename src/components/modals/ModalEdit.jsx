@@ -14,14 +14,12 @@ import TwitterLogo from "../../assets/TwitterLogo.jpg";
 import { useSelector } from "react-redux";
 import { IconStyle } from "../../style/Mixin";
 import { __editUserInfo } from "../../redux/modules/usersSlice";
-import { __uploadImage } from "../../redux/modules/sweetSlice";
 
 const ModalEdit = ({ editModalRef }) => {
   const userInfo = useSelector((state) => state.users.userInfo);
   const dispatch = useDispatch();
   const [background, setBackground] = useState([]);
   const [profile, setProfile] = useState([]);
-  const [imageUrl, setImage] = useState();
 
   const [{ username, introduction, newPassword }, inputHandler] = useInput({
     username: userInfo.username,
@@ -37,23 +35,17 @@ const ModalEdit = ({ editModalRef }) => {
     setBackground(e.target.files[0]);
   };
 
-  // const setImageData = async (image) => {
-  //   const formData = new FormData();
-  //   formData.append("image", image);
-  //   dispatch(__uploadImage(formData));
-  // };
-
   const editHandler = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
 
-    const data = {
-      profileImage: profile,
-      backgroundImage: background,
-      introduction: introduction,
-      newPassword: newPassword,
-      username: username,
-    };
-    console.log(data);
+    formData.append("profileImage", profile);
+    formData.append("backgroundImage", background);
+    formData.append("username", username);
+    formData.append("introduction", introduction);
+    formData.append("newPassword", newPassword);
+
+    dispatch(__editUserInfo(formData));
   };
 
   return (

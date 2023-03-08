@@ -47,11 +47,7 @@ export const __editUserInfo = createAsyncThunk(
   "editUserInfo",
   async (payload, thunkAPI) => {
     try {
-      const response = await sweetInstance.put(
-        "/user/settings/profile",
-        payload
-      );
-      console.log(response);
+      const response = await sweetInstance.put("/user/setprofile", payload);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

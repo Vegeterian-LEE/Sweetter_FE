@@ -30,7 +30,7 @@ export const __getReSweetsComments = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await sweetInstance.get(
-        `/tweetlistAndCommentlist/${payload}`
+        `/tweetlistAndCommenttweet/${payload}`
       );
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
