@@ -37,6 +37,7 @@ export const __uploadSweet = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await sweetInstance.post("/post", payload);
+      console.log(response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       console.log(error);

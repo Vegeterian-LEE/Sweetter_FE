@@ -60,7 +60,7 @@ const SweetPosting = () => {
       dispatch(__uploadSweet(data));
     } else {
       dispatch(__uploadImage(formData)).then((response) => {
-        const data = { content: contents, image: response.payload };
+        const data = { content: contents, imageUrls: response.payload };
         dispatch(__uploadSweet(data));
       });
     }

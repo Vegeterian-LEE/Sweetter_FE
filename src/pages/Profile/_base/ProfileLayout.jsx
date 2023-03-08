@@ -1,4 +1,6 @@
-import { React, useState, useRef } from "react";
+import { React, useState, useRef, useEffect } from "react";
+import useOutSideClick from "../../../hooks/useOutsideClick";
+import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
 import {
@@ -13,12 +15,15 @@ import Button from "../../../elements/Button";
 import Navbar from "../../../components/Navbar";
 import CategoryButton from "../../../components/CategoryButton";
 import ModalEdit from "../../../components/modals/ModalEdit";
+import Post from "../../../components/Post";
 
-import { FaRegCalendarAlt } from "react-icons/fa";
-
-import useOutSideClick from "../../../hooks/useOutsideClick";
+import { __getSweet } from "../../../redux/modules/profileSlice";
+import { useParams } from "react-router-dom";
 
 const ProfileLayout = () => {
+  const { id } = useParams();
+  const userInfo = useSelector((state) => state.users.userInfo);
+  const postList = useSelector((state) => state.profile);
   const [activeButton, setActiveButton] = useState("Sweets");
 
   const handleClick = (category) => {
@@ -33,6 +38,13 @@ const ProfileLayout = () => {
   const editModalRef = useRef(null);
   useOutSideClick(editModalRef, handleModalClose);
 
+  // Get Lists
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(__getSweet(Number(id)));
+  }, []);
+
   return (
     <>
       <PostLayoutContainer>
@@ -46,19 +58,15 @@ const ProfileLayout = () => {
             <Button onClick={() => setIsEditModalOpen(true)}>Edit</Button>
           </UserImageBox>
           <UserInfomation>
-            <UserInfo name="true">User Name</UserInfo>
-            <UserInfo>@User ID</UserInfo>
+            <UserInfo name="true">{userInfo.username}</UserInfo>
+            <UserInfo>@{userInfo.userId}</UserInfo>
           </UserInfomation>
-          <UserJoinDate>
-            <FaRegCalendarAlt />
-            <Date>Joined March 2023</Date>
-          </UserJoinDate>
           <UserFollowInfomation>
             <Follow>
-              <span>3</span> Following
+              <span>{userInfo.followingnumber}</span> Following
             </Follow>
             <Follow>
-              <span>3</span> Followers
+              <span>{userInfo.followernumber}</span> Followers
             </Follow>
           </UserFollowInfomation>
         </UserWrapper>
@@ -70,18 +78,40 @@ const ProfileLayout = () => {
             Sweets
           </CategoryButton>
           <CategoryButton
+            onClick={() => handleClick("Comments")}
+            active={activeButton === "Comments"}
+          >
+            Sweets&Comments
+          </CategoryButton>
+          <CategoryButton
+            onClick={() => handleClick("Media")}
+            active={activeButton === "Media"}
+          >
+            Media
+          </CategoryButton>
+          <CategoryButton
             onClick={() => handleClick("Likes")}
             active={activeButton === "Likes"}
           >
             Likes
           </CategoryButton>
-          <CategoryButton
-            onClick={() => handleClick("Comments")}
-            active={activeButton === "Comments"}
-          >
-            Comments
-          </CategoryButton>
         </CategoryButtonWrapper>
+        {activeButton === "Sweets" &&
+          postList.sweetLists.map((item) => {
+            return <Post key={`post-item-${item.id}`} item={item}></Post>;
+          })}
+        {activeButton === "Comments" &&
+          postList.sweetLists.map((item) => {
+            return <Post key={`post-item-${item.id}`} item={item}></Post>;
+          })}
+        {activeButton === "Media" &&
+          postList.sweetandCommentLists.map((item) => {
+            return <Post key={`post-item-${item.id}`} item={item}></Post>;
+          })}
+        {activeButton === "Likes" &&
+          postList.likeLists.map((item) => {
+            return <Post key={`post-item-${item.id}`} item={item}></Post>;
+          })}
       </PostLayoutContainer>
       {isEditModalOpen && <ModalEdit editModalRef={editModalRef} />}
     </>
@@ -128,16 +158,6 @@ const UserInfomation = styled.div`
 const UserInfo = styled.span`
   ${UserInfomaitionText}
   margin-bottom: 5px;
-`;
-
-const UserJoinDate = styled.div`
-  ${FlexAttribute("row", "center")}
-  color: ${theme.color.hazy_text};
-`;
-
-const Date = styled.span`
-  margin-left: 10px;
-  font-size: ${theme.textsize.date};
 `;
 
 const UserFollowInfomation = styled.div`

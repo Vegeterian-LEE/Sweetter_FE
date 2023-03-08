@@ -1,7 +1,7 @@
 import React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import useOutSideClick from "../../hooks/useOutsideClick";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import {
@@ -14,18 +14,33 @@ import theme from "../../style/Theme";
 import Button from "../../elements/Button";
 import ModalSweetpost from "../modals/ModalSweetpost";
 import ModalLogout from "../modals/ModalLogout";
-import { getUserInfo } from "../../redux/modules/usersSlice";
+import { __getUserInfo } from "../../redux/modules/usersSlice";
 
 import { FaTwitter, FaHome, FaBookmark, FaUserCircle } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { RxDotsHorizontal } from "react-icons/rx";
+import { useDispatch, useSelector } from "react-redux";
 
 const SideBar = () => {
+  const userInfo = useSelector((state) => state.users.userInfo);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(__getUserInfo());
+  }, []);
+
+  console.log(userInfo);
+
   const CategoryArr = [
     { title: "Sweeter", icon: <FaTwitter />, linkTo: "/" },
     { title: "Home", icon: <FaHome />, linkTo: "/" },
     { title: "Bookmark", icon: <FaBookmark />, linkTo: "/bookmark" },
-    { title: "Profile", icon: <CgProfile />, linkTo: "/profile" },
+    {
+      title: "Profile",
+      icon: <CgProfile />,
+      linkTo: `/profile/${userInfo.id}`,
+    },
   ];
 
   //sweet 모달창
@@ -50,8 +65,10 @@ const SideBar = () => {
   const signoutModalRef = useRef(null);
   useOutSideClick(signoutModalRef, handleSignoutModalClose);
 
-  const userInfo = getUserInfo();
-  console.log(userInfo);
+  // const userInfo = getUserInfo();
+  // console.log(userInfo);
+
+  // user 정보 조회
 
   return (
     <>

@@ -1,15 +1,26 @@
 import styled from "styled-components";
+import useInput from "../../hooks/useInput";
 
 import ModalWrapper from "../../elements/ModalWrapper";
 import ModalBox from "../../elements/ModalBox";
 import { ModalBoxRef } from "../../pages/Login/LoginPage";
+
 import { FaUserCircle } from "react-icons/fa";
 import { BsImage } from "react-icons/bs";
 
+import TwitterLogo from "../../assets/TwitterLogo.jpg";
+import { useSelector } from "react-redux";
+
 const ModalEdit = ({ editModalRef }) => {
+  const userInfo = useSelector((state) => state.users.userInfo);
+  console.log(userInfo);
+  const [{ username, introduction }, inputHandler] = useInput({
+    username: userInfo.username,
+    introduction: "",
+  });
   return (
     <ModalWrapper>
-      <ModalBox>
+      <ModalBox width="40vw">
         <ModalBoxRef ref={editModalRef}>
           <UpperBox>
             <StText>프로필 수정</StText>
@@ -18,9 +29,27 @@ const ModalEdit = ({ editModalRef }) => {
           <UserBackground>
             <StBsImage size={25} />
           </UserBackground>
-          <StFaUserCircle size={40} />
+          <UserProfileImage>
+            <ImageBox>
+              <UserImage src={TwitterLogo} />
+              <StFaUserCircle size={25} />
+            </ImageBox>
+          </UserProfileImage>
           <InputWrapper>
-            <StInput type="text" placeholder="username" />
+            <StInput
+              name="username"
+              value={username}
+              onChange={(e) => inputHandler(e)}
+              type="text"
+              placeholder={"username"}
+            />
+            <StInput
+              name="introduction"
+              value={introduction}
+              onChange={(e) => inputHandler(e)}
+              type="text"
+              placeholder="introduce"
+            />
           </InputWrapper>
         </ModalBoxRef>
       </ModalBox>
@@ -55,13 +84,19 @@ const SaveButton = styled.button`
 
 const UserBackground = styled.div`
   display: flex;
-  height: 10rem;
+  height: 250px;
   width: 100%;
   background-color: lightgray;
   border-radius: 5px;
   justify-content: center;
   align-items: center;
 `;
+
+const UserProfileImage = styled.div`
+  position: relative;
+`;
+
+const ImageBox = styled.div``;
 
 const StBsImage = styled(BsImage)`
   :hover {
@@ -70,10 +105,23 @@ const StBsImage = styled(BsImage)`
 `;
 
 const StFaUserCircle = styled(FaUserCircle)`
+  top: 0;
+  transform: translate(-50%, 80%);
+  position: absolute;
   margin-top: -2rem;
   :hover {
     cursor: pointer;
   }
+`;
+
+const UserImage = styled.img`
+  top: 0;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
 `;
 
 const InputWrapper = styled.div`
@@ -86,6 +134,12 @@ const StInput = styled.input`
   height: 3rem;
   border: 1px solid lightgray;
   border-radius: 5px;
+  :first-child {
+    margin-top: 50px;
+  }
+  :not(:first-child) {
+    margin-top: 20px;
+  }
 `;
 
 export default ModalEdit;
