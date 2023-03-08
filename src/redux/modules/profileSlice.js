@@ -29,11 +29,7 @@ export const __getSweetsComments = createAsyncThunk(
   "upload",
   async (payload, thunkAPI) => {
     try {
-      const response = await sweetInstance.post("/upload", payload, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await sweetInstance.get("/upload");
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -46,11 +42,7 @@ export const __getMedia = createAsyncThunk(
   "upload",
   async (payload, thunkAPI) => {
     try {
-      const response = await sweetInstance.post("/upload", payload, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await sweetInstance.get("/upload");
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -63,11 +55,7 @@ export const __getLike = createAsyncThunk(
   "upload",
   async (payload, thunkAPI) => {
     try {
-      const response = await sweetInstance.post("/upload", payload, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await sweetInstance.get("/upload");
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

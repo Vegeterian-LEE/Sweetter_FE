@@ -1,5 +1,7 @@
+import { useState } from "react";
 import styled from "styled-components";
 import useInput from "../../hooks/useInput";
+import { useDispatch } from "react-redux";
 
 import ModalWrapper from "../../elements/ModalWrapper";
 import ModalBox from "../../elements/ModalBox";
@@ -10,32 +12,86 @@ import { BsImage } from "react-icons/bs";
 
 import TwitterLogo from "../../assets/TwitterLogo.jpg";
 import { useSelector } from "react-redux";
+import { IconStyle } from "../../style/Mixin";
+import { __editUserInfo } from "../../redux/modules/usersSlice";
+import { __uploadImage } from "../../redux/modules/sweetSlice";
 
 const ModalEdit = ({ editModalRef }) => {
   const userInfo = useSelector((state) => state.users.userInfo);
-  console.log(userInfo);
-  const [{ username, introduction }, inputHandler] = useInput({
+  const dispatch = useDispatch();
+  const [background, setBackground] = useState([]);
+  const [profile, setProfile] = useState([]);
+  const [imageUrl, setImage] = useState();
+
+  const [{ username, introduction, newPassword }, inputHandler] = useInput({
     username: userInfo.username,
     introduction: "",
+    newPassword: "",
   });
+
+  const profileImageHandler = (e) => {
+    setProfile(e.target.files[0]);
+  };
+
+  const backgroundImageHandler = (e) => {
+    setBackground(e.target.files[0]);
+  };
+
+  // const setImageData = async (image) => {
+  //   const formData = new FormData();
+  //   formData.append("image", image);
+  //   dispatch(__uploadImage(formData));
+  // };
+
+  const editHandler = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      profileImage: profile,
+      backgroundImage: background,
+      introduction: introduction,
+      newPassword: newPassword,
+      username: username,
+    };
+    console.log(data);
+  };
+
   return (
     <ModalWrapper>
       <ModalBox width="40vw">
         <ModalBoxRef ref={editModalRef}>
           <UpperBox>
             <StText>프로필 수정</StText>
-            <SaveButton>save</SaveButton>
+            <SaveButton type="submit" form="editUserInfo">
+              save
+            </SaveButton>
           </UpperBox>
           <UserBackground>
-            <StBsImage size={25} />
+            <ImageLabel htmlFor="backgroundInput">
+              <StBsImage size={25} />
+            </ImageLabel>
+            <input
+              id="backgroundInput"
+              name="backgroundImage"
+              type="file"
+              onChange={(e) => profileImageHandler(e)}
+            />
           </UserBackground>
           <UserProfileImage>
             <ImageBox>
               <UserImage src={TwitterLogo} />
-              <StFaUserCircle size={25} />
+              <ImageLabel htmlFor="userImageInput">
+                <StFaUserCircle size={25} />
+              </ImageLabel>
+              <input
+                id="userImageInput"
+                name="userProfile"
+                type="file"
+                onChange={(e) => backgroundImageHandler(e)}
+              />
             </ImageBox>
           </UserProfileImage>
-          <InputWrapper>
+          <InputWrapper onSubmit={(e) => editHandler(e)} id="editUserInfo">
             <StInput
               name="username"
               value={username}
@@ -49,6 +105,13 @@ const ModalEdit = ({ editModalRef }) => {
               onChange={(e) => inputHandler(e)}
               type="text"
               placeholder="introduce"
+            />
+            <StInput
+              name="newPassword"
+              value={newPassword}
+              onChange={(e) => inputHandler(e)}
+              type="password"
+              placeholder="newPassword"
             />
           </InputWrapper>
         </ModalBoxRef>
@@ -90,13 +153,20 @@ const UserBackground = styled.div`
   border-radius: 5px;
   justify-content: center;
   align-items: center;
+  input {
+    display: none;
+  }
 `;
 
 const UserProfileImage = styled.div`
   position: relative;
 `;
 
-const ImageBox = styled.div``;
+const ImageBox = styled.div`
+  input {
+    display: none;
+  }
+`;
 
 const StBsImage = styled(BsImage)`
   :hover {
@@ -106,7 +176,7 @@ const StBsImage = styled(BsImage)`
 
 const StFaUserCircle = styled(FaUserCircle)`
   top: 0;
-  transform: translate(-50%, 80%);
+  transform: translate(0, 75%);
   position: absolute;
   margin-top: -2rem;
   :hover {
@@ -116,7 +186,7 @@ const StFaUserCircle = styled(FaUserCircle)`
 
 const UserImage = styled.img`
   top: 0;
-  transform: translate(-50%, -50%);
+  transform: translate(-40%, -50%);
   position: absolute;
   width: 90px;
   height: 90px;
@@ -124,7 +194,12 @@ const UserImage = styled.img`
   object-fit: cover;
 `;
 
-const InputWrapper = styled.div`
+const ImageLabel = styled.label`
+  padding: 8px 8px 4px 8px;
+  ${IconStyle}
+`;
+
+const InputWrapper = styled.form`
   width: 100%;
   margin-top: 10px;
 `;

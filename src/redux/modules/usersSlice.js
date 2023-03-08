@@ -17,9 +17,6 @@ export const __loginUser = createAsyncThunk(
       const response = await usersInstance.post("/api/user/login", loginUser);
       const Token = response.headers.authorization;
 
-      const userInfo = response.data.data;
-      localStorage.setItem("userInfo", JSON.stringify(userInfo));
-
       // const expiryDate = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000);
       Cookies.set("accessJWTToken", Token);
 
@@ -45,11 +42,22 @@ export const __getUserInfo = createAsyncThunk(
   }
 );
 
-//개별 유저 정보 갖고오기
-// export const getUserInfo = () => {
-//   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-//   return userInfo;
-// };
+// 유저 정보 수정
+export const __editUserInfo = createAsyncThunk(
+  "editUserInfo",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await sweetInstance.put(
+        "/user/settings/profile",
+        payload
+      );
+      console.log(response);
+      return thunkAPI.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 const initialState = {
   users: [],
@@ -81,6 +89,14 @@ export const usersSlice = createSlice({
         state.userInfo = action.payload;
       })
       .addCase(__getUserInfo.rejected, (state) => {
+        state.isCheck = false;
+      });
+
+    builder
+      .addCase(__editUserInfo.fulfilled, (state, action) => {
+        state.userInfo = action.payload;
+      })
+      .addCase(__editUserInfo, (state) => {
         state.isCheck = false;
       });
   },
