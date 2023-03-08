@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { __deletePost } from "../redux/modules/sweetSlice";
 import useOutSideClick from "../hooks/useOutsideClick";
 
@@ -23,7 +23,7 @@ import { IoMdRepeat } from "react-icons/io";
 import ModalComment from "./modals/ModalComment";
 
 const Post = ({ item }) => {
-  const { userId } = JSON.parse(localStorage.getItem("userInfo"));
+  const userId = useSelector((state) => state.users.userInfo);
   const dispatch = useDispatch();
   const deletePost = (postId) => {
     dispatch(__deletePost(postId));

@@ -9,7 +9,7 @@ import { BsImage } from "react-icons/bs";
 const ModalEdit = ({ editModalRef }) => {
   return (
     <ModalWrapper>
-      <ModalBox>
+      <ModalBox width="42vw">
         <ModalBoxRef ref={editModalRef}>
           <UpperBox>
             <StText>프로필 수정</StText>
@@ -18,7 +18,7 @@ const ModalEdit = ({ editModalRef }) => {
           <UserBackground>
             <StBsImage size={25} />
           </UserBackground>
-          <StFaUserCircle size={40} />
+
           <InputWrapper>
             <StInput type="text" placeholder="username" />
           </InputWrapper>
