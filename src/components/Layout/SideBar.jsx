@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useRef, useEffect } from "react";
 import useOutSideClick from "../../hooks/useOutsideClick";
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 import styled from "styled-components";
 import {
@@ -25,6 +26,14 @@ const SideBar = () => {
   const userInfo = useSelector((state) => state.users.userInfo);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessJWTToken = Cookies.get("accessJWTToken");
+    if (!accessJWTToken) {
+      navigate("/login");
+      window.location.reload();
+    }
+  }, [navigate]);
 
   useEffect(() => {
     dispatch(__getUserInfo());

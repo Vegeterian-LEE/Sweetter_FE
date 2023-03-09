@@ -1,6 +1,7 @@
-import { React, useState, useRef } from "react";
+import { React, useState, useRef, useEffect } from "react";
 import useOutSideClick from "../../hooks/useOutsideClick";
 import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
 
 import styled from "styled-components";
 import { FlexAttribute } from "../../style/Mixin";
@@ -14,12 +15,25 @@ import ModalSignup from "../../components/modals/ModalSignup";
 import { __addUser } from "../../redux/modules/usersSlice";
 
 import { FaTwitter } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
+
+  // 로그인 확인
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // 쿠키 상태를 확인하고, 로그아웃된 경우 새로고침
+    const accessJWTToken = Cookies.get("accessJWTToken");
+    if (accessJWTToken) {
+      navigate("/");
+      window.location.reload();
+    }
+  }, [navigate]);
 
   // 오류 메세지
   const [userIdMessage, setUserIdMessage] = useState("");
