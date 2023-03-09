@@ -19,6 +19,7 @@ import styled, { css } from "styled-components";
 import {
   FlexAttribute,
   IconStyle,
+  PostImageStyle,
   PostText,
   UserImageStyle,
   UserInfomaitionText,
@@ -92,7 +93,7 @@ const Post = ({ item }) => {
           <UserImage>
             <img src={TwitterLogo} alt="userimage" />
           </UserImage>
-          <PostContentsWrapper>
+          <PostContentsContainer>
             {userInfo.userId === item.userId && (
               <IconBox onClick={() => deletePost(item.id)} delete="true">
                 <FaTrash />
@@ -106,7 +107,14 @@ const Post = ({ item }) => {
                     <UserInfo>@{item.userId}</UserInfo>
                   </UserInfomation>
                 </UserInfoWrapper>
-                <PostContents>{item.content}</PostContents>
+                <ContentsWrapper>
+                  <PostContents>{item.content}</PostContents>
+                  <ImageContents>
+                    {item.imageUrls?.map((item, index) => {
+                      return <Image key={`image-item-${index}`} src={item} />;
+                    })}
+                  </ImageContents>
+                </ContentsWrapper>
               </div>
             </Link>
             <PostButtonWrapper>
@@ -136,7 +144,7 @@ const Post = ({ item }) => {
                 />
               </IconBox>
             </PostButtonWrapper>
-          </PostContentsWrapper>
+          </PostContentsContainer>
         </PostWrapper>
       </PostContainer>
       {isCommentModalOpen && (
@@ -182,14 +190,22 @@ const UserInfo = styled.span`
   }
 `;
 
-const PostContentsWrapper = styled.div`
+const PostContentsContainer = styled.div`
   position: relative;
   width: 80%;
   margin-left: 10px;
 `;
 
+const ContentsWrapper = styled.div``;
+
 const PostContents = styled.span`
   ${PostText}
+`;
+
+const ImageContents = styled.div``;
+
+const Image = styled.img`
+  ${PostImageStyle}
 `;
 
 const PostButtonWrapper = styled.div`

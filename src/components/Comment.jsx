@@ -23,7 +23,8 @@ import { __getPostDetail } from "../redux/modules/sweetSlice";
 
 const Comment = ({ item }) => {
   const userInfo = useSelector((state) => state.users.userInfo);
-  console.log(userInfo.userId);
+  console.log("item", item);
+  console.log("userInfo", userInfo);
   const { id } = useParams();
 
   const dispatch = useDispatch();
@@ -58,12 +59,11 @@ const Comment = ({ item }) => {
             <img src={TwitterLogo} alt="userimage" />
           </UserImage>
           <PostContentsWrapper>
-            {userInfo.userId === item.userId && (
-              <IconBox onClick={() => deleteComment(item.id)}>
+            {userInfo.username === item.username && (
+              <IconBox onClick={() => deleteComment(item.id)} delete="true">
                 <FaTrash />
               </IconBox>
             )}
-
             <div>
               <UserInfoWrapper>
                 <UserInfomation>
@@ -73,7 +73,6 @@ const Comment = ({ item }) => {
               </UserInfoWrapper>
               <PostContents>{item.content}</PostContents>
             </div>
-
             <PostButtonWrapper>
               <IconBox>
                 <FaHeart
