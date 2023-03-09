@@ -138,7 +138,6 @@ export const __getBookMark = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await sweetInstance.get("/bookmarks");
-      console.log(response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -177,7 +176,6 @@ export const sweetSlice = createSlice({
   initialState,
   reducers: {
     toggleCategory: (state, action) => {
-      console.log(action.payload);
       state.category = action.payload;
     },
   },

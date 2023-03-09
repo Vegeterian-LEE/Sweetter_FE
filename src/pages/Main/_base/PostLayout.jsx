@@ -18,7 +18,6 @@ const PostLayout = () => {
   const dispatch = useDispatch();
 
   const post = useSelector((state) => state.sweets);
-  console.log(post);
 
   useEffect(() => {
     dispatch(__getPostHome());
