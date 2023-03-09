@@ -31,6 +31,14 @@ export const PostText = css`
   font-size: ${theme.textsize.post};
 `;
 
+export const PostImageStyle = css`
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+  border-radius: 30px;
+  object-fit: cover;
+`;
+
 export const CategoryTitleStyle = css`
   width: 120px;
   margin-top: 13px;

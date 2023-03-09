@@ -3,7 +3,12 @@ import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
 import theme from "../style/Theme";
-import { FlexAttribute, IconStyle, UserImageStyle } from "../style/Mixin";
+import {
+  FlexAttribute,
+  IconStyle,
+  PostImageStyle,
+  UserImageStyle,
+} from "../style/Mixin";
 
 import Button from "../elements/Button";
 
@@ -155,11 +160,7 @@ const PreviewImageWrapper = styled.div`
 `;
 
 const PreviewImage = styled.img`
-  width: 200px;
-  height: 200px;
-  margin: 20px;
-  border-radius: 30px;
-  object-fit: cover;
+  ${PostImageStyle}
 `;
 
 export default SweetPosting;
