@@ -110,10 +110,9 @@ const Post = ({ item }) => {
                 <ContentsWrapper>
                   <PostContents>{item.content}</PostContents>
                   <ImageContents>
-                    {item.imageUrls.length !== 0 &&
-                      item.imageUrls.map((item) => {
-                        return <Image src={item} />;
-                      })}
+                    {item.imageUrls?.map((item, index) => {
+                      return <Image key={`image-item-${index}`} src={item} />;
+                    })}
                   </ImageContents>
                 </ContentsWrapper>
               </div>
