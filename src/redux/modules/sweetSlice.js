@@ -4,6 +4,7 @@ import { sweetInstance } from "../../utils/axios";
 // State
 const initialState = {
   imageURl: [],
+  category: "",
   allPostResponse: [],
   followPostResponse: [],
   DetailPost: {},
@@ -174,7 +175,12 @@ export const __searchUser = createAsyncThunk(
 export const sweetSlice = createSlice({
   name: "sweets",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleCategory: (state, action) => {
+      console.log(action.payload);
+      state.category = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(__uploadImage.pending, (state) => {
@@ -330,4 +336,5 @@ export const sweetSlice = createSlice({
   },
 });
 
+export const { toggleCategory } = sweetSlice.actions;
 export default sweetSlice.reducer;
