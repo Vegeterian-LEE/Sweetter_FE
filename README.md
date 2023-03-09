@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+# Swetter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+twitter를 클론 코딩 하는 항해 12기 swetter입니다.
 
-## Available Scripts
+## Team Member
 
-In the project directory, you can run:
+| FE/BE | 이름   | Github                                          |
+| ----- | ------ | ----------------------------------------------- | 
+| FE    | 이현동 | [hdlee0619](https://github.com/hdlee0619)       |  
+| FE    | 김준형 | [juninkorea95](https://github.com/juninkorea95) |      
+| BE    |  이진규      |       [vegeterianlee](https://github.com/vegeterianlee)                                          |      
+| BE    |    이도경    |        [colleenInKorea](https://github.com/colleenInKorea)                                         |      
+| BE      |    최정환    |       [the1224](https://github.com/the1224)                                          |      
 
-### `yarn start`
+## Github
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+> FE: [https://github.com/Vegeterian-LEE/Sweetter_FE](https://github.com/Vegeterian-LEE/Sweetter_FE)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> BE: [https://github.com/Vegeterian-LEE/Sweetter-BE](https://github.com/Vegeterian-LEE/Sweetter-BE)
 
-### `yarn test`
+## ProtoType
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> Figma address: [https://www.figma.com/file/VriPcY0YzZOyyGNpAktytP/Twitter-Hifi-prototype?node-id=0-1](https://www.figma.com/file/VriPcY0YzZOyyGNpAktytP/Twitter-Hifi-prototype?node-id=0-1)
 
-### `yarn build`
+## 프로젝트 기능
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 회원가입 & 로그인 기능
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+> 회원 가입후 같은 정보를 가지고 있는 경우만 로그인이 가능하게 합니다. 로그인 성공후, 토큰 발급 해당 토큰이 있어야만 다른 기능을 사용할 수 있습니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 트윗 기능, 리트윗 기능
 
-### `yarn eject`
+> 간단하게 최대 사진 4개까지 올리고, 글을 작성, 삭제가 가능하게 만들고 그 트윗을 리트윗(타인 또는 본인의 글을 그대로 가져 오는 것) 하는 기능을 구현했습니다. 리트윗이 된 글은 boolean으로 했는지 여부를 확인 할 수 있게 했습니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 트윗 좋아요와 댓글 좋아요 기능
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> 트위터나 인스타를 보면, 가장 기억이 많이 될 것 같은 기능 이라고 생각합니다. 좋아요 여부와 갯수, 댓글 갯수를 확인 할 수 있도록 했습니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 북마크 기능
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+> SNS를 사용하다보면 혼자만 간직하고 싶은 글이 있지 않으신가요? 북마크를 사용하여 트윗을 저장하고 한 곳에서 모아보세요!
 
-## Learn More
+### 프로필에서 다양한 방법으로 유저 또는 유저가 팔로우한 사람들의 트윗을 확인
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> 트위터에서 해당 페이지마다 나오는 리스트 별로 로직을 짜서 확인 할수 있도록 만들었습니다. 좋아요를 한 리스트, 미디어가 있는 리스트, 내가 리트윗한 글과 트윗한 글 그리고 코멘트한 리스트, 내가 트윗과 리트윗한 리스트 4가지로 나누어 처리했습니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 트위터 홈 화면
 
-### Code Splitting
+> 간단하게 유저가 팔로우한 사람들의 리스트를 확인 할 수 있도록 합니다. 사이드 상단에 유저 검색이 가능하고 검색을 안할때 다른 유저들을 팔로우 할 수 있도록 했습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## FE적용 기술
 
-### Analyzing the Bundle Size
+### ☑ 회원가입 및 로그인 - 준형
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+> JWT 토큰을 통해 서버와 연결, 정규식을 통한 정보 검수, 로그인시 토큰의 정보를저 장해 전역에서 사용. (패스워드 제외)
 
-### Making a Progressive Web App
+### ☑ CRUD - 준형, 현동
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+> 게시물을 생성하고 조회하고 삭제할 수 있습니다. 
 
-### Advanced Configuration
+### ☑ 검색 기능 - 현동
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+> 검색 기능 구현
 
-### Deployment
+### ☑ 좋아요 기능 - 준형
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+> 좋아요기능 구현
 
-### `yarn build` fails to minify
+### ☑ 이미지 업로드 기능 - 현동
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> base64로 받아온 이미지 파일을 formData로 서버에 전송 (S3)(사용자의 이미지가 없다면) ? 
+> 디폴트 이미지 : 사용자 이미지이미지 업로드를 통한 프로필 수정 기능
+
+### ☑ 북마크 기능 - 준형
+
+> 게시물 북마크 기능 구현
+
+### ☑ 리트윗 기능 - 준형
+
+> 리트윗 기능 구현
+
+## BE적용 기술
+
+### ◻ Swagger - 진규
+
+> 프론트엔드와 정확하고 원활한 소통을 위해 스웨거를 도입하여 적용하였습니다.
+
+### ◻ Spring Security - 진규
+
+> 사용자 인증, 인가 기능 구현을 위해 Spring Security를 사용하였습니다.
+
+### ◻ S3를 통한 이미지 업로드 - 정환
+
+> 이미지를 업로드 하기 위해 S3를 활용하였습니다
+
+### ◻ Profile Controller, Comment Controller, Post create, delete , like - 도경
+
+> 간단한 CRUD와 list Response 관련 내용을 통해서, 서비스를 구성했습니다.
+
+### ◻ Post Controller, UserController - 정환
+
+> 트윗 관련 내용을 홈에서 보여주는 것과 유저관련한 서비스를 구현했습니다.
+
+### ◻ rds db 연결 - 도경
+
+> 공통적으로 db를 사용 할 수 있게 활용 하였습니다
+
+### ◻ BookMark, Follower - 진규
+
+> 북마크 기능과 팔로잉과 팔로워 관련한 기능을 구현했습니다.
