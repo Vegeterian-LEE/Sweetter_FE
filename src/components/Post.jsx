@@ -40,8 +40,10 @@ import {
 } from "../redux/modules/profileSlice";
 
 const Post = ({ item }) => {
+  console.log(item);
   const { id } = useParams();
   const userInfo = useSelector((state) => state.users.userInfo);
+  console.log("userInfo", userInfo);
 
   const dispatch = useDispatch();
   const deletePost = (postId) => {
@@ -91,7 +93,14 @@ const Post = ({ item }) => {
       <PostContainer>
         <PostWrapper>
           <UserImage>
-            <img src={TwitterLogo} alt="userimage" />
+            <img
+              src={
+                userInfo.profileImage == null
+                  ? TwitterLogo
+                  : userInfo.profileImage
+              }
+              alt="userimage"
+            />
           </UserImage>
           <PostContentsContainer>
             {userInfo.userId === item.userId && (

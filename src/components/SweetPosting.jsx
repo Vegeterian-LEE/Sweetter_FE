@@ -27,7 +27,7 @@ const SweetPosting = () => {
   const ImageHandler = (event) => {
     const formImg = new FormData();
     imageFormData.forEach((image) => {
-      formImg.append("files", image);
+      formImg.append("image", image);
     });
     setImageFormData([...imageFormData, ...event.target.files]);
     // 이미지 미리 보기

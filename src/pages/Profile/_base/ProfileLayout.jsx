@@ -32,6 +32,8 @@ const ProfileLayout = () => {
   const postList = useSelector((state) => state.profile);
   const [activeButton, setActiveButton] = useState("Sweets");
 
+  console.log(userInfo);
+
   const handleClick = (category) => {
     setActiveButton(category);
   };
@@ -65,7 +67,13 @@ const ProfileLayout = () => {
         <UserWrapper>
           <UserImageBox>
             <div>
-              <Image src={TwitterLogo} />
+              <Image
+                src={
+                  userInfo.profileImage == null
+                    ? TwitterLogo
+                    : userInfo.profileImage
+                }
+              />
             </div>
             <Button onClick={() => setIsEditModalOpen(true)}>Edit</Button>
           </UserImageBox>
@@ -115,11 +123,11 @@ const ProfileLayout = () => {
             return <Post key={`post-item-${item.id}`} item={item}></Post>;
           })}
         {activeButton === "Comments" &&
-          postList.sweetLists?.map((item) => {
+          postList.reSweetandCommentLists?.map((item) => {
             return <Post key={`post-item-${item.id}`} item={item}></Post>;
           })}
         {activeButton === "Media" &&
-          postList.sweetandCommentLists?.map((item) => {
+          postList.mediaLists?.map((item) => {
             return <Post key={`post-item-${item.id}`} item={item}></Post>;
           })}
         {activeButton === "Likes" &&

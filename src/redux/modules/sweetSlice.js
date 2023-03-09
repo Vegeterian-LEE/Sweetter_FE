@@ -20,11 +20,13 @@ export const __uploadImage = createAsyncThunk(
   "upload",
   async (payload, thunkAPI) => {
     try {
+      console.log(payload);
       const response = await sweetInstance.post("/upload", payload, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+      console.log(response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -33,7 +35,6 @@ export const __uploadImage = createAsyncThunk(
 );
 
 // Posting Sweet
-
 export const __uploadSweet = createAsyncThunk(
   "uploadPost",
   async (payload, thunkAPI) => {
