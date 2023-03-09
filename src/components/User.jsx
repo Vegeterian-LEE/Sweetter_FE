@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { __followUser, __unFollowUser } from "../redux/modules/sweetSlice";
 
 import styled from "styled-components";
 import {
@@ -12,6 +14,15 @@ import Button from "../elements/Button";
 import TwitterLogo from "../assets/TwitterLogo.jpg";
 
 const User = ({ item }) => {
+  const dispatch = useDispatch();
+
+  const followHandler = (username) => {
+    dispatch(__followUser(username));
+  };
+
+  const unFollowHandler = (username) => {
+    dispatch(__unFollowUser(username));
+  };
   return (
     <UserListContainer>
       <UserImage
@@ -21,7 +32,15 @@ const User = ({ item }) => {
         <UserInfo name="true">{item.username}</UserInfo>
         <UserInfo>@{item.userId}</UserInfo>
       </UserInfomaition>
-      <Button wh="s">Follow</Button>
+      {item.followCheck ? (
+        <Button wh="s" onClick={() => unFollowHandler(item.username)}>
+          취소
+        </Button>
+      ) : (
+        <Button wh="s" onClick={() => followHandler(item.username)}>
+          Follow
+        </Button>
+      )}
     </UserListContainer>
   );
 };

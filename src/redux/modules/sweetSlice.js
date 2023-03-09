@@ -171,6 +171,33 @@ export const __searchUser = createAsyncThunk(
   }
 );
 
+// Follow User
+export const __followUser = createAsyncThunk(
+  "followUser",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await sweetInstance.post(`/follow/${payload}`);
+      console.log(response);
+      return thunkAPI.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// Unfollow User
+export const __unFollowUser = createAsyncThunk(
+  "unFollowUser",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await sweetInstance.delete(`/follow/${payload}`);
+      console.log(response);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const sweetSlice = createSlice({
   name: "sweets",
   initialState,
@@ -328,6 +355,16 @@ export const sweetSlice = createSlice({
         state.userLists = action.payload;
       })
       .addCase(__searchUser.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      });
+
+    builder
+      .addCase(__followUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(__followUser.rejected, (state) => {
         state.isLoading = false;
         state.isError = true;
       });
