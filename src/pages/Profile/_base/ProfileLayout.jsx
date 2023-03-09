@@ -67,13 +67,7 @@ const ProfileLayout = () => {
         <UserWrapper>
           <UserImageBox>
             <div>
-              <Image
-                src={
-                  userInfo.profileImage == null
-                    ? TwitterLogo
-                    : userInfo.profileImage
-                }
-              />
+              <Image src={TwitterLogo} />
             </div>
             <Button onClick={() => setIsEditModalOpen(true)}>Edit</Button>
           </UserImageBox>
