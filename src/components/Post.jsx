@@ -93,14 +93,7 @@ const Post = ({ item }) => {
       <PostContainer>
         <PostWrapper>
           <UserImage>
-            <img
-              src={
-                userInfo.profileImage == null
-                  ? TwitterLogo
-                  : userInfo.profileImage
-              }
-              alt="userimage"
-            />
+            <img src={TwitterLogo} alt="userimage" />
           </UserImage>
           <PostContentsContainer>
             {userInfo.userId === item.userId && (
