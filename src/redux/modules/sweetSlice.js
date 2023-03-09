@@ -78,9 +78,9 @@ export const __getPostDetail = createAsyncThunk(
 // Delete Sweet Post
 export const __deletePost = createAsyncThunk(
   "deletePost",
-  async (postid, thunkAPI) => {
+  async (postId, thunkAPI) => {
     try {
-      const response = await sweetInstance.delete(`/post${postid}`);
+      const response = await sweetInstance.delete(`/post/${postId}`);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

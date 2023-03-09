@@ -94,7 +94,7 @@ const Post = ({ item }) => {
           </UserImage>
           <PostContentsWrapper>
             {userInfo.userId === item.userId && (
-              <IconBox onClick={deletePost(item.id)} delete="true">
+              <IconBox onClick={() => deletePost(item.id)} delete="true">
                 <FaTrash />
               </IconBox>
             )}
