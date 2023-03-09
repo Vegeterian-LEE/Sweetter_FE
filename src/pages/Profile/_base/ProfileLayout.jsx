@@ -24,6 +24,7 @@ import {
   __getLike,
 } from "../../../redux/modules/profileSlice";
 import { useParams } from "react-router-dom";
+import { __getPostHome } from "../../../redux/modules/sweetSlice";
 
 const ProfileLayout = () => {
   const { id } = useParams();
@@ -47,8 +48,9 @@ const ProfileLayout = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(__getPostHome());
     dispatch(__getSweet(Number(id)));
-  }, []);
+  }, [dispatch, id]);
 
   const getCategoryList = (category, axios) => {
     handleClick(category);

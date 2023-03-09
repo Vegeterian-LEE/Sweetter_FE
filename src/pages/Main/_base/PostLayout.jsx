@@ -8,10 +8,7 @@ import PostLayoutNavbar from "./PostLayoutNavbar";
 import SweetPosting from "../../../components/SweetPosting";
 import Post from "../../../components/Post";
 
-import {
-  __getBookMark,
-  __getPostHome,
-} from "../../../redux/modules/sweetSlice";
+import { __getPostHome } from "../../../redux/modules/sweetSlice";
 import IsLoading from "../../../elements/IsLoading";
 
 const PostLayout = () => {
@@ -21,7 +18,6 @@ const PostLayout = () => {
 
   useEffect(() => {
     dispatch(__getPostHome());
-    dispatch(__getBookMark());
   }, [dispatch]);
 
   return (

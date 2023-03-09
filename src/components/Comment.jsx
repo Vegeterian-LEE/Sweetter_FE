@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useOutSideClick from "../hooks/useOutsideClick";
 import { useParams } from "react-router-dom";
 
@@ -22,7 +22,8 @@ import { __deleteComment, __likeComment } from "../redux/modules/commentsSlice";
 import { __getPostDetail } from "../redux/modules/sweetSlice";
 
 const Comment = ({ item }) => {
-  const { userId, username } = JSON.parse(localStorage.getItem("userInfo"));
+  const userInfo = useSelector((state) => state.users.userInfo);
+  console.log(userInfo.userId);
   const { id } = useParams();
 
   const dispatch = useDispatch();
@@ -57,7 +58,7 @@ const Comment = ({ item }) => {
             <img src={TwitterLogo} alt="userimage" />
           </UserImage>
           <PostContentsWrapper>
-            {username === item.username && (
+            {userInfo.userId === item.userId && (
               <IconBox onClick={() => deleteComment(item.id)}>
                 <FaTrash />
               </IconBox>
@@ -67,7 +68,7 @@ const Comment = ({ item }) => {
               <UserInfoWrapper>
                 <UserInfomation>
                   <UserInfo name="true">{item.username}</UserInfo>
-                  <UserInfo>@{userId}</UserInfo>
+                  <UserInfo>@{userInfo.userId}</UserInfo>
                 </UserInfomation>
               </UserInfoWrapper>
               <PostContents>{item.content}</PostContents>
