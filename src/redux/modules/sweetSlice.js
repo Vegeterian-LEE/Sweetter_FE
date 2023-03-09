@@ -4,6 +4,7 @@ import { sweetInstance } from "../../utils/axios";
 // State
 const initialState = {
   imageURl: [],
+  category: "",
   allPostResponse: [],
   followPostResponse: [],
   DetailPost: {},
@@ -137,7 +138,6 @@ export const __getBookMark = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await sweetInstance.get("/bookmarks");
-      console.log(response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -171,10 +171,41 @@ export const __searchUser = createAsyncThunk(
   }
 );
 
+// Follow User
+export const __followUser = createAsyncThunk(
+  "followUser",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await sweetInstance.post(`/follow/${payload}`);
+      console.log(response);
+      return thunkAPI.fulfillWithValue(response.data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+// Unfollow User
+export const __unFollowUser = createAsyncThunk(
+  "unFollowUser",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await sweetInstance.delete(`/follow/${payload}`);
+      console.log(response);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const sweetSlice = createSlice({
   name: "sweets",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleCategory: (state, action) => {
+      state.category = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(__uploadImage.pending, (state) => {
@@ -327,7 +358,18 @@ export const sweetSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
       });
+
+    builder
+      .addCase(__followUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+      })
+      .addCase(__followUser.rejected, (state) => {
+        state.isLoading = false;
+        state.isError = true;
+      });
   },
 });
 
+export const { toggleCategory } = sweetSlice.actions;
 export default sweetSlice.reducer;

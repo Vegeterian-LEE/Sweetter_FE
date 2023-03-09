@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __getUserList, __searchUser } from "../../redux/modules/sweetSlice";
+import _ from "lodash";
 
 import styled from "styled-components";
 import { FlexAttribute } from "../../style/Mixin";
@@ -19,22 +20,28 @@ const SearchBar = () => {
     dispatch(__getUserList());
   }, []);
 
-  // 쓰로틀
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (searchWord !== "") {
-        setSearchWord(searchWord);
-        dispatch(__searchUser(searchWord));
-      }
-      if (searchWord === "") {
-        dispatch(__getUserList());
-      }
-    }, 500);
+    if (searchWord !== "") {
+      dispatch(__searchUser(searchWord));
+    } else {
+      dispatch(__getUserList());
+    }
+  }, [searchWord]);
 
+  useEffect(() => {
+    const throttleSearch = _.throttle(() => {
+      setSearchWord(searchWord);
+    }, 100);
+    throttleSearch();
     return () => {
-      clearTimeout(timer);
+      throttleSearch.cancel();
     };
   }, [searchWord]);
+
+  const searchHandler = (e) => {
+    const value = e.target.value;
+    setSearchWord(value);
+  };
 
   return (
     <div>
@@ -44,7 +51,7 @@ const SearchBar = () => {
           <SearchSweetterInput
             name="searchWord"
             value={searchWord}
-            onChange={(e) => setSearchWord(e.target.value)}
+            onChange={searchHandler}
             placeholder="serch sweetter 🐥"
           ></SearchSweetterInput>
         </SearchForm>

@@ -30,8 +30,6 @@ const SideBar = () => {
     dispatch(__getUserInfo());
   }, []);
 
-  console.log(userInfo);
-
   const CategoryArr = [
     { title: "Sweeter", icon: <FaTwitter />, linkTo: "/" },
     { title: "Home", icon: <FaHome />, linkTo: "/" },

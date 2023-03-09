@@ -17,8 +17,7 @@ import IsLoading from "../../../elements/IsLoading";
 const PostLayout = () => {
   const dispatch = useDispatch();
 
-  const postLists = useSelector((state) => state.sweets);
-  console.log(postLists.allPostResponse);
+  const post = useSelector((state) => state.sweets);
 
   useEffect(() => {
     dispatch(__getPostHome());
@@ -29,10 +28,15 @@ const PostLayout = () => {
     <PostLayoutContainer>
       <PostLayoutNavbar></PostLayoutNavbar>
       <SweetPosting></SweetPosting>
-      {postLists.isLoading && <IsLoading />}
-      {postLists.allPostResponse.map((item) => {
-        return <Post key={item.id} item={item}></Post>;
-      })}
+      {post.isLoading && <IsLoading />}
+      {post.category === "ALL" &&
+        post.allPostResponse?.map((item) => {
+          return <Post key={`post-item-${item.id}`} item={item}></Post>;
+        })}
+      {(post.category === "Follow") ===
+        post.followPostResponse?.map((item) => {
+          return <Post key={`post-item-${item.id}`} item={item}></Post>;
+        })}
     </PostLayoutContainer>
   );
 };

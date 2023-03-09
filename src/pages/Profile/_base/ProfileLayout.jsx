@@ -73,10 +73,10 @@ const ProfileLayout = () => {
           </UserInfomation>
           <UserFollowInfomation>
             <Follow>
-              <span>{userInfo.followingnumber}</span> Following
+              <span>{userInfo.followernumber}</span> Following
             </Follow>
             <Follow>
-              <span>{userInfo.followernumber}</span> Followers
+              <span>{userInfo.followingnumber}</span> Followers
             </Follow>
           </UserFollowInfomation>
         </UserWrapper>
