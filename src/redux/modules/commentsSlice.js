@@ -15,10 +15,8 @@ export const __addComment = createAsyncThunk(
         `/comment/${postIds}`,
         newComment
       );
-      console.log(response.data);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -41,7 +39,6 @@ export const __likeComment = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const response = await sweetInstance.post(`/comment/like/${id}`);
-      console.log(response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -74,8 +71,6 @@ export const commentsSlice = createSlice({
       .addCase(__deleteComment.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
-        console.log("deletePostState ->", state);
-        console.log("deletePostAction ->", action);
       })
       .addCase(__deleteComment.rejected, (state) => {
         state.isLoading = false;

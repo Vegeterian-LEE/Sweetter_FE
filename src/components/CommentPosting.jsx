@@ -23,10 +23,8 @@ const CommentPosting = ({ postId }) => {
   let postIds = 0;
   if (id == null) {
     postIds = postId;
-    console.log(postIds);
   } else {
     postIds = Number(id);
-    console.log(postIds);
   }
 
   const onSubmitButtonHandler = (newComment) => {

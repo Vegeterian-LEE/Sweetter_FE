@@ -72,11 +72,6 @@ const SideBar = () => {
   const signoutModalRef = useRef(null);
   useOutSideClick(signoutModalRef, handleSignoutModalClose);
 
-  // const userInfo = getUserInfo();
-  // console.log(userInfo);
-
-  // user 정보 조회
-
   return (
     <>
       <SideBarLayoutContainer>

@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 //회원가입
 export const __addUser = createAsyncThunk("login/signup", async (newUser) => {
   const response = await usersInstance.post("/api/user/signup", newUser);
-  console.log(response);
   return newUser;
 });
 

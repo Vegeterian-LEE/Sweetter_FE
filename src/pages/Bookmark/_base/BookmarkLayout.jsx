@@ -19,7 +19,6 @@ import Post from "../../../components/Post";
 const BookmarkLayout = () => {
   const dispatch = useDispatch();
   const bookMark = useSelector((state) => state.sweets.bookMarkList);
-  console.log(bookMark);
 
   useEffect(() => {
     dispatch(__getPostHome());

@@ -23,8 +23,6 @@ import { __getPostDetail } from "../redux/modules/sweetSlice";
 
 const Comment = ({ item }) => {
   const userInfo = useSelector((state) => state.users.userInfo);
-  console.log("item", item);
-  console.log("userInfo", userInfo);
   const { id } = useParams();
 
   const dispatch = useDispatch();

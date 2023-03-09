@@ -39,10 +39,8 @@ export const __uploadSweet = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await sweetInstance.post("/post", payload);
-      console.log(response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -186,7 +184,7 @@ export const __unFollowUser = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await sweetInstance.delete(`/follow/${payload}`);
-      console.log(response);
+      return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -260,41 +258,26 @@ export const sweetSlice = createSlice({
       });
 
     builder
-      .addCase(__likePost.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(__likePost.fulfilled, (state) => {
-        state.isLoading = false;
         state.isError = false;
       })
       .addCase(__likePost.rejected, (state) => {
-        state.isLoading = false;
         state.isError = true;
       });
 
     builder
-      .addCase(__retweetPost.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(__retweetPost.fulfilled, (state) => {
-        state.isLoading = false;
         state.isError = false;
       })
       .addCase(__retweetPost.rejected, (state) => {
-        state.isLoading = false;
         state.isError = true;
       });
 
     builder
-      .addCase(__addBookMark.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(__addBookMark.fulfilled, (state) => {
-        state.isLoading = false;
         state.isError = false;
       })
       .addCase(__addBookMark.rejected, (state) => {
-        state.isLoading = false;
         state.isError = true;
       });
 
@@ -313,55 +296,44 @@ export const sweetSlice = createSlice({
       });
 
     builder
-      .addCase(__deletePost.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(__deletePost.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.isError = false;
-        console.log("deletePostState ->", state);
-        console.log("deletePostAction ->", action);
       })
       .addCase(__deletePost.rejected, (state) => {
-        state.isLoading = false;
         state.isError = true;
       });
 
     builder
-      .addCase(__getUserList.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(__getUserList.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.isError = false;
         state.userLists = action.payload;
       })
       .addCase(__getUserList.rejected, (state) => {
-        state.isLoading = false;
         state.isError = true;
       });
 
     builder
-      .addCase(__searchUser.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(__searchUser.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.isError = false;
         state.userLists = action.payload;
       })
       .addCase(__searchUser.rejected, (state) => {
-        state.isLoading = false;
         state.isError = true;
       });
 
     builder
       .addCase(__followUser.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.isError = false;
       })
       .addCase(__followUser.rejected, (state) => {
-        state.isLoading = false;
+        state.isError = true;
+      });
+
+    builder
+      .addCase(__unFollowUser.fulfilled, (state, action) => {
+        state.isError = false;
+      })
+      .addCase(__unFollowUser.rejected, (state) => {
         state.isError = true;
       });
   },
