@@ -29,7 +29,7 @@ const PostLayout = () => {
         post.allPostResponse?.map((item) => {
           return <Post key={`post-item-${item.id}`} item={item}></Post>;
         })}
-      {(post.category === "Follow") ===
+      {post.category === "Follow" &&
         post.followPostResponse?.map((item) => {
           return <Post key={`post-item-${item.id}`} item={item}></Post>;
         })}

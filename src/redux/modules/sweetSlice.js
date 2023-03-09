@@ -68,7 +68,6 @@ export const __getPostDetail = createAsyncThunk(
   async (postId, thunkAPI) => {
     try {
       const response = await sweetInstance.get(`/post/${postId}`);
-      console.log(response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -94,7 +93,6 @@ export const __deletePost = createAsyncThunk(
 export const __likePost = createAsyncThunk("likePost", async (id, thunkAPI) => {
   try {
     const response = await sweetInstance.post(`/post/like/${id}`);
-    console.log(response);
     return thunkAPI.fulfillWithValue(response.data.data);
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
@@ -108,7 +106,6 @@ export const __retweetPost = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const response = await sweetInstance.post(`/retweet/${id}`);
-      console.log(response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -123,7 +120,6 @@ export const __addBookMark = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const response = await sweetInstance.post(`/mark/toggle/${id}`);
-      console.log(response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -177,7 +173,6 @@ export const __followUser = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await sweetInstance.post(`/follow/${payload}`);
-      console.log(response);
       return thunkAPI.fulfillWithValue(response.data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -242,6 +237,7 @@ export const sweetSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.allPostResponse = action.payload.allPostResponse;
+        state.followPostResponse = action.payload.followedPostResponse;
       })
       .addCase(__getPostHome.rejected, (state) => {
         state.isLoading = false;
