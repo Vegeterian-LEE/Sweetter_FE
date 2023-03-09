@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -10,6 +10,7 @@ import {
   __addBookMark,
   __getBookMark,
   __retweetPost,
+  __getPostDetail,
 } from "../redux/modules/sweetSlice";
 
 import useOutSideClick from "../hooks/useOutsideClick";
@@ -30,13 +31,21 @@ import { FaCommentAlt, FaHeart, FaTrash, FaBookmark } from "react-icons/fa";
 import { IoMdRepeat } from "react-icons/io";
 
 import ModalComment from "./modals/ModalComment";
+import {
+  __getLike,
+  __getMedia,
+  __getReSweetsComments,
+  __getSweet,
+} from "../redux/modules/profileSlice";
 
 const Post = ({ item }) => {
-  const userId = useSelector((state) => state.users.userInfo);
+  const { id } = useParams();
+  const userInfo = useSelector((state) => state.users.userInfo);
 
   const dispatch = useDispatch();
   const deletePost = (postId) => {
     dispatch(__deletePost(postId));
+    dispatch(__getPostHome());
   };
 
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
@@ -52,6 +61,11 @@ const Post = ({ item }) => {
   const likePostHandler = () => {
     dispatch(__likePost(item.id)).then(() => {
       dispatch(__getPostHome());
+      dispatch(__getPostDetail(Number(id)));
+      dispatch(__getSweet(Number(id)));
+      dispatch(__getMedia(Number(id)));
+      dispatch(__getReSweetsComments(Number(id)));
+      dispatch(__getLike(Number(id)));
     });
   };
 
@@ -79,7 +93,7 @@ const Post = ({ item }) => {
             <img src={TwitterLogo} alt="userimage" />
           </UserImage>
           <PostContentsWrapper>
-            {userId === item.userId && (
+            {userInfo.userId === item.userId && (
               <IconBox onClick={deletePost(item.id)} delete="true">
                 <FaTrash />
               </IconBox>
@@ -99,7 +113,9 @@ const Post = ({ item }) => {
               <IconBox>
                 <FaHeart
                   onClick={likePostHandler}
-                  color={item.likeCheck ? "red" : "lightgray"}
+                  color={
+                    item.postLikeCheck || item.likeCheck ? "red" : "lightgray"
+                  }
                 />
                 <StlikeText>{item.likeCount}</StlikeText>
               </IconBox>
